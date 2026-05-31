@@ -538,6 +538,14 @@
       const CONFIG_KEY = 'lead_board_config';
       let leads = [];
 
+      // Helper to determine the API endpoint dynamically (for file:// protocol support)
+      const getApiUrl = (endpoint) => {
+        if (window.location.protocol === 'file:') {
+          return 'http://localhost:3000' + endpoint;
+        }
+        return endpoint;
+      };
+
       // DOM Elements
       const dbSelect = document.getElementById('db-source-select');
       const supabaseUrlInput = document.getElementById('db-supabase-url');
@@ -647,7 +655,7 @@
         // If local mode (or fallback), fetch from server leads.json
         if (config.source === 'local') {
           try {
-            const res = await fetch('/api/leads');
+            const res = await fetch(getApiUrl('/api/leads'));
             if (res.ok) {
               leads = await res.json();
             }
@@ -795,7 +803,7 @@
         } else {
           // Delete from local server API
           try {
-            const res = await fetch(`/api/leads/${leadId}`, { method: 'DELETE' });
+            const res = await fetch(getApiUrl(`/api/leads/${leadId}`), { method: 'DELETE' });
             if (res.ok) {
               loadLeads();
             }

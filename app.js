@@ -8,6 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
     supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
   }
 
+
+  // Helper to determine the API endpoint dynamically (for file:// protocol support)
+  const getApiUrl = (endpoint) => {
+    if (window.location.protocol === 'file:') {
+      return 'http://localhost:3000' + endpoint;
+    }
+    return endpoint;
+  };
+
   // Session state manager helpers for the live demo simulator
   window.unlockDemo = function(name) {
     const lock = document.getElementById('demo-lock-screen');
@@ -101,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Submit to Local Server for email delivery
     try {
-      await fetch('/api/register', {
+      await fetch(getApiUrl('/api/register'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -232,11 +241,11 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.disabled = true;
     btn.textContent = 'Unlocking Simulator...';
 
-    const payload = { name, email, business, phone };
+    const payload = { name, email, business, phone, source: 'Live Call Demo' };
 
     // 1. Submit to Local Server for email notification
     try {
-      await fetch('/api/register', {
+      await fetch(getApiUrl('/api/register'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -590,7 +599,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {}
     }
 
-    fetch('/api/call-event', {
+    fetch(getApiUrl('/api/call-event'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
