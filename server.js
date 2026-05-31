@@ -3,24 +3,35 @@ const fs = require('fs');
 const path = require('path');
 
 // ─── SMTP Email Configuration ───
-// To receive emails, fill out your SMTP credentials below.
-// You can use a free SMTP service like Gmail (using an App Password), SendGrid, Mailgun, etc.
 const SMTP_CONFIG = {
   host: '',         // e.g. 'smtp.gmail.com'
-  port: 587,        // e.g. 587 (TLS) or 465 (SSL)
-  secure: false,    // true for 465, false for other ports
+  port: 587,
+  secure: false,
   auth: {
-    user: '',       // e.g. 'your-smtp-username@gmail.com'
-    pass: ''        // e.g. 'your-smtp-password-or-app-password'
+    user: '',
+    pass: ''
   }
 };
 const EMAIL_TO = 'digitaladsexpresso@gmail.com';
+
+// ─── Supabase Backend Configuration ───
+// Storing secret keys on the backend prevents client-side exposure.
+// Load these from process environment variables for security.
+const SUPABASE_URL = process.env.SUPABASE_URL || ''; 
+const SUPABASE_KEY = process.env.SUPABASE_KEY || ''; 
 
 let nodemailer = null;
 try {
   nodemailer = require('nodemailer');
 } catch (e) {
-  // nodemailer package is optional; we log mocks to the console if it is missing
+  // nodemailer package is optional
+}
+
+let createClient = null;
+try {
+  createClient = require('@supabase/supabase-js').createClient;
+} catch (e) {
+  // @supabase/supabase-js package is optional
 }
 
 const PORT = 3000;
@@ -84,6 +95,34 @@ const server = http.createServer((req, res) => {
           console.log(`  Phone:    ${data.phone}`);
           console.log(`  Email:    ${data.email}`);
           console.log(`  (Configure SMTP in server.js to enable real email notifications)\n`);
+        }
+
+        // Saving to Supabase (Backend Insertion using Service Key)
+        if (createClient && SUPABASE_URL && SUPABASE_KEY) {
+          try {
+            const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+            supabase.from('leads').insert([
+              {
+                name: data.name,
+                email: data.email,
+                business: data.business,
+                phone: data.phone,
+                source: data.source || 'Live Call Demo'
+              }
+            ]).then(({ error }) => {
+              if (error) {
+                console.error('[Supabase Error] Failed to insert lead on backend:', error.message);
+              } else {
+                console.log('[Supabase] Successfully saved lead to database from backend.');
+              }
+            });
+          } catch (supabaseErr) {
+            console.error('[Supabase Error] Failed to initialize supabase client on backend:', supabaseErr.message);
+          }
+        } else {
+          console.log(`[Supabase Backend Mock] Details would be inserted into Supabase leads table:`);
+          console.log(`  Name:     ${data.name}`);
+          console.log(`  (Configure SUPABASE_URL in server.js and run 'npm install @supabase/supabase-js' to enable backend database insertion)\n`);
         }
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
