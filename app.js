@@ -546,29 +546,62 @@ document.addEventListener('DOMContentLoaded', () => {
     const cal = document.getElementById('ph-calendar');
     cal.style.display = 'none';
 
+    let detailsText = '';
+
     if (type === 'transfer') {
       icon.textContent = '⚡';
       title.textContent = 'Call Transferred!';
-      desc.textContent = `${name} was qualified and transferred to your team in real-time. No lead wasted.`;
+      detailsText = `${name} was qualified and transferred to your team in real-time. No lead wasted.`;
+      desc.textContent = detailsText;
     } else if (type === 'scheduled') {
       icon.textContent = '📅';
       title.textContent = 'Callback Scheduled!';
-      desc.textContent = `${name} was busy but a callback was automatically booked. Zero manual follow-up.`;
+      detailsText = `${name} was busy but a callback was automatically booked. Zero manual follow-up.`;
+      desc.textContent = detailsText;
       cal.style.display = 'block';
     } else if (type === 'declined') {
       icon.textContent = '👋';
       title.textContent = 'Lead Handled';
-      desc.textContent = `${name} declined politely. The outcome and data are logged for future reference.`;
+      detailsText = `${name} declined politely. The outcome and data are logged for future reference.`;
+      desc.textContent = detailsText;
     } else {
       icon.textContent = '📵';
       title.textContent = 'Call Ended';
-      desc.textContent = 'The call was ended. All data has been logged.';
+      detailsText = 'The call was ended. All data has been logged.';
+      desc.textContent = detailsText;
     }
 
     showState('outcome');
     demoRunning = false;
     startBtn.textContent = '📞 Start Live Call';
     startBtn.disabled = false;
+
+    // Send call event details to digitaladsexpresso@gmail.com
+    const saved = localStorage.getItem('demo_user');
+    let email = '';
+    let business = '';
+    let phone = '';
+    if (saved) {
+      try {
+        const user = JSON.parse(saved);
+        email = user.email;
+        business = user.business;
+        phone = user.phone;
+      } catch (err) {}
+    }
+
+    fetch('/api/call-event', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name,
+        email,
+        business,
+        phone,
+        outcome: type,
+        details: detailsText
+      })
+    }).catch(err => console.warn('Failed to submit call event to local server:', err));
   }
 
   // Calendar slot clicks

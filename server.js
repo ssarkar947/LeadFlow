@@ -134,6 +134,63 @@ const server = http.createServer((req, res) => {
     });
     return;
   }
+
+  if (req.method === 'POST' && req.url === '/api/call-event') {
+    let body = '';
+    req.on('data', chunk => { body += chunk.toString(); });
+    req.on('end', () => {
+      try {
+        const data = JSON.parse(body);
+        console.log('\n================ DEMO SIMULATOR CALL COMPLETED ================');
+        console.log(`Name:     ${data.name}`);
+        console.log(`Email:    ${data.email || 'N/A'}`);
+        console.log(`Business: ${data.business || 'N/A'}`);
+        console.log(`Phone:    ${data.phone || 'N/A'}`);
+        console.log(`Outcome:  ${data.outcome.toUpperCase()}`);
+        if (data.details) {
+          console.log(`Details:  ${data.details}`);
+        }
+        console.log('===============================================================\n');
+
+        // Sending Email to digitaladsexpresso@gmail.com
+        if (nodemailer && SMTP_CONFIG.host && SMTP_CONFIG.auth.user) {
+          const transporter = nodemailer.createTransport(SMTP_CONFIG);
+          const mailOptions = {
+            from: SMTP_CONFIG.auth.user,
+            to: EMAIL_TO,
+            subject: `📞 Live Demo Call Attempt: ${data.name} (${data.outcome.toUpperCase()})`,
+            text: `A user has just completed a simulated live voice call on the LeadFlow mockup.\n\n` +
+                  `Name:          ${data.name}\n` +
+                  `Email:         ${data.email || 'N/A'}\n` +
+                  `Business Name: ${data.business || 'N/A'}\n` +
+                  `Contact Phone: ${data.phone || 'N/A'}\n\n` +
+                  `Call Outcome:  ${data.outcome.toUpperCase()}\n` +
+                  `Outcome Info:  ${data.details || ''}\n`
+          };
+          transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+              console.error(`[Error] Failed to send email to ${EMAIL_TO}:`, error.message);
+            } else {
+              console.log(`[Email] Notification email successfully sent to ${EMAIL_TO}`);
+            }
+          });
+        } else {
+          console.log(`[Email Mock] Demo Call details would be sent to ${EMAIL_TO}:`);
+          console.log(`  Name:     ${data.name}`);
+          console.log(`  Outcome:  ${data.outcome.toUpperCase()}`);
+          console.log(`  Details:  ${data.details || ''}`);
+          console.log(`  (Configure SMTP in server.js to enable real email notifications)\n`);
+        }
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, message: 'Call event processed' }));
+      } catch (err) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: 'Invalid JSON payload' }));
+      }
+    });
+    return;
+  }
   
   // Normalize path and set default index.html
   let filePath = req.url === '/' ? '/index.html' : req.url;
