@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ─── Supabase Configuration (Optional - User can fill this in) ───
-  const supabaseUrl = ''; // Enter your Supabase Project URL here
+  const supabaseUrl = 'https://srblcdevmvdjhfdedmnr.supabase.co'; 
   const supabaseKey = ''; // Enter your Supabase Anon Key here
   let supabaseClient = null;
   if (supabaseUrl && supabaseKey && window.supabase) {
