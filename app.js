@@ -110,14 +110,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Submit to Local Server for email delivery
     try {
-      await fetch(getApiUrl('/api/register'), {
+      const response = await fetch(getApiUrl('/api/register'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error('Registration API server error:', errorData.error || response.statusText);
+      }
     } catch (err) {
       console.warn('Local register API offline, running mock registration', err);
     }
+
 
     // 2. Submit to Supabase (if configured)
     if (supabaseClient) {
@@ -245,14 +250,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Submit to Local Server for email notification
     try {
-      await fetch(getApiUrl('/api/register'), {
+      const response = await fetch(getApiUrl('/api/register'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error('Registration API server error:', errorData.error || response.statusText);
+      }
     } catch (err) {
       console.warn('Local register API offline, running mock registration', err);
     }
+
 
     // 2. Submit to Supabase (if configured)
     if (supabaseClient) {
