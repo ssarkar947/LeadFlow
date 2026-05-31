@@ -54,19 +54,25 @@ module.exports = async (req, res) => {
     const supabaseUrl = process.env.SUPABASE_URL || 'https://srblcdevmvdjhfdedmnr.supabase.co';
     const supabaseKey = process.env.SUPABASE_KEY;
 
-    if (supabaseUrl && supabaseKey) {
-      const supabase = createClient(supabaseUrl, supabaseKey);
-      const { error } = await supabase.from('leads').insert([
-        {
-          name: data.name,
-          email: data.email,
-          business: data.business,
-          phone: data.phone,
-          source: data.source || 'Early Access Signup'
-        }
-      ]);
-      if (error) throw error;
+    if (!supabaseKey) {
+      res.status(500).json({ 
+        success: false, 
+        error: 'SUPABASE_KEY environment variable is not defined on Vercel. Please check your Vercel Project Settings.' 
+      });
+      return;
     }
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const { error } = await supabase.from('leads').insert([
+      {
+        name: data.name,
+        email: data.email,
+        business: data.business,
+        phone: data.phone,
+        source: data.source || 'Early Access Signup'
+      }
+    ]);
+    if (error) throw error;
 
     res.status(200).json({ success: true, message: 'Registration processed' });
   } catch (err) {
