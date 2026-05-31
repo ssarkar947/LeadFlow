@@ -2,22 +2,43 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
+// Load environment variables from local .env file if it exists
+try {
+  const envPath = path.join(__dirname, '.env');
+  if (fs.existsSync(envPath)) {
+    const envData = fs.readFileSync(envPath, 'utf8');
+    envData.split(/\r?\n/).forEach(line => {
+      const match = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+      if (match) {
+        const key = match[1];
+        let value = match[2] || '';
+        // Remove quotes if any
+        if (value.length > 0 && value.charAt(0) === '"' && value.charAt(value.length - 1) === '"') {
+          value = value.substring(1, value.length - 1);
+        }
+        process.env[key] = value;
+      }
+    });
+  }
+} catch (e) {
+  // Ignore env loading errors
+}
+
 // ─── SMTP Email Configuration ───
 const SMTP_CONFIG = {
-  host: '',         // e.g. 'smtp.gmail.com'
-  port: 587,
-  secure: false,
+  host: process.env.SMTP_HOST || '',
+  port: process.env.SMTP_PORT || 587,
+  secure: process.env.SMTP_PORT === '465',
   auth: {
-    user: '',
-    pass: ''
+    user: process.env.SMTP_USER || '',
+    pass: process.env.SMTP_PASS || ''
   }
 };
-const EMAIL_TO = 'digitaladsexpresso@gmail.com';
+const EMAIL_TO = process.env.EMAIL_TO || 'digitaladsexpresso@gmail.com';
 
 // ─── Supabase Backend Configuration ───
 // Storing secret keys on the backend prevents client-side exposure.
-// Load these from process environment variables for security.
-const SUPABASE_URL = process.env.SUPABASE_URL || ''; 
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://srblcdevmvdjhfdedmnr.supabase.co'; 
 const SUPABASE_KEY = process.env.SUPABASE_KEY || ''; 
 
 let nodemailer = null;
