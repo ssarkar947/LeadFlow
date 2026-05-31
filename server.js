@@ -34,6 +34,36 @@ try {
   // @supabase/supabase-js package is optional
 }
 
+const LEADS_FILE = path.join(__dirname, 'leads.json');
+
+function saveLeadLocally(lead) {
+  fs.readFile(LEADS_FILE, (err, data) => {
+    let leads = [];
+    if (!err) {
+      try {
+        leads = JSON.parse(data.toString());
+      } catch (e) {
+        leads = [];
+      }
+    }
+    
+    // Check if this lead email already exists to update it, or add new
+    const existingIndex = leads.findIndex(l => l.email === lead.email && lead.email);
+    if (existingIndex > -1) {
+      // Merge properties (e.g. add call outcomes to existing signup details)
+      leads[existingIndex] = { ...leads[existingIndex], ...lead, updated_at: new Date().toISOString() };
+    } else {
+      lead.id = Date.now();
+      lead.created_at = new Date().toISOString();
+      leads.push(lead);
+    }
+    
+    fs.writeFile(LEADS_FILE, JSON.stringify(leads, null, 2), writeErr => {
+      if (writeErr) console.error('[Error] Failed to save lead locally:', writeErr.message);
+    });
+  });
+}
+
 const PORT = 3000;
 
 const MIME_TYPES = {
@@ -66,6 +96,17 @@ const server = http.createServer((req, res) => {
           console.log(`Source:   ${data.source}`);
         }
         console.log('==========================================================\n');
+
+        // Save locally to JSON DB
+        const lead = {
+          name: data.name,
+          email: data.email,
+          business: data.business,
+          phone: data.phone,
+          source: data.source || 'Early Access Signup',
+          outcome: 'No Call Yet'
+        };
+        saveLeadLocally(lead);
 
         // Sending Email to digitaladsexpresso@gmail.com
         if (nodemailer && SMTP_CONFIG.host && SMTP_CONFIG.auth.user) {
@@ -152,6 +193,18 @@ const server = http.createServer((req, res) => {
         }
         console.log('===============================================================\n');
 
+        // Save locally to JSON DB
+        const leadUpdate = {
+          name: data.name,
+          email: data.email,
+          business: data.business,
+          phone: data.phone,
+          source: data.source || 'Live Call Demo',
+          outcome: data.outcome,
+          outcome_details: data.details
+        };
+        saveLeadLocally(leadUpdate);
+
         // Sending Email to digitaladsexpresso@gmail.com
         if (nodemailer && SMTP_CONFIG.host && SMTP_CONFIG.auth.user) {
           const transporter = nodemailer.createTransport(SMTP_CONFIG);
@@ -188,6 +241,47 @@ const server = http.createServer((req, res) => {
         res.writeHead(400, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ success: false, error: 'Invalid JSON payload' }));
       }
+    });
+    return;
+  }
+
+  if (req.method === 'GET' && req.url === '/api/leads') {
+    fs.readFile(LEADS_FILE, (err, data) => {
+      let leads = [];
+      if (!err) {
+        try {
+          leads = JSON.parse(data.toString());
+        } catch (e) {
+          leads = [];
+        }
+      }
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(leads));
+    });
+    return;
+  }
+
+  if (req.method === 'DELETE' && req.url.startsWith('/api/leads/')) {
+    const leadId = parseInt(req.url.split('/').pop(), 10);
+    fs.readFile(LEADS_FILE, (err, data) => {
+      let leads = [];
+      if (!err) {
+        try {
+          leads = JSON.parse(data.toString());
+        } catch (e) {
+          leads = [];
+        }
+      }
+      leads = leads.filter(l => l.id !== leadId);
+      fs.writeFile(LEADS_FILE, JSON.stringify(leads, null, 2), writeErr => {
+        if (writeErr) {
+          res.writeHead(500, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: false, error: writeErr.message }));
+        } else {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: true }));
+        }
+      });
     });
     return;
   }
