@@ -140,7 +140,7 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
   transition: opacity 1.5s ease-in-out;
 }
 .hero-waves-bg.is-flowing {
-  opacity: 0.8;
+  opacity: 0.3;
 }
 .hero-wave-svg {
   width: 100%; height: 100%;
