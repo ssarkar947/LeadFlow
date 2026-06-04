@@ -63,8 +63,15 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
 }
 .adv-nav a:hover { color: var(--text-dark); }
 .adv-nav a:hover::after { width: 100%; }
-.nav-highlight { color: var(--lime-green) !important; font-weight: 600 !important; }
-.nav-highlight::after { background: var(--lime-green) !important; }
+.nav-highlight { 
+  color: #000 !important; 
+  font-weight: 600 !important; 
+  border: 1px solid var(--lime-green);
+  padding: 0.4rem 1rem !important;
+  border-radius: 99px;
+  background-color: transparent;
+}
+.nav-highlight::after { display: none !important; }
 
 .adv-btn {
   display: inline-flex; align-items: center; justify-content: center;
