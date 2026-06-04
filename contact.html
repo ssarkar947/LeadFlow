@@ -144,42 +144,34 @@
 <body>
 
   <!-- ═══════════ HEADER ═══════════ -->
-  <header class="adv-header" id="site-header">
+  <header class="adv-header" id="adv-header">
     <div class="adv-container header-inner">
       <a href="index.html" class="adv-logo">
         <img src="logo.png" alt="AdsVise Logo" />
       </a>
-      <nav class="adv-nav desktop-nav">
+      <nav class="adv-nav" id="adv-nav">
         <a href="index.html#services">Services</a>
-        <a href="index.html#work">Our Work</a>
-        <a href="index.html#process">Process</a>
-        <a href="leadcall.html">LeadCall AI <span class="badge">NEW</span></a>
+        <a href="index.html#how-we-roll">Process</a>
+        <a href="index.html#values">Values</a>
+        <a href="leadcall.html" class="nav-highlight">LeadCall AI</a>
       </nav>
-      <div class="header-actions desktop-nav">
-        <a href="contact.html" class="btn btn-outline">Client Login</a>
-        <a href="#form" class="btn btn-primary">Start a Project</a>
-      </div>
-      <button class="mobile-menu-btn" id="open-drawer">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <a href="#form" class="adv-btn adv-btn-primary header-cta-btn">Get in touch</a>
+      <button class="adv-menu-toggle" id="adv-menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
     </div>
   </header>
 
-  <!-- ═══════════ MOBILE DRAWER ═══════════ -->
-  <div class="drawer" id="drawer">
-    <div class="drawer-header">
-      <a href="index.html" class="adv-logo">
-        <img src="logo.png" alt="AdsVise Logo" />
-      </a>
-      <button class="close-btn" id="close-drawer">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
-    <nav class="drawer-nav">
-      <a href="index.html#services" class="close-drawer-link">Services</a>
-      <a href="index.html#work" class="close-drawer-link">Our Work</a>
-      <a href="leadcall.html" class="close-drawer-link">LeadCall AI</a>
-      <a href="contact.html" class="close-drawer-link">Contact Us</a>
+  <!-- Mobile Overlay Menu -->
+  <div class="mobile-overlay" id="mobile-overlay">
+    <nav class="mobile-overlay-nav">
+      <a href="index.html#services" class="mobile-nav-link">Services</a>
+      <a href="index.html#how-we-roll" class="mobile-nav-link">Process</a>
+      <a href="index.html#values" class="mobile-nav-link">Values</a>
+      <a href="leadcall.html" class="mobile-nav-link nav-highlight">LeadCall AI</a>
+      <a href="#form" class="adv-btn adv-btn-primary mobile-nav-link" style="margin-top:2rem;">Get in touch</a>
     </nav>
   </div>
 
