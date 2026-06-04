@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       const heroWaves = document.getElementById('hero-waves');
       if (heroWaves) heroWaves.classList.add('is-flowing');
-    }, 2000);
+    }, 1000);
   })();
 
 
