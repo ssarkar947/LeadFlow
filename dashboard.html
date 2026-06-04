@@ -419,6 +419,24 @@
       border-radius: 4px;
       border: 1px solid var(--border-color);
     }
+
+    /* ═══════════════════════════════════════════
+       DASHBOARD TABS
+       ═══════════════════════════════════════════ */
+    .dashboard-tabs {
+      display: flex; gap: 1rem; margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color); padding-bottom: 0;
+    }
+    .tab-btn {
+      background: transparent; border: none; color: var(--text-muted);
+      font-size: 1rem; font-weight: 500; padding: 0.75rem 1.5rem;
+      cursor: pointer; border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tab-btn:hover { color: var(--text-light); }
+    .tab-btn.active {
+      color: var(--lime-green); border-bottom: 3px solid var(--lime-green);
+    }
   </style>
 </head>
 <body>
@@ -515,15 +533,17 @@
       </div>
     </section>
 
+    <!-- Dashboard Tabs -->
+    <div class="dashboard-tabs" id="dashboard-tabs">
+      <button class="tab-btn active" data-tab="all">All Leads</button>
+      <button class="tab-btn" data-tab="get-in-touch">Get in Touch</button>
+      <button class="tab-btn" data-tab="voice-demo">Voice Demo</button>
+    </div>
+
     <!-- Controls and Filters -->
     <section class="controls-bar">
       <div class="search-filter">
         <input type="text" class="search-input" id="search-input" placeholder="Search leads by name, email, business..."/>
-        <select class="filter-select" id="filter-source">
-          <option value="all">All Lead Sources</option>
-          <option value="signup">Modal Signups</option>
-          <option value="demo">Live Call Demo</option>
-        </select>
         <select class="filter-select" id="filter-outcome">
           <option value="all">All Outcomes</option>
           <option value="transfer">Transferred Only</option>
@@ -589,8 +609,8 @@
 
       const refreshBtn = document.getElementById('refresh-btn');
       const searchInput = document.getElementById('search-input');
-      const filterSource = document.getElementById('filter-source');
       const filterOutcome = document.getElementById('filter-outcome');
+      const tabBtns = document.querySelectorAll('.tab-btn');
       const exportBtn = document.getElementById('export-btn');
       
       const tbody = document.getElementById('leads-tbody');
@@ -606,6 +626,18 @@
       const loginApp = document.getElementById('login-app');
       const dashboardApp = document.getElementById('dashboard-app');
       const loginBtn = document.getElementById('login-btn');
+      
+      let currentTab = 'all';
+
+      // Tab click logic
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentTab = btn.getAttribute('data-tab');
+          renderLeads();
+        });
+      });
       
       let authToken = sessionStorage.getItem('dashboardToken');
       if (authToken) {
@@ -738,44 +770,38 @@
           }
         }
 
-        renderLeadsTable(leads);
+        renderLeads();
       }
 
       // Render leads table
-      function renderLeadsTable(list) {
+      function renderLeads() {
         tbody.innerHTML = '';
-        const search = searchInput.value.toLowerCase().trim();
-        const sourceVal = filterSource.value;
-        const outcomeVal = filterOutcome.value;
+        const q = searchInput.value.toLowerCase();
+        const out = filterOutcome.value;
 
         // Apply filters
-        const filtered = list.filter(item => {
-          // Search filter
-          const textMatch = !search || 
-            (item.name && item.name.toLowerCase().includes(search)) ||
-            (item.email && item.email.toLowerCase().includes(search)) ||
-            (item.business && item.business.toLowerCase().includes(search)) ||
-            (item.phone && item.phone.toLowerCase().includes(search));
+        const filtered = leads.filter(lead => {
+          // Tab filtering
+          const leadSource = (lead.source || '').toLowerCase();
+          if (currentTab === 'get-in-touch' && !leadSource.includes('get in touch') && !leadSource.includes('signup')) return false;
+          if (currentTab === 'voice-demo' && !leadSource.includes('voice demo') && !leadSource.includes('live call')) return false;
 
-          // Source filter
-          let sourceMatch = true;
-          if (sourceVal === 'signup') {
-            sourceMatch = item.source && item.source.toLowerCase().includes('signup');
-          } else if (sourceVal === 'demo') {
-            sourceMatch = item.source && item.source.toLowerCase().includes('demo');
+          // Search text filtering
+          const txt = `${lead.name||''} ${lead.email||''} ${lead.business||''} ${lead.phone||''}`.toLowerCase();
+          if (q && !txt.includes(q)) return false;
+
+          // Outcome filtering
+          if (out !== 'all') {
+            if (out === 'transfer' && lead.outcome !== 'transfer') return false;
+            if (out === 'scheduled' && lead.outcome !== 'scheduled') return false;
+            if (out === 'declined' && lead.outcome !== 'declined' && lead.outcome !== 'hangup') return false;
           }
 
-          // Outcome filter
-          let outcomeMatch = true;
-          if (outcomeVal !== 'all') {
-            outcomeMatch = item.outcome === outcomeVal;
-          }
-
-          return textMatch && sourceMatch && outcomeMatch;
+          return true;
         });
 
         // Update metric cards based on all unfiltered loaded leads
-        updateMetrics(list);
+        updateMetrics(leads);
 
         if (filtered.length === 0) {
           emptyState.style.display = 'block';
@@ -913,12 +939,8 @@
 
       // Controls Bindings
       refreshBtn.addEventListener('click', loadLeads);
-      searchInput.addEventListener('input', () => renderLeadsTable(leads));
-      filterSource.addEventListener('change', () => renderLeadsTable(leads));
-      filterOutcome.addEventListener('change', () => renderLeadsTable(leads));
-
-      // Initial Fetch
-      loadLeads();
+      filterOutcome.addEventListener('change', renderLeads);
+      searchInput.addEventListener('input', renderLeads);
     });
   </script>
 </body>

@@ -536,6 +536,9 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
 .lead-form input:focus, .lead-form select:focus {
   outline: none; border-color: var(--lime-green); background: rgba(204, 255, 0, 0.05);
 }
+.lead-form select option {
+  color: #000 !important;
+}
 .success-message {
   text-align: center; padding: 2rem 0;
 }
