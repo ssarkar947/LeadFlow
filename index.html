@@ -25,7 +25,7 @@
       <a href="#values">Values</a>
       <a href="leadcall.html" class="nav-highlight">LeadCall AI</a>
     </nav>
-    <a href="mailto:digitaladsexpresso@gmail.com" class="adv-btn adv-btn-primary header-cta-btn">Get in touch</a>
+    <a href="#lead-modal" class="adv-btn adv-btn-primary header-cta-btn open-lead-modal">Get in touch</a>
     <button class="adv-menu-toggle" id="adv-menu-toggle" aria-label="Toggle menu">
       <span></span>
       <span></span>
@@ -41,7 +41,7 @@
     <a href="#how-we-roll" class="mobile-nav-link">Process</a>
     <a href="#values" class="mobile-nav-link">Values</a>
     <a href="leadcall.html" class="mobile-nav-link nav-highlight">LeadCall AI</a>
-    <a href="mailto:digitaladsexpresso@gmail.com" class="adv-btn adv-btn-primary mobile-nav-link" style="margin-top:2rem;">Get in touch</a>
+    <a href="#lead-modal" class="adv-btn adv-btn-primary mobile-nav-link open-lead-modal" style="margin-top:2rem;">Get in touch</a>
   </nav>
 </div>
 
@@ -346,7 +346,7 @@
       <div class="cta-inner reveal-fade">
         <h2>Ready to grow?</h2>
         <p>Let's turn your big, audacious goals into reality.</p>
-        <a href="mailto:digitaladsexpresso@gmail.com" class="adv-btn adv-btn-primary">Get in touch</a>
+        <a href="#lead-modal" class="adv-btn adv-btn-primary open-lead-modal">Get in touch</a>
       </div>
     </div>
   </section>
@@ -393,6 +393,52 @@
   </div>
 </footer>
 
-<script src="adsvise.js"></script>
+  <!-- Lead Capture Modal -->
+  <div class="modal-overlay" id="lead-modal-overlay">
+    <div class="modal-container">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <div class="modal-content">
+        <h2>Get in touch</h2>
+        <p>Drop your details below and we'll reach out to discuss your growth strategy.</p>
+        <form id="lead-capture-form" class="lead-form">
+          <div class="form-group">
+            <label for="lead-name">Name <span class="required">*</span></label>
+            <input type="text" id="lead-name" placeholder="John Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="lead-company">Company</label>
+            <input type="text" id="lead-company" placeholder="Acme Corp">
+          </div>
+          <div class="form-group">
+            <label for="lead-phone">Phone number <span class="required">*</span></label>
+            <input type="tel" id="lead-phone" placeholder="(555) 123-4567" required>
+          </div>
+          <div class="form-group">
+            <label for="lead-email">Email <span class="required">*</span></label>
+            <input type="email" id="lead-email" placeholder="john@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="lead-size">Company Size <span class="required">*</span></label>
+            <select id="lead-size" required>
+              <option value="" disabled selected>Select size</option>
+              <option value="1-10">1-10 employees</option>
+              <option value="11-50">11-50 employees</option>
+              <option value="51-200">51-200 employees</option>
+              <option value="201-500">201-500 employees</option>
+              <option value="500+">500+ employees</option>
+            </select>
+          </div>
+          <button type="submit" class="adv-btn adv-btn-primary" id="lead-submit-btn" style="width: 100%; margin-top: 1rem;">Submit Details</button>
+        </form>
+        <div id="lead-success-msg" class="success-message" style="display: none;">
+          <h3>Thanks for reaching out!</h3>
+          <p>We've received your details and will be in touch shortly.</p>
+          <button class="adv-btn adv-btn-secondary" id="modal-close-success" style="margin-top: 1.5rem;">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="adsvise.js"></script>
 </body>
 </html>

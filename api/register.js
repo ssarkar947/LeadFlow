@@ -43,7 +43,8 @@ module.exports = async (req, res) => {
         text: `New early access signup from ${data.name} on the AdsVise website (https://adsvise.in/).\n\n` +
               `Name:          ${data.name}\n` +
               `Email:         ${data.email}\n` +
-              `Business Name: ${data.business}\n` +
+              `Business Name: ${data.company || data.business}\n` +
+              (data.companySize ? `Company Size:  ${data.companySize}\n` : '') +
               `Contact Phone: ${data.phone}\n` +
               (data.source ? `Lead Source:   ${data.source}\n` : '')
       };
@@ -67,7 +68,7 @@ module.exports = async (req, res) => {
       {
         name: data.name,
         email: data.email,
-        business: data.business,
+        business: (data.company || data.business || '') + (data.companySize ? ` (${data.companySize})` : ''),
         phone: data.phone,
         source: data.source || 'Early Access Signup',
         website: 'https://adsvise.in/'

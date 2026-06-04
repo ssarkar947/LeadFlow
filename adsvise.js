@@ -63,14 +63,99 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ═══════════════════════════════════════════
      SERVICES ACCORDION
      ═══════════════════════════════════════════ */
-  document.querySelectorAll('.accordion-header').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.parentElement;
-      const wasOpen = item.classList.contains('is-open');
-      document.querySelectorAll('.accordion-item.is-open').forEach(i => i.classList.remove('is-open'));
-      if (!wasOpen) item.classList.add('is-open');
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+  const accordionItems = document.querySelectorAll('.accordion-item');
+
+  accordionHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+      const parentItem = header.parentElement;
+      const wasActive = parentItem.classList.contains('active');
+      
+      // Close all accordions
+      accordionItems.forEach(item => {
+        item.classList.remove('active');
+        item.querySelector('.accordion-body').style.maxHeight = null;
+      });
+      
+      // If wasn't active, open it
+      if (!wasActive) {
+        parentItem.classList.add('active');
+        const body = parentItem.querySelector('.accordion-body');
+        body.style.maxHeight = body.scrollHeight + "px";
+      }
     });
   });
+
+  // ═══════════════════════════════════════════
+  // MODAL LOGIC
+  // ═══════════════════════════════════════════
+  const modalOverlay = document.getElementById('lead-modal-overlay');
+  if (modalOverlay) {
+    const openBtns = document.querySelectorAll('.open-lead-modal');
+    const closeBtn = document.getElementById('modal-close-btn');
+    const successCloseBtn = document.getElementById('modal-close-success');
+    const leadForm = document.getElementById('lead-capture-form');
+    const successMsg = document.getElementById('lead-success-msg');
+    const submitBtn = document.getElementById('lead-submit-btn');
+
+    function openModal(e) {
+      if (e) e.preventDefault();
+      modalOverlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+    
+    function closeModal() {
+      modalOverlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        leadForm.style.display = 'block';
+        successMsg.style.display = 'none';
+        leadForm.reset();
+      }, 300);
+    }
+
+    openBtns.forEach(btn => btn.addEventListener('click', openModal));
+    closeBtn.addEventListener('click', closeModal);
+    successCloseBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+
+    leadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.textContent = 'Submitting...';
+      submitBtn.disabled = true;
+
+      const payload = {
+        name: document.getElementById('lead-name').value,
+        company: document.getElementById('lead-company').value,
+        phone: document.getElementById('lead-phone').value,
+        email: document.getElementById('lead-email').value,
+        companySize: document.getElementById('lead-size').value,
+        source: 'Get In Touch Form'
+      };
+
+      try {
+        const res = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        
+        if (res.ok) {
+          leadForm.style.display = 'none';
+          successMsg.style.display = 'block';
+        } else {
+          alert('Something went wrong. Please try again or email us directly.');
+        }
+      } catch (err) {
+        alert('Network error. Please try again.');
+      } finally {
+        submitBtn.textContent = 'Submit Details';
+        submitBtn.disabled = false;
+      }
+    });
+  }
 
 
   /* ═══════════════════════════════════════════

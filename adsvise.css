@@ -489,9 +489,54 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
   
   /* Product Showcase */
   .product-card { padding: 2rem 1.5rem; }
-  .product-content h2 { font-size: 2rem; }
+  .value-footer h3 { font-size: 1rem; }
+  .accordion-title { font-size: 1.1rem; }
   
-  /* Footer */
-  .adv-footer { padding: 3rem 0 2rem; }
-  .footer-grid { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
 }
+
+/* ═══════════════════════════════════════════
+   MODAL / POPUP
+   ═══════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(4, 3, 10, 0.85); backdrop-filter: blur(8px);
+  z-index: 9999; display: flex; justify-content: center; align-items: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.modal-overlay.is-open {
+  opacity: 1; pointer-events: auto;
+}
+.modal-container {
+  background: var(--card-bg); border: 1px solid var(--border-light);
+  width: 90%; max-width: 480px; border-radius: var(--radius);
+  position: relative; transform: translateY(20px); transition: transform 0.3s ease;
+  max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+.modal-overlay.is-open .modal-container { transform: translateY(0); }
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem; background: transparent; border: none;
+  color: var(--text-muted); font-size: 2rem; cursor: pointer; line-height: 1;
+}
+.modal-close:hover { color: var(--lime-green); }
+.modal-content { padding: 2.5rem; }
+.modal-content h2 { margin-top: 0; margin-bottom: 0.5rem; font-size: 2rem; }
+.modal-content p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.5; }
+
+.lead-form .form-group { margin-bottom: 1.25rem; }
+.lead-form label {
+  display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-light); margin-bottom: 0.4rem;
+}
+.lead-form label .required { color: var(--lime-green); }
+.lead-form input, .lead-form select {
+  width: 100%; padding: 0.75rem 1rem; background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-light); border-radius: var(--radius);
+  color: var(--text-light); font-family: 'Inter', sans-serif; transition: border-color 0.2s, background 0.2s;
+}
+.lead-form input:focus, .lead-form select:focus {
+  outline: none; border-color: var(--lime-green); background: rgba(204, 255, 0, 0.05);
+}
+.success-message {
+  text-align: center; padding: 2rem 0;
+}
+.success-message h3 { color: var(--lime-green); font-size: 1.5rem; margin-bottom: 0.5rem; }

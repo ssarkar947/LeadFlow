@@ -122,7 +122,8 @@ const server = http.createServer((req, res) => {
         console.log('\n================ NEW ACCOUNT REGISTRATION ================');
         console.log(`Name:     ${data.name}`);
         console.log(`Email:    ${data.email}`);
-        console.log(`Business: ${data.business}`);
+        console.log(`Business: ${data.company || data.business}`);
+        if (data.companySize) console.log(`Size:     ${data.companySize}`);
         console.log(`Phone:    ${data.phone}`);
         if (data.source) {
           console.log(`Source:   ${data.source}`);
@@ -133,7 +134,7 @@ const server = http.createServer((req, res) => {
         const lead = {
           name: data.name,
           email: data.email,
-          business: data.business,
+          business: (data.company || data.business || '') + (data.companySize ? ` (${data.companySize})` : ''),
           phone: data.phone,
           source: data.source || 'Early Access Signup',
           outcome: 'No Call Yet'
@@ -150,7 +151,8 @@ const server = http.createServer((req, res) => {
             text: `A new user has registered to access the Live Call Demo on the AdsVise website (https://adsvise.in/).\n\n` +
                   `Name:          ${data.name}\n` +
                   `Email:         ${data.email}\n` +
-                  `Business Name: ${data.business}\n` +
+                  `Business Name: ${data.company || data.business}\n` +
+                  (data.companySize ? `Company Size:  ${data.companySize}\n` : '') +
                   `Contact Phone: ${data.phone}\n` +
                   (data.source ? `Lead Source:   ${data.source}\n` : '')
           };
