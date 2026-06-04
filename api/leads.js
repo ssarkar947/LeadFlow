@@ -11,6 +11,18 @@ module.exports = async (req, res) => {
     return;
   }
 
+  // Verify Authentication
+  const authHeader = req.headers.authorization || '';
+  const token = authHeader.replace('Bearer ', '');
+  const envUser = process.env.DASHBOARD_USER || 'admin';
+  const envPass = process.env.DASHBOARD_PASSWORD || 'admin123';
+  const expectedToken = Buffer.from(`${envUser}:${envPass}`).toString('base64');
+  
+  if (token !== expectedToken) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
   const supabaseUrl = process.env.SUPABASE_URL || 'https://srblcdevmvdjhfdedmnr.supabase.co';
   const supabaseKey = process.env.SUPABASE_KEY;
 

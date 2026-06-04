@@ -423,6 +423,36 @@
 </head>
 <body>
 
+  <!-- Login Application -->
+  <div id="login-app">
+    <div class="login-card">
+      <div class="logo-icon" style="font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem;">🔒</div>
+      <h2 style="text-align: center; color: var(--text-light); margin-bottom: 1.5rem;">Backend Login</h2>
+      <div class="form-group">
+        <label for="login-username">Username</label>
+        <input type="text" id="login-username" placeholder="Enter username" />
+      </div>
+      <div class="form-group">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" placeholder="Enter password" />
+      </div>
+      <button class="btn btn-blue" id="login-btn" style="width: 100%;">Authenticate</button>
+      <div id="login-error" style="color: var(--danger); margin-top: 1rem; text-align: center; display: none;">Invalid credentials</div>
+    </div>
+  </div>
+  <style>
+    #login-app {
+      display: flex; justify-content: center; align-items: center; min-height: 100vh;
+    }
+    .login-card {
+      background: var(--card-bg); border: 1px solid var(--border-color);
+      padding: 2.5rem; border-radius: var(--radius); width: 100%; max-width: 400px;
+    }
+  </style>
+
+  <!-- Dashboard Application (Hidden initially) -->
+  <div id="dashboard-app" style="display: none;">
+
   <!-- Navigation Header -->
   <header class="dashboard-header">
     <a href="index.html" class="logo">
@@ -531,6 +561,7 @@
     </section>
 
   </main>
+  </div> <!-- end dashboard-app -->
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -570,6 +601,47 @@
       const statTransfers = document.getElementById('stat-transfers');
       const statCallbacks = document.getElementById('stat-callbacks');
       const statRate = document.getElementById('stat-rate');
+
+      // Login Logic
+      const loginApp = document.getElementById('login-app');
+      const dashboardApp = document.getElementById('dashboard-app');
+      const loginBtn = document.getElementById('login-btn');
+      
+      let authToken = sessionStorage.getItem('dashboardToken');
+      if (authToken) {
+        showDashboard();
+      }
+
+      function showDashboard() {
+        loginApp.style.display = 'none';
+        dashboardApp.style.display = 'block';
+        loadLeads();
+      }
+
+      loginBtn.addEventListener('click', async () => {
+        const u = document.getElementById('login-username').value;
+        const p = document.getElementById('login-password').value;
+        loginBtn.textContent = 'Authenticating...';
+        try {
+          const res = await fetch(getApiUrl('/api/auth'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: u, password: p })
+          });
+          const data = await res.json();
+          if (data.success && data.token) {
+            sessionStorage.setItem('dashboardToken', data.token);
+            authToken = data.token;
+            document.getElementById('login-error').style.display = 'none';
+            showDashboard();
+          } else {
+            document.getElementById('login-error').style.display = 'block';
+          }
+        } catch (e) {
+          document.getElementById('login-error').style.display = 'block';
+        }
+        loginBtn.textContent = 'Authenticate';
+      });
 
       // Load Settings from LocalStorage
       let config = JSON.parse(localStorage.getItem(CONFIG_KEY)) || {
@@ -655,7 +727,9 @@
         // If local mode (or fallback), fetch from server leads.json
         if (config.source === 'local') {
           try {
-            const res = await fetch(getApiUrl('/api/leads'));
+            const res = await fetch(getApiUrl('/api/leads'), {
+              headers: { 'Authorization': 'Bearer ' + authToken }
+            });
             if (res.ok) {
               leads = await res.json();
             }
@@ -803,9 +877,14 @@
         } else {
           // Delete from local server API
           try {
-            const res = await fetch(getApiUrl(`/api/leads/${leadId}`), { method: 'DELETE' });
-            if (res.ok) {
-              loadLeads();
+            if (config.source === 'local') {
+              const res = await fetch(getApiUrl(`/api/leads/${leadId}`), { 
+                method: 'DELETE',
+                headers: { 'Authorization': 'Bearer ' + authToken }
+              });
+              if (res.ok) {
+                loadLeads();
+              }
             }
           } catch (err) {
             console.error('Delete call failed:', err);

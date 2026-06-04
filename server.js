@@ -279,7 +279,46 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  if (req.method === 'POST' && req.url === '/api/auth') {
+    let body = '';
+    req.on('data', chunk => { body += chunk.toString(); });
+    req.on('end', () => {
+      try {
+        const payload = JSON.parse(body);
+        const envUser = process.env.DASHBOARD_USER || 'admin';
+        const envPass = process.env.DASHBOARD_PASSWORD || 'admin123';
+        if (payload.username === envUser && payload.password === envPass) {
+          const token = Buffer.from(`${envUser}:${envPass}`).toString('base64');
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: true, token }));
+        } else {
+          res.writeHead(401, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: false, error: 'Invalid credentials' }));
+        }
+      } catch (err) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: 'Invalid JSON payload' }));
+      }
+    });
+    return;
+  }
+
+  // ─── AUTH MIDDLEWARE FOR PROTECTED ROUTES ───
+  function checkAuth() {
+    const authHeader = req.headers.authorization || '';
+    const token = authHeader.replace('Bearer ', '');
+    const envUser = process.env.DASHBOARD_USER || 'admin';
+    const envPass = process.env.DASHBOARD_PASSWORD || 'admin123';
+    const expectedToken = Buffer.from(`${envUser}:${envPass}`).toString('base64');
+    return token === expectedToken;
+  }
+
   if (req.method === 'GET' && req.url === '/api/leads') {
+    if (!checkAuth()) {
+      res.writeHead(401, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Unauthorized' }));
+      return;
+    }
     fs.readFile(LEADS_FILE, (err, data) => {
       let leads = [];
       if (!err) {
@@ -296,6 +335,11 @@ const server = http.createServer((req, res) => {
   }
 
   if (req.method === 'DELETE' && req.url.startsWith('/api/leads/')) {
+    if (!checkAuth()) {
+      res.writeHead(401, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Unauthorized' }));
+      return;
+    }
     const leadId = parseInt(req.url.split('/').pop(), 10);
     fs.readFile(LEADS_FILE, (err, data) => {
       let leads = [];
