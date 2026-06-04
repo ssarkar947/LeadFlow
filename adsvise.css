@@ -453,18 +453,18 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
   
   /* Hero Section */
   .desktop-br { display: none; }
-  .adv-hero { padding: 120px 0 60px; min-height: 80vh; }
+  .adv-hero { padding: 120px 0 60px; min-height: 70vh; }
   .hero-content { max-width: 100%; margin-bottom: 2rem; }
-  .adv-hero h1 { font-size: clamp(2.3rem, 9vw, 3rem); line-height: 1.05; letter-spacing: -0.03em; padding-right: 0.5rem; }
-  .hero-tagline { font-size: 1.1rem; }
+  .adv-hero h1 { font-size: clamp(1.8rem, 8vw, 2.4rem); line-height: 1.1; letter-spacing: -0.02em; padding-right: 0.5rem; }
+  .hero-tagline { font-size: 1rem; }
   
   .hero-services-row { 
     flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start;
     gap: 0.4rem 0.2rem; margin-top: 1.5rem; 
   }
-  .hero-service-plus { display: inline-block; color: #F97316; font-weight: 800; font-size: 0.95rem; }
+  .hero-service-plus { display: inline-block; color: #F97316; font-weight: 800; font-size: 0.9rem; }
   .hero-service-item { padding: 0; }
-  .hero-service-item h2 { font-size: 0.95rem; font-weight: 800; color: var(--text-dark); margin: 0; }
+  .hero-service-item h2 { font-size: 0.9rem; font-weight: 800; color: var(--text-dark); margin: 0; }
   
   /* Section Paddings */
   .adv-values { padding: 5rem 0; }
