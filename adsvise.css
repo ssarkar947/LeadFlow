@@ -124,6 +124,11 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
   color: var(--text-dark);
 }
 .mobile-nav-link:hover { color: var(--brand-blue); }
+.mobile-nav-link.nav-highlight {
+  font-size: 1.5rem !important; /* Slightly smaller for the button */
+  padding: 0.6rem 1.5rem !important;
+  border-width: 2px !important;
+}
 
 
 /* ─── HERO (Cream/Light BG like bald.agency) ─── */
