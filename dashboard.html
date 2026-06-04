@@ -815,8 +815,7 @@
           const tdSource = document.createElement('td');
           const spanSource = document.createElement('span');
           spanSource.className = 'source-pill';
-          const isSignup = lead.source && lead.source.toLowerCase().includes('signup');
-          spanSource.textContent = isSignup ? 'Signup Form' : 'Voice Demo Tryon';
+          spanSource.textContent = lead.source || 'Voice demo';
           tdSource.appendChild(spanSource);
           tr.appendChild(tdSource);
 

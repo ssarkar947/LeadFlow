@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         phone: document.getElementById('lead-phone').value,
         email: document.getElementById('lead-email').value,
         companySize: document.getElementById('lead-size').value,
-        source: 'Get In Touch Form'
+        source: 'Get in touch'
       };
 
       try {

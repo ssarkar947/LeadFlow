@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.disabled = true;
     btn.textContent = 'Unlocking Simulator...';
 
-    const payload = { name, email, business, phone, source: 'Live Call Demo' };
+    const payload = { name, email, business, phone, source: 'Voice demo' };
 
     // 1. Submit to Local Server for email notification
     try {
