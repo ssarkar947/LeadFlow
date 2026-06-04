@@ -462,9 +462,9 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
     display: inline-flex; 
     margin-left: auto; /* Push to right */
     padding: 0.35rem 0.8rem; font-size: 0.85rem; font-weight: 700;
-    background: transparent; color: #F97316; border: 2px solid #F97316; 
+    background: transparent; color: #000; border: 2px solid var(--lime-green); 
   }
-  .header-cta-btn:hover { background: #F97316; color: #fff; }
+  .header-cta-btn:hover { background: var(--lime-green); color: #000; }
   
   /* Hero Section */
   .desktop-br { display: none; }
