@@ -456,7 +456,7 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
   /* Navigation */
   .adv-logo img { height: 60px; } /* Resize logo for mobile */
   .adv-menu-toggle { display: flex; margin-left: 0.75rem; }
-  .adv-menu-toggle span { background: #F97316; } /* Orange hamburger */
+  .adv-menu-toggle span { background: var(--text-dark); } /* Match theme */
   .adv-nav { display: none; }
   .header-cta-btn { 
     display: inline-flex; 
