@@ -113,7 +113,8 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
 /* Mobile Overlay */
 .mobile-overlay {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: var(--bg-cream); z-index: 1050;
+  background: var(--bg-color); /* Dark theme */
+  z-index: 1050;
   display: flex; align-items: center; justify-content: center;
   opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
 }
@@ -121,13 +122,15 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
 .mobile-overlay-nav { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
 .mobile-nav-link {
   font-family: var(--font-heading); font-size: 2rem; font-weight: 800;
-  color: var(--text-dark);
+  color: var(--text-light); /* Light text for dark background */
 }
-.mobile-nav-link:hover { color: var(--brand-blue); }
+.mobile-nav-link:hover { color: var(--lime-green); }
 .mobile-nav-link.nav-highlight {
-  font-size: 1.5rem !important; /* Slightly smaller for the button */
+  font-size: 1.5rem !important;
   padding: 0.6rem 1.5rem !important;
   border-width: 2px !important;
+  background-color: var(--lime-green) !important; /* Solid background for visibility */
+  color: #000 !important; /* Black text on lime green */
 }
 
 
