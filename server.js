@@ -147,7 +147,7 @@ const server = http.createServer((req, res) => {
             from: SMTP_CONFIG.auth.user,
             to: EMAIL_TO,
             subject: `🔥 New Lead Registered: ${data.name}`,
-            text: `A new user has registered to access the Live Call Demo.\n\n` +
+            text: `A new user has registered to access the Live Call Demo on the AdsVise website (https://adsvise.in/).\n\n` +
                   `Name:          ${data.name}\n` +
                   `Email:         ${data.email}\n` +
                   `Business Name: ${data.business}\n` +
@@ -180,7 +180,8 @@ const server = http.createServer((req, res) => {
                 email: data.email,
                 business: data.business,
                 phone: data.phone,
-                source: data.source || 'Live Call Demo'
+                source: data.source || 'Live Call Demo',
+                website: 'https://adsvise.in/'
               }
             ]).then(({ error }) => {
               if (error) {
@@ -232,6 +233,7 @@ const server = http.createServer((req, res) => {
           business: data.business,
           phone: data.phone,
           source: data.source || 'Live Call Demo',
+          website: 'https://adsvise.in/',
           outcome: data.outcome,
           outcome_details: data.details
         };
@@ -244,7 +246,7 @@ const server = http.createServer((req, res) => {
             from: SMTP_CONFIG.auth.user,
             to: EMAIL_TO,
             subject: `📞 Live Demo Call Attempt: ${data.name} (${data.outcome.toUpperCase()})`,
-            text: `A user has just completed a simulated live voice call on the LeadFlow mockup.\n\n` +
+            text: `A user has just completed a simulated live voice call on the AdsVise website (https://adsvise.in/).\n\n` +
                   `Name:          ${data.name}\n` +
                   `Email:         ${data.email || 'N/A'}\n` +
                   `Business Name: ${data.business || 'N/A'}\n` +

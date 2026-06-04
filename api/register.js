@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
         from: smtpUser,
         to: emailTo,
         subject: `🔥 New Lead Registered: ${data.name}`,
-        text: `A new user has registered to access the Live Call Demo.\n\n` +
+        text: `New early access signup from ${data.name} on the AdsVise website (https://adsvise.in/).\n\n` +
               `Name:          ${data.name}\n` +
               `Email:         ${data.email}\n` +
               `Business Name: ${data.business}\n` +
@@ -69,7 +69,8 @@ module.exports = async (req, res) => {
         email: data.email,
         business: data.business,
         phone: data.phone,
-        source: data.source || 'Early Access Signup'
+        source: data.source || 'Early Access Signup',
+        website: 'https://adsvise.in/'
       }
     ]);
     if (error) throw error;

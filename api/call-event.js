@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
         from: smtpUser,
         to: emailTo,
         subject: `📞 Live Demo Call Attempt: ${data.name} (${data.outcome.toUpperCase()})`,
-        text: `A user has just completed a simulated live voice call on the LeadFlow mockup.\n\n` +
+        text: `A user has just completed a simulated live voice call on the AdsVise website (https://adsvise.in/).\n\n` +
               `Name:          ${data.name}\n` +
               `Email:         ${data.email || 'N/A'}\n` +
               `Business Name: ${data.business || 'N/A'}\n` +
@@ -63,7 +63,8 @@ module.exports = async (req, res) => {
         .from('leads')
         .update({
           outcome: data.outcome,
-          outcome_details: data.details
+          outcome_details: data.details,
+          website: 'https://adsvise.in/'
         })
         .eq('email', data.email);
         
