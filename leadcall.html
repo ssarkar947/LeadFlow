@@ -79,7 +79,34 @@
     <div class="hero-visual">
       <div class="hero-img-wrap">
         <div class="hero-glow"></div>
-        <img src="hero.png" alt="LeadCall AI Dashboard showing live lead monitoring and instant callback system" width="1200" height="1200"/>
+        <style>
+          .hero-video-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 9 / 16;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,.35);
+            animation: bobbing 6s ease-in-out infinite;
+            overflow: hidden;
+            background: #000;
+            margin: 0 auto;
+          }
+          @media(min-width:1024px) {
+            .hero-video-wrapper {
+              left: 100px; /* maintain the right-shift on desktop */
+            }
+          }
+        </style>
+        <div class="hero-video-wrapper">
+          <div id="custom-yt-player" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;"></div>
+          <!-- Custom Controls Overlay -->
+          <div style="position:absolute;bottom:20px;right:20px;z-index:10;display:flex;gap:10px;">
+            <button id="btn-custom-mute" class="btn btn-white btn-sm" style="box-shadow:0 4px 12px rgba(0,0,0,0.2);font-weight:700;">Mute</button>
+            <button id="btn-custom-pause" class="btn btn-white btn-sm" style="box-shadow:0 4px 12px rgba(0,0,0,0.2);font-weight:700;">Pause</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -639,5 +666,61 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="app.js"></script>
+<script>
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var ytPlayer;
+  function onYouTubeIframeAPIReady() {
+    ytPlayer = new YT.Player('custom-yt-player', {
+      height: '100%',
+      width: '100%',
+      videoId: 'nu5UjVUfU0w',
+      playerVars: {
+        'autoplay': 1,
+        'controls': 0,
+        'rel': 0,
+        'modestbranding': 1,
+        'loop': 1,
+        'playlist': 'nu5UjVUfU0w',
+        'iv_load_policy': 3,
+        'disablekb': 1,
+        'mute': 0
+      },
+      events: {
+        'onReady': function(event) {
+           event.target.playVideo();
+        }
+      }
+    });
+  }
+
+  document.getElementById('btn-custom-mute').addEventListener('click', function() {
+    if (ytPlayer && ytPlayer.isMuted) {
+      if (ytPlayer.isMuted()) {
+        ytPlayer.unMute();
+        this.innerText = 'Mute';
+      } else {
+        ytPlayer.mute();
+        this.innerText = 'Unmute';
+      }
+    }
+  });
+
+  document.getElementById('btn-custom-pause').addEventListener('click', function() {
+    if (ytPlayer && ytPlayer.getPlayerState) {
+      var state = ytPlayer.getPlayerState();
+      if (state === 1) { // playing
+        ytPlayer.pauseVideo();
+        this.innerText = 'Play';
+      } else {
+        ytPlayer.playVideo();
+        this.innerText = 'Pause';
+      }
+    }
+  });
+</script>
 </body>
 </html>
