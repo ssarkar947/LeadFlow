@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFBB9FSMCS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-NFBB9FSMCS');
+  </script>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>LeadCall AI – Instant AI Lead Response System for Service Businesses</title>
@@ -103,7 +112,7 @@
           <div id="custom-yt-player" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;"></div>
           <!-- Custom Controls Overlay -->
           <div style="position:absolute;bottom:20px;right:20px;z-index:10;display:flex;gap:10px;">
-            <button id="btn-custom-mute" class="btn btn-white btn-sm" style="box-shadow:0 4px 12px rgba(0,0,0,0.2);font-weight:700;">Mute</button>
+            <button id="btn-custom-mute" class="btn btn-white btn-sm" style="box-shadow:0 4px 12px rgba(0,0,0,0.2);font-weight:700;">Unmute</button>
             <button id="btn-custom-pause" class="btn btn-white btn-sm" style="box-shadow:0 4px 12px rgba(0,0,0,0.2);font-weight:700;">Pause</button>
           </div>
         </div>
@@ -687,7 +696,7 @@
         'playlist': 'nu5UjVUfU0w',
         'iv_load_policy': 3,
         'disablekb': 1,
-        'mute': 0
+        'mute': 1
       },
       events: {
         'onReady': function(event) {
