@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFBB9FSMCS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-NFBB9FSMCS');
+  </script>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>LeadCall AI – Instant AI Lead Response System for Service Businesses</title>
+  <meta name="description" content="LeadCall AI automatically calls your new leads within seconds, qualifies them, and transfers hot prospects to your phone. Perfect for freelancers, coaches, consultants, and agencies."/>
+  <meta name="robots" content="index, follow"/>
+  <meta property="og:title" content="LeadCall AI – Stop Losing Leads While You're Busy"/>
+  <meta property="og:description" content="Every lead that doesn't hear from you quickly is another opportunity for a competitor to step in. LeadCall AI fixes that in seconds."/>
+  <meta property="og:type" content="website"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon">⚡</div>
+      LeadCall<span>AI</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/" style="color:var(--lime-green);font-weight:bold;">← AdsVise Home</a>
+      <a href="#demo">Live Demo</a>
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="header-cta">
+      <a href="#" class="btn btn-outline btn-sm open-modal">Login</a>
+      <a href="#" class="btn btn-blue btn-sm open-modal">Start for free</a>
+    </div>
+    <div class="mobile-actions">
+      <a href="#" class="btn btn-blue btn-sm open-modal">Start free</a>
+      <button class="drawer-close" id="open-drawer" aria-label="Open menu" style="font-size:1.5rem;background:none;border:none;color:#52525b">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer -->
+<div class="drawer-overlay" id="drawer">
+  <div class="drawer-panel">
+    <button class="drawer-close" id="close-drawer" aria-label="Close menu">✕</button>
+      <a href="/" class="close-drawer-link" style="color:var(--lime-green);font-weight:bold;">← AdsVise Home</a>
+      <a href="#demo" class="close-drawer-link">Live Demo</a>
+      <a href="#features" class="close-drawer-link">Features</a>
+      <a href="#how-it-works" class="close-drawer-link">How It Works</a>
+      <a href="#faq" class="close-drawer-link">FAQ</a>
+      <a href="#" class="btn btn-outline open-modal close-drawer-link" style="width:100%;margin-top:1rem">Login</a>
+      <a href="#" class="btn btn-blue open-modal close-drawer-link" style="width:100%">Start for free</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-blur-1"></div>
+  <div class="hero-blur-2"></div>
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <span class="hero-badge-name">LeadCall AI</span>
+        <span class="hero-badge-sep">×</span>
+        <span class="hero-badge-partner">🤖 AI Voice Technology</span>
+      </div>
+      <h1>Stop Losing Leads<br><span>While You're Busy</span></h1>
+      <p class="hero-desc">Every lead that doesn't hear from you quickly is another opportunity for a competitor to step in. Our AI calls your prospects within seconds — 24/7.</p>
+      <div class="hero-cta-row">
+        <a href="#" class="btn btn-lime btn-xl open-modal">Start For Free</a>
+      </div>
+      <div class="trust-row">
+        <span class="trust-pill"><span class="check">✓</span> &lt; 5 Second Response</span>
+        <span class="trust-pill"><span class="check">✓</span> No Credit Card</span>
+        <span class="trust-pill"><span class="check">✓</span> Instant Setup</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-wrap">
+        <div class="hero-glow"></div>
+        <style>
+          .hero-video-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 9 / 16;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,.35);
+            animation: bobbing 6s ease-in-out infinite;
+            overflow: hidden;
+            background: #000;
+            margin: 0 auto;
+          }
+          @media(min-width:1024px) {
+            .hero-video-wrapper {
+              left: 100px; /* maintain the right-shift on desktop */
+            }
+          }
+        </style>
+        <div class="hero-video-wrapper">
+          <div id="custom-yt-player" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;"></div>
+          <!-- Custom Controls Overlay -->
+          <div style="position:absolute;bottom:20px;right:20px;z-index:10;display:flex;gap:10px;">
+            <button id="btn-custom-mute" class="btn btn-white btn-sm" style="box-shadow:0 4px 12px rgba(0,0,0,0.2);font-weight:700;">Unmute</button>
+            <button id="btn-custom-pause" class="btn btn-white btn-sm" style="box-shadow:0 4px 12px rgba(0,0,0,0.2);font-weight:700;">Pause</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ STATS BAR ═══════════════ -->
+<section class="stats-bar">
+  <div class="container stats-grid">
+    <div class="reveal">
+      <div class="stat-val">&lt;5s</div>
+      <div class="stat-label">Avg. Response Time</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-val">3.4×</div>
+      <div class="stat-label">More Conversations</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-val">78%</div>
+      <div class="stat-label">Lead-to-Call Rate</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-val">24/7</div>
+      <div class="stat-label">Always Available</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SHOWCASE 1: Instant Response ═══════════════ -->
+<section class="showcase">
+  <div class="showcase-block">
+    <div class="container showcase-grid">
+      <div class="showcase-text reveal">
+        <h2>Convert More Leads Instantly!</h2>
+        <p>Stop losing prospects to faster competitors. The moment a lead fills out your form, our AI calls them within seconds — while their interest is at its peak. No more "sorry, we went with someone else."</p>
+        <div class="showcase-cta-row">
+          <a href="#" class="btn btn-lime btn-lg open-modal">Start For Free</a>
+        </div>
+        <div class="showcase-badges">
+          <span><span class="dot">✓</span> AI-Powered</span>
+          <span>•</span>
+          <span><span class="dot">✓</span> No Credit Card</span>
+          <span>•</span>
+          <span><span class="dot">✓</span> Instant Setup</span>
+        </div>
+      </div>
+      <div class="showcase-visual reveal">
+        <div class="showcase-card" style="padding:2rem">
+          <!-- Live phone mockup simulation -->
+          <div style="display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap;justify-content:center">
+            <div class="phone-mock">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="msg msg-status">Incoming Call • LeadCall AI</div>
+                <div class="msg msg-ai">Hi Sarah, thanks for your inquiry about website design services. Is now a good time to talk?</div>
+                <div class="msg msg-user">Yes, I'm looking for someone to redesign my company's website!</div>
+                <div class="msg msg-ai">Perfect! Let me connect you directly with the team lead right now. Hold on one moment...</div>
+                <div class="msg msg-status" style="color:#a3e635">⚡ Call transferred successfully</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SHOWCASE 2: Smart Scheduling ═══════════════ -->
+<section class="showcase" style="background:#f9fafb">
+  <div class="showcase-block">
+    <div class="container showcase-grid reverse">
+      <div class="showcase-text reveal">
+        <h2>Never Miss a Busy Lead!</h2>
+        <p>When a prospect is busy, the AI doesn't give up. It automatically offers convenient callback times and schedules the follow-up — no manual coordination needed. Zero leads slip through the cracks.</p>
+        <div class="showcase-cta-row">
+          <a href="#" class="btn btn-lime btn-lg open-modal">Start For Free</a>
+        </div>
+        <div class="showcase-badges">
+          <span><span class="dot">✓</span> Auto Scheduling</span>
+          <span>•</span>
+          <span><span class="dot">✓</span> Smart Follow-ups</span>
+          <span>•</span>
+          <span><span class="dot">✓</span> Zero Manual Work</span>
+        </div>
+      </div>
+      <div class="showcase-visual reveal">
+        <div class="showcase-card" style="padding:2rem">
+          <div style="display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap;justify-content:center">
+            <div class="phone-mock">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="msg msg-status">Incoming Call • LeadCall AI</div>
+                <div class="msg msg-ai">Hi Mike, thanks for reaching out about consulting services. Is now a good time?</div>
+                <div class="msg msg-user">Actually, I'm in a meeting right now. Can we talk later?</div>
+                <div class="msg msg-ai">Of course! Let me find a convenient time. How about today at 3:00 PM or tomorrow at 10:00 AM?</div>
+                <div class="msg msg-user">Tomorrow at 10 AM works great.</div>
+                <div class="msg msg-ai">Done! I've booked you for tomorrow at 10:00 AM. You'll get a reminder. Talk soon!</div>
+                <div class="msg msg-status" style="color:#38bdf8">📅 Callback booked automatically</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ INTERACTIVE VOICE DEMO ═══════════════ -->
+<section class="demo-section" id="demo">
+  <div class="container">
+    <div class="demo-header">
+      <div class="demo-tag">🔊 Live Demo</div>
+      <h2>Hear the Voice Agent in Action</h2>
+      <p>Enter your details below to experience a live voice call simulation with a human-sounding customer support agent. You can adjust the agent's voice, tone, and select from all major languages in the world to hear it speak.</p>
+    </div>
+    <div class="demo-grid">
+      <!-- Left: Form Card -->
+      <div class="demo-form-card reveal">
+        <!-- STEP 1: Registration Form (Locked) -->
+        <div class="demo-form-inner" id="demo-lock-screen">
+          <div class="lock-header" style="text-align:center;margin-bottom:1.5rem">
+            <span style="font-size:2.5rem;display:block;margin-bottom:.5rem">🔒</span>
+            <h3>Access Live Demo</h3>
+            <p>Create your free account to unlock the interactive voice agent simulator.</p>
+          </div>
+          <form id="demo-register-form">
+            <div class="form-group">
+              <label for="reg-name">Full Name</label>
+              <input type="text" id="reg-name" placeholder="Sarah Connor" required/>
+            </div>
+            <div class="form-group">
+              <label for="reg-email">Email Address</label>
+              <input type="email" id="reg-email" placeholder="sarah@example.com" required/>
+            </div>
+            <div class="form-group">
+              <label for="reg-business">Business Name</label>
+              <input type="text" id="reg-business" placeholder="Cyberdyne Systems" required/>
+            </div>
+            <div class="form-group">
+              <label for="reg-phone">Contact Number (with Country Code)</label>
+              <input type="tel" id="reg-phone" placeholder="e.g. +1 555 0199" required/>
+            </div>
+            <button type="submit" class="btn btn-blue btn-lg" style="width:100%;margin-top:.5rem" id="demo-unlock-btn">
+              Create Account & Unlock Demo 🔓
+            </button>
+          </form>
+        </div>
+
+        <!-- STEP 2: Demo Controller (Unlocked) -->
+        <div class="demo-form-inner" id="demo-controls-screen" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid #e4e4e7">
+            <div>
+              <span class="user-badge" style="font-size:.8rem;background:#dcfce7;color:#15803d;padding:.2rem .6rem;border-radius:9999px;font-weight:600">● Unlocked</span>
+            </div>
+            <button id="demo-logout-btn" class="btn-ghost" style="border:none;background:none;color:#ef4444;font-size:.8rem;cursor:pointer;font-weight:600">Change Account</button>
+          </div>
+          <h3>Configure Demo Call</h3>
+          <p>Logged in as <strong id="user-display-name">Sarah</strong>. Adjust settings and start your simulated call.</p>
+          
+          <form id="demo-form" onsubmit="return false">
+            <div class="form-group">
+              <label for="demo-industry">Your Industry</label>
+              <select id="demo-industry">
+                <option value="website design">Website Design</option>
+                <option value="consulting">Business Consulting</option>
+                <option value="coaching">Coaching & Education</option>
+                <option value="home services">Home Services</option>
+                <option value="marketing">Marketing Agency</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="demo-voice">Agent Voice & Language</label>
+              <select id="demo-voice">
+                <option value="default">Default Human-Like Voice (English)</option>
+              </select>
+              <span class="field-hint">Fully customizable voice, tone, and language (all major world languages supported).</span>
+            </div>
+            <button type="submit" class="btn btn-blue btn-lg" style="width:100%;margin-top:.5rem" id="demo-start-btn">
+              📞 Start Live Call
+            </button>
+          </form>
+          <div class="demo-tts-toggle" style="margin-top:1rem">
+            <button class="btn btn-ghost btn-sm" id="tts-toggle" style="border-color:#e4e4e7;color:#52525b;width:100%">
+              🔊 Voice Audio: ON
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Right: Phone Simulator -->
+      <div class="demo-phone-col reveal">
+        <div class="demo-phone" id="demo-phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <!-- Top bar -->
+            <div class="ph-topbar">
+              <span class="ph-time" id="ph-time">11:32 AM</span>
+              <span class="ph-sig">●●●○ 5G</span>
+            </div>
+
+            <!-- STATE: Idle -->
+            <div class="ph-state active" id="ph-idle">
+              <div class="ph-idle-content">
+                <div class="ph-idle-icon">📱</div>
+                <div class="ph-idle-title">Ready for Demo</div>
+                <div class="ph-idle-sub">Fill out the form and press<br>"Start Live Call" to begin.</div>
+                <div class="ph-notif">
+                  <div class="ph-notif-head">
+                    <span class="ph-notif-app">⚡ LeadCall AI</span>
+                    <span class="ph-notif-time">now</span>
+                  </div>
+                  <div class="ph-notif-title">New lead detected</div>
+                  <div class="ph-notif-body">A prospect just submitted your inquiry form...</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STATE: Ringing -->
+            <div class="ph-state" id="ph-ringing">
+              <div class="ph-ring-content">
+                <div class="ph-ring-label">INCOMING CALL</div>
+                <div class="ph-ring-name" id="ph-ring-name">Sarah</div>
+                <div class="ph-ring-sub">via LeadCall AI</div>
+                <div class="ph-avatar-pulse">
+                  <div class="ph-avatar-ring"></div>
+                  <div class="ph-avatar-core">📞</div>
+                </div>
+                <div class="ph-ring-actions">
+                  <button class="ph-ring-btn ph-decline" id="ph-decline">
+                    <span class="ph-ring-icon" style="background:#ef4444">✕</span>
+                    <span>Decline</span>
+                  </button>
+                  <button class="ph-ring-btn ph-accept" id="ph-accept">
+                    <span class="ph-ring-icon" style="background:#22c55e">✓</span>
+                    <span>Accept</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- STATE: Active Call -->
+            <div class="ph-state" id="ph-active">
+              <div class="ph-active-top">
+                <span class="ph-call-timer" id="ph-timer">00:00</span>
+                <div class="ph-waves">
+                  <span class="ph-wave-bar"></span>
+                  <span class="ph-wave-bar"></span>
+                  <span class="ph-wave-bar"></span>
+                  <span class="ph-wave-bar"></span>
+                  <span class="ph-wave-bar"></span>
+                </div>
+                <span class="ph-active-label">AI Voice Agent</span>
+              </div>
+              <div class="ph-chat" id="ph-chat">
+                <!-- Conversation bubbles injected by JS -->
+              </div>
+              <div class="ph-options" id="ph-options">
+                <!-- Response buttons injected by JS -->
+              </div>
+              <div class="ph-hangup-row">
+                <button class="ph-hangup" id="ph-hangup">
+                  <span style="font-size:1.2rem">📵</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- STATE: Outcome -->
+            <div class="ph-state" id="ph-outcome">
+              <div class="ph-outcome-content">
+                <div class="ph-outcome-icon" id="ph-out-icon">⚡</div>
+                <div class="ph-outcome-title" id="ph-out-title">Call Outcome</div>
+                <div class="ph-outcome-desc" id="ph-out-desc">Call ended.</div>
+                <!-- Calendar widget for busy leads -->
+                <div class="ph-calendar" id="ph-calendar" style="display:none">
+                  <div class="ph-cal-label">SELECT CALLBACK TIME</div>
+                  <div class="ph-cal-slots">
+                    <button class="ph-cal-slot">Today 2:00 PM</button>
+                    <button class="ph-cal-slot">Today 4:30 PM</button>
+                    <button class="ph-cal-slot">Tomorrow 10 AM</button>
+                    <button class="ph-cal-slot">Tomorrow 1 PM</button>
+                  </div>
+                </div>
+              </div>
+              <div style="padding:0 1.5rem 1.5rem;width:100%">
+                <button class="btn btn-ghost btn-sm" id="ph-reset" style="width:100%;border-color:rgba(255,255,255,.15)">↻ Reset Demo</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ DARK FEATURES GRID ═══════════════ -->
+<section class="features-section" id="features">
+  <div class="container">
+    <div class="features-header">
+      <div class="tag">All The Features You Need</div>
+      <h2>Unlock the Full Power of AI Lead Response</h2>
+      <p>Every tool you need to convert more inquiries into real conversations — built into one connected system.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">📞</div>
+        <h3>Instant Lead Response</h3>
+        <p>Every lead is contacted within seconds of submitting an inquiry. Reduce lead decay and increase your speed to lead.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🎙️</div>
+        <h3>Human-Like Voice AI</h3>
+        <p>Natural, ultra-realistic voice conversations that sound professional and human-like. Customize the voice tone, speed, and gender. Fully capable of speaking in all major languages in the world.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">⚡</div>
+        <h3>Smart Call Transfers</h3>
+        <p>Interested leads are transferred directly to the right person. Create immediate sales conversations while interest is highest.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📅</div>
+        <h3>Auto Callback Scheduling</h3>
+        <p>Busy leads can schedule a callback automatically. Never lose opportunities because of bad timing.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🔗</div>
+        <h3>CRM Integration</h3>
+        <p>Connect with HubSpot, Salesforce, GoHighLevel, Zapier, and all your existing marketing tools seamlessly.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📊</div>
+        <h3>Lead Activity Tracking</h3>
+        <p>Monitor every interaction. Know exactly what happened with every lead — calls, transfers, callbacks, and outcomes.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🔔</div>
+        <h3>Real-Time Notifications</h3>
+        <p>Get instant alerts via email, SMS, Slack, or WhatsApp about new leads, transfers, scheduled callbacks, and more.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">✅</div>
+        <h3>Qualification Questions</h3>
+        <p>Ask budget, timeline, location, and project size questions before transferring — so you only talk to qualified leads.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🌙</div>
+        <h3>24/7 Availability</h3>
+        <p>Respond to leads while you're working, sleeping, traveling, in meetings, or on vacation. Never miss another opportunity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ HOW IT WORKS ═══════════════ -->
+<section class="how-section" id="how-it-works">
+  <div class="container">
+    <div class="how-header">
+      <div class="tag">How it works</div>
+      <h2>3 Easy Steps, Instant Results</h2>
+      <p>Set up once, and let AI handle every lead from the moment they submit an inquiry.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h3>Lead Submits Inquiry</h3>
+        <p>A prospect fills out your website form, ad campaign lead form, or booking funnel. The system detects it instantly.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <h3>AI Calls Within Seconds</h3>
+        <p>The system automatically calls the lead with a natural, professional voice conversation — no waiting, no delays.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <h3>Connect or Schedule</h3>
+        <p>Available leads are transferred to you instantly. Busy leads get a callback booked automatically. Every lead handled.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ IDEAL FOR — Audience Cards ═══════════════ -->
+<section style="background:#fff;padding:5rem 0">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem">
+      <h2 style="font-size:2rem;margin-bottom:.5rem">Built For Professionals Who Value Speed</h2>
+      <p style="color:#71717a;max-width:30rem;margin:0 auto">Whether you're a solo operator or a growing team, LeadCall AI ensures every inquiry gets instant attention.</p>
+    </div>
+    <div style="display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+      <div class="feature-card reveal" style="background:#f9fafb;border-color:#e4e4e7">
+        <div style="font-size:2.5rem;margin-bottom:1rem">🎨</div>
+        <h3 style="color:#18181b">Freelancers</h3>
+        <p style="color:#52525b">Convert more inquiries into discovery calls — even while you're deep in creative work.</p>
+      </div>
+      <div class="feature-card reveal" style="background:#f9fafb;border-color:#e4e4e7">
+        <div style="font-size:2.5rem;margin-bottom:1rem">🧘</div>
+        <h3 style="color:#18181b">Coaches</h3>
+        <p style="color:#52525b">Respond to prospects before they lose interest. Catch high-ticket buyers at peak motivation.</p>
+      </div>
+      <div class="feature-card reveal" style="background:#f9fafb;border-color:#e4e4e7">
+        <div style="font-size:2.5rem;margin-bottom:1rem">📊</div>
+        <h3 style="color:#18181b">Consultants</h3>
+        <p style="color:#52525b">Book more qualified strategy sessions without the endless back-and-forth emails.</p>
+      </div>
+      <div class="feature-card reveal" style="background:#f9fafb;border-color:#e4e4e7">
+        <div style="font-size:2.5rem;margin-bottom:1rem">🏢</div>
+        <h3 style="color:#18181b">Agencies</h3>
+        <p style="color:#52525b">Ensure every inbound lead from ads and SEO receives immediate attention and follow-up.</p>
+      </div>
+      <div class="feature-card reveal" style="background:#f9fafb;border-color:#e4e4e7">
+        <div style="font-size:2.5rem;margin-bottom:1rem">🛠️</div>
+        <h3 style="color:#18181b">Service Businesses</h3>
+        <p style="color:#52525b">Capture emergency and field-service inquiries 24/7 while your teams are out on jobs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA BANNER ═══════════════ -->
+<section class="cta-banner">
+  <div class="container cta-inner">
+    <h2>You Worked Hard to Generate That Lead. Don't Lose Them.</h2>
+    <p>Respond instantly. Book more conversations. Convert more clients. The faster business wins — make sure it's yours.</p>
+    <a href="#" class="btn btn-lime btn-xl open-modal">Start For Free</a>
+    <div class="cta-badges">
+      <span>✓ Reaches Leads in Seconds</span>
+      <span>•</span>
+      <span>✓ No Credit Card Required</span>
+      <span>•</span>
+      <span>✓ Setup in Minutes</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FAQ ═══════════════ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="faq-header">
+      <h2>All Questions Answered</h2>
+      <p>Everything you need to know about LeadCall AI.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Will the lead know they are speaking with AI?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">The conversation is designed to sound natural and professional. The AI's goal is to quickly connect the lead with your business — it greets them, confirms availability, and either transfers or schedules a callback. The experience feels seamless and human.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I customize the script and questions?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. Greetings, qualification questions (budget, timeline, location, service type), transfer logic, voicemail fallbacks, and callback workflows can all be fully customized to match your business.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can it connect to my CRM?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. LeadCall AI integrates with HubSpot, Salesforce, GoHighLevel, ActiveCampaign, Zapier, Make, Webflow forms, WordPress, Facebook Lead Ads, and custom webhooks out of the box.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What happens if I can't take the transferred call?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">The system automatically falls back to scheduling a callback, routing to a team member, or leaving a voicemail — whatever you've configured. No lead is ever left hanging.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How quickly can I set this up?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Most businesses are up and running within minutes. Connect your lead source, customize your greeting, and you can trigger your first test call right away.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is LeadCall AI free to try?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes! You can start completely free with no credit card required. Test the system, run sample calls, and see results before committing to a paid plan.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo">
+          <div class="logo-icon">⚡</div>
+          LeadCall<span>AI</span>
+        </a>
+        <p>Ensure every inbound lead gets instant attention. The fastest responder wins the customer — make sure it's you.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#">Integrations</a></li>
+          <li><a href="#">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="/dashboard" style="color:var(--lime-green);font-weight:600">📊 Admin Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="/contact">Contact Us</a></li>
+          <li><a href="mailto:digitaladsexpresso@gmail.com">digitaladsexpresso@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 LeadCall AI. All rights reserved.</p>
+      <p>Built with ⚡ for speed-obsessed businesses</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════ INTENT CAPTURE MODAL ═══════════════ -->
+<div class="modal-bg" id="modal">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close-btn">✕</button>
+    <div id="modal-form">
+      <h3>Get Early Access</h3>
+      <p>Enter your details to activate your free trial and start responding to leads instantly.</p>
+      <form id="capture-form" onsubmit="return false">
+        <div class="form-group">
+          <label for="cap-name">Full Name</label>
+          <input type="text" id="cap-name" placeholder="e.g. Sarah Jenkins" required/>
+        </div>
+        <div class="form-group">
+          <label for="cap-business">Business Name</label>
+          <input type="text" id="cap-business" placeholder="e.g. Cyberdyne Systems" required/>
+        </div>
+        <div class="form-group">
+          <label for="cap-email">Business Email</label>
+          <input type="email" id="cap-email" placeholder="e.g. sarah@agency.com" required/>
+        </div>
+        <div class="form-group">
+          <label for="cap-phone">Contact Number (with Country Code)</label>
+          <input type="tel" id="cap-phone" placeholder="e.g. +1 555-019-2834" required/>
+        </div>
+        <div class="form-group">
+          <label for="cap-source">Primary Lead Source</label>
+          <select id="cap-source">
+            <option>Website Forms</option>
+            <option>Facebook Lead Ads</option>
+            <option>Google Ads</option>
+            <option>HubSpot / CRM</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-blue" style="width:100%;margin-top:1rem" id="cap-submit">Create Free Account 🚀</button>
+      </form>
+    </div>
+    <div class="modal-success" id="modal-success">
+      <div class="check-circle">✓</div>
+      <h3>You're In!</h3>
+      <p>We've registered your account. Check your email at <strong id="success-email"></strong> for setup instructions and your API key.</p>
+      <button class="btn btn-blue" style="width:100%" id="success-close">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+<script>
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var ytPlayer;
+  function onYouTubeIframeAPIReady() {
+    ytPlayer = new YT.Player('custom-yt-player', {
+      height: '100%',
+      width: '100%',
+      videoId: 'nu5UjVUfU0w',
+      playerVars: {
+        'autoplay': 1,
+        'controls': 0,
+        'rel': 0,
+        'modestbranding': 1,
+        'loop': 1,
+        'playlist': 'nu5UjVUfU0w',
+        'iv_load_policy': 3,
+        'disablekb': 1,
+        'mute': 1
+      },
+      events: {
+        'onReady': function(event) {
+           event.target.playVideo();
+        }
+      }
+    });
+  }
+
+  document.getElementById('btn-custom-mute').addEventListener('click', function() {
+    if (ytPlayer && ytPlayer.isMuted) {
+      if (ytPlayer.isMuted()) {
+        ytPlayer.unMute();
+        this.innerText = 'Mute';
+      } else {
+        ytPlayer.mute();
+        this.innerText = 'Unmute';
+      }
+    }
+  });
+
+  document.getElementById('btn-custom-pause').addEventListener('click', function() {
+    if (ytPlayer && ytPlayer.getPlayerState) {
+      var state = ytPlayer.getPlayerState();
+      if (state === 1) { // playing
+        ytPlayer.pauseVideo();
+        this.innerText = 'Play';
+      } else {
+        ytPlayer.playVideo();
+        this.innerText = 'Pause';
+      }
+    }
+  });
+</script>
+</body>
+</html>
