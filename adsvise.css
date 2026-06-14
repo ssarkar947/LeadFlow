@@ -528,6 +528,11 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
   pointer-events: none;
 }
 
+.phone-screen iframe.no-zoom {
+  width: 300%;
+  height: 100%;
+}
+
 .mobile-thumbnail-only {
   display: none !important;
 }
