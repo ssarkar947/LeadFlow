@@ -317,10 +317,21 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
 }
 .value-icon svg {
   width: 100px; height: 100px;
-  stroke: rgba(255, 255, 255, 0.15); stroke-width: 1.5px;
-  transition: stroke 0.3s, opacity 0.3s;
+  transition: stroke 0.3s, opacity 0.3s, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s;
 }
-.value-item-new:hover .value-icon svg { stroke: var(--lime-green); opacity: 1; }
+.value-icon svg:not(.expressive-icon) {
+  stroke: rgba(255, 255, 255, 0.15); stroke-width: 1.5px;
+}
+.value-item-new:hover .value-icon svg:not(.expressive-icon) { stroke: var(--lime-green); opacity: 1; }
+
+.value-icon svg.expressive-icon {
+  overflow: visible;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+}
+.value-item-new:hover .value-icon svg.expressive-icon {
+  transform: scale(1.15) rotate(4deg);
+  filter: drop-shadow(0 8px 24px rgba(204,255,0,0.3));
+}
 
 .value-footer {
   border-top: 2px solid var(--lime-green);
