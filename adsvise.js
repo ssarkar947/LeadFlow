@@ -61,6 +61,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ═══════════════════════════════════════════
+     LAZY-LOAD YOUTUBE IFRAMES
+     ═══════════════════════════════════════════ */
+  const lazyIframes = document.querySelectorAll('iframe[data-src]');
+  if (lazyIframes.length) {
+    const iframeObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const iframe = entry.target;
+          iframe.src = iframe.dataset.src;
+          iframe.removeAttribute('data-src');
+          obs.unobserve(iframe);
+        }
+      });
+    }, { rootMargin: '200px 0px' });
+    lazyIframes.forEach(iframe => iframeObserver.observe(iframe));
+  }
+
+
+  /* ═══════════════════════════════════════════
      VIDZY SERVICES ACCORDION
      ═══════════════════════════════════════════ */
   const vidzyAccordHeads = document.querySelectorAll('.vidzy-accod-head');
