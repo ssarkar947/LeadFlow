@@ -509,7 +509,8 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
   position: relative;
 }
 
-.phone-screen video {
+.phone-screen video,
+.phone-screen img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -525,6 +526,14 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
   height: 100%;
   border: none;
   pointer-events: none;
+}
+
+.mobile-thumbnail-only {
+  display: none !important;
+}
+
+.desktop-iframe-only {
+  display: block !important;
 }
 
 /* Left phone — rotated behind, left */
@@ -593,6 +602,12 @@ h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1
   }
   .phone-right {
     transform: rotate(16deg) translateX(84px) translateY(8px) scale(0.88);
+  }
+  .mobile-thumbnail-only {
+    display: block !important;
+  }
+  .desktop-iframe-only {
+    display: none !important;
   }
 }
 
