@@ -61,29 +61,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ═══════════════════════════════════════════
-     SERVICES ACCORDION
+     VIDZY SERVICES ACCORDION
      ═══════════════════════════════════════════ */
-  const accordionHeaders = document.querySelectorAll('.accordion-header');
-  const accordionItems = document.querySelectorAll('.accordion-item');
+  const vidzyAccordHeads = document.querySelectorAll('.vidzy-accod-head');
 
-  accordionHeaders.forEach(header => {
-    header.addEventListener('click', () => {
-      const parentItem = header.parentElement;
-      const wasActive = parentItem.classList.contains('active');
-      
-      // Close all accordions
-      accordionItems.forEach(item => {
-        item.classList.remove('active');
-        item.querySelector('.accordion-body').style.maxHeight = null;
+  vidzyAccordHeads.forEach(head => {
+    head.addEventListener('click', () => {
+      const parentPanel = head.parentElement;
+      const accordBlock = parentPanel.parentElement;
+      const wasActive = parentPanel.classList.contains('active');
+
+      // Close all panels in this specific accordion block
+      const allPanels = accordBlock.querySelectorAll('.vidzy-accod-panel');
+      allPanels.forEach(panel => {
+        panel.classList.remove('active');
+        const content = panel.querySelector('.vidzy-accod-content');
+        if (content) content.style.maxHeight = null;
+        const icon = panel.querySelector('.vidzy-icon');
+        if (icon) icon.innerHTML = '+';
       });
-      
-      // If wasn't active, open it
+
+      // If it wasn't active before, open it now
       if (!wasActive) {
-        parentItem.classList.add('active');
-        const body = parentItem.querySelector('.accordion-body');
-        body.style.maxHeight = body.scrollHeight + "px";
+        parentPanel.classList.add('active');
+        const content = parentPanel.querySelector('.vidzy-accod-content');
+        if (content) {
+          content.style.maxHeight = content.scrollHeight + "px";
+        }
+        const icon = parentPanel.querySelector('.vidzy-icon');
+        if (icon) icon.innerHTML = '&minus;';
       }
     });
+  });
+
+  // Initialize open panels
+  document.querySelectorAll('.vidzy-accod-panel.active').forEach(panel => {
+    const content = panel.querySelector('.vidzy-accod-content');
+    if (content) content.style.maxHeight = content.scrollHeight + "px";
   });
 
   // ═══════════════════════════════════════════
