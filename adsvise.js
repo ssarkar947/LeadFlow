@@ -54,14 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function cycleWord() {
       currentIndex = (currentIndex + 1) % words.length;
       cyclingWord.style.opacity    = '0';
-      cyclingWord.style.transform  = 'translateY(40px)';
+      cyclingWord.style.transform  = 'translateY(30px)';
 
       setTimeout(() => {
         cyclingWord.textContent     = words[currentIndex];
-        cyclingWord.style.transition = 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1)';
+        cyclingWord.style.transition = 'opacity 0.28s ease, transform 0.28s cubic-bezier(0.16,1,0.3,1)';
         cyclingWord.style.opacity   = '1';
         cyclingWord.style.transform = 'translateY(0)';
-      }, 350);
+      }, 180);
     }
 
     // Initial style
@@ -69,9 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
     cyclingWord.style.color      = 'var(--brand-blue)';
     cyclingWord.style.opacity    = '1';
     cyclingWord.style.transform  = 'translateY(0)';
-    cyclingWord.style.transition = 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1)';
+    cyclingWord.style.transition = 'opacity 0.28s ease, transform 0.28s cubic-bezier(0.16,1,0.3,1)';
 
-    setInterval(cycleWord, 2800);
+    setInterval(cycleWord, 1000);
   }
 
 
