@@ -243,22 +243,11 @@ body:has(button:hover) #cursor-ring {
 .word-cycle-wrap {
   display: inline-block;
   position: relative;
-  overflow: hidden;
   vertical-align: bottom;
-  min-width: 340px;
 }
 .word-cycle-word {
-  display: block;
+  display: inline-block;
   color: var(--brand-blue);
-  animation: wordCycleSlide 12s infinite;
-  will-change: transform, opacity;
-}
-@keyframes wordCycleSlide {
-  0%   { opacity: 0; transform: translateY(40px); }
-  5%   { opacity: 1; transform: translateY(0); }
-  22%  { opacity: 1; transform: translateY(0); }
-  27%  { opacity: 0; transform: translateY(-40px); }
-  100% { opacity: 0; transform: translateY(-40px); }
 }
 
 /* ═══════════════════════════════════════════
