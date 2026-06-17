@@ -50,18 +50,39 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cyclingWord) {
     const words = ['Automatically.', 'Effortlessly.', 'Intelligently.', 'Boldly.', 'Instantly.'];
     let currentIndex = 0;
+    let cycling = false;
+
+    // Phase timings (must total well under 1000ms)
+    const EXIT_DURATION  = 120; // ms — slide up + fade out
+    const ENTER_DURATION = 220; // ms — slide up + fade in
 
     function cycleWord() {
-      currentIndex = (currentIndex + 1) % words.length;
+      if (cycling) return;
+      cycling = true;
+
+      // — Phase 1: EXIT — slide up & fade out
+      cyclingWord.style.transition = `opacity ${EXIT_DURATION}ms ease, transform ${EXIT_DURATION}ms ease`;
       cyclingWord.style.opacity    = '0';
-      cyclingWord.style.transform  = 'translateY(30px)';
+      cyclingWord.style.transform  = 'translateY(-14px)';
 
       setTimeout(() => {
-        cyclingWord.textContent     = words[currentIndex];
-        cyclingWord.style.transition = 'opacity 0.28s ease, transform 0.28s cubic-bezier(0.16,1,0.3,1)';
-        cyclingWord.style.opacity   = '1';
-        cyclingWord.style.transform = 'translateY(0)';
-      }, 180);
+        // — Phase 2: SNAP — change word, reposition below instantly (no transition)
+        currentIndex = (currentIndex + 1) % words.length;
+        cyclingWord.textContent    = words[currentIndex];
+        cyclingWord.style.transition = 'none';
+        cyclingWord.style.transform  = 'translateY(14px)';
+        cyclingWord.style.opacity    = '0';
+
+        // Force reflow so browser registers the new position before animating
+        void cyclingWord.offsetWidth;
+
+        // — Phase 3: ENTER — slide up & fade in
+        cyclingWord.style.transition = `opacity ${ENTER_DURATION}ms ease, transform ${ENTER_DURATION}ms cubic-bezier(0.16,1,0.3,1)`;
+        cyclingWord.style.opacity    = '1';
+        cyclingWord.style.transform  = 'translateY(0)';
+
+        setTimeout(() => { cycling = false; }, ENTER_DURATION);
+      }, EXIT_DURATION + 10); // tiny buffer after exit completes
     }
 
     // Initial style
@@ -69,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
     cyclingWord.style.color      = 'var(--brand-blue)';
     cyclingWord.style.opacity    = '1';
     cyclingWord.style.transform  = 'translateY(0)';
-    cyclingWord.style.transition = 'opacity 0.28s ease, transform 0.28s cubic-bezier(0.16,1,0.3,1)';
 
     setInterval(cycleWord, 1000);
   }
