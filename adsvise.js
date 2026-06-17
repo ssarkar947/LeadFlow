@@ -1,6 +1,81 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ═══════════════════════════════════════════
+     #1 — CUSTOM ANIMATED CURSOR
+     ═══════════════════════════════════════════ */
+  const cursorDot  = document.getElementById('cursor-dot');
+  const cursorRing = document.getElementById('cursor-ring');
+
+  if (cursorDot && cursorRing && window.matchMedia('(hover: hover)').matches) {
+    let ringX = 0, ringY = 0;
+    let dotX  = 0, dotY  = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      dotX = e.clientX;
+      dotY = e.clientY;
+      cursorDot.style.left  = dotX + 'px';
+      cursorDot.style.top   = dotY + 'px';
+    });
+
+    // Ring lags behind with lerp
+    (function animateRing() {
+      ringX += (dotX - ringX) * 0.12;
+      ringY += (dotY - ringY) * 0.12;
+      cursorRing.style.left = ringX + 'px';
+      cursorRing.style.top  = ringY + 'px';
+      requestAnimationFrame(animateRing);
+    })();
+  }
+
+
+  /* ═══════════════════════════════════════════
+     #2 — CURSOR-TRACKED HERO GLOW
+     ═══════════════════════════════════════════ */
+  const heroGlow = document.getElementById('hero-cursor-glow');
+  const heroSection = document.getElementById('hero');
+  if (heroGlow && heroSection) {
+    heroSection.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      heroGlow.style.transform = `translate(${x - 350}px, ${y - 350}px)`;
+    });
+  }
+
+
+  /* ═══════════════════════════════════════════
+     #3 — WORD-CYCLE HEADLINE ANIMATION
+     ═══════════════════════════════════════════ */
+  const cyclingWord = document.getElementById('cycling-word');
+  if (cyclingWord) {
+    const words = ['Automatically.', 'Effortlessly.', 'Intelligently.', 'Boldly.', 'Instantly.'];
+    let currentIndex = 0;
+
+    function cycleWord() {
+      currentIndex = (currentIndex + 1) % words.length;
+      cyclingWord.style.opacity    = '0';
+      cyclingWord.style.transform  = 'translateY(40px)';
+
+      setTimeout(() => {
+        cyclingWord.textContent     = words[currentIndex];
+        cyclingWord.style.transition = 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1)';
+        cyclingWord.style.opacity   = '1';
+        cyclingWord.style.transform = 'translateY(0)';
+      }, 350);
+    }
+
+    // Initial style
+    cyclingWord.style.display    = 'inline-block';
+    cyclingWord.style.color      = 'var(--brand-blue)';
+    cyclingWord.style.opacity    = '1';
+    cyclingWord.style.transform  = 'translateY(0)';
+    cyclingWord.style.transition = 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1)';
+
+    setInterval(cycleWord, 2800);
+  }
+
+
+  /* ═══════════════════════════════════════════
      HERO WAVES ANIMATION TRIGGER
      ═══════════════════════════════════════════ */
   (function initHeroWaves() {
@@ -57,6 +132,41 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach(el => observer.observe(el));
+  }
+
+
+  /* ═══════════════════════════════════════════
+     #4 — BENTO STATS COUNT-UP ANIMATION
+     ═══════════════════════════════════════════ */
+  const bentoNumbers = document.querySelectorAll('.bento-number[data-count-to]');
+  if (bentoNumbers.length) {
+    const bentoObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el       = entry.target;
+        const target   = parseInt(el.dataset.countTo, 10);
+        const prefix   = el.dataset.prefix  || '';
+        const suffix   = el.dataset.suffix  || '';
+        const duration = 1800;
+        const start    = performance.now();
+
+        function update(now) {
+          const elapsed  = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease out cubic
+          const eased    = 1 - Math.pow(1 - progress, 3);
+          const current  = Math.floor(eased * target);
+          el.textContent = prefix + current + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+          else el.textContent = prefix + target + suffix;
+        }
+
+        requestAnimationFrame(update);
+        obs.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+
+    bentoNumbers.forEach(el => bentoObserver.observe(el));
   }
 
 
@@ -119,9 +229,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (content) content.style.maxHeight = content.scrollHeight + "px";
   });
 
-  // ═══════════════════════════════════════════
-  // MODAL LOGIC
-  // ═══════════════════════════════════════════
+
+  /* ═══════════════════════════════════════════
+     #10 — LEADCALL AI — LIVE CALL TIMER
+     ═══════════════════════════════════════════ */
+  const callTimer = document.getElementById('call-timer');
+  if (callTimer) {
+    let seconds = 0;
+    setInterval(() => {
+      seconds++;
+      const mm = String(Math.floor(seconds / 60)).padStart(2, '0');
+      const ss = String(seconds % 60).padStart(2, '0');
+      callTimer.textContent = mm + ':' + ss;
+    }, 1000);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     MODAL LOGIC
+     ═══════════════════════════════════════════ */
   const modalOverlay = document.getElementById('lead-modal-overlay');
   if (modalOverlay) {
     const openBtns = document.querySelectorAll('.open-lead-modal');
@@ -134,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function openModal(e) {
       if (e) e.preventDefault();
       modalOverlay.classList.add('is-open');
-      document.body.style.overflow = 'hidden'; // Prevent scrolling
+      document.body.style.overflow = 'hidden';
     }
     
     function closeModal() {
