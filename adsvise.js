@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ═══════════════════════════════════════════ */
   const cyclingWord = document.getElementById('cycling-word');
   if (cyclingWord) {
-    const words = ['Automatically.', 'Effortlessly.', 'Intelligently.', 'Boldly.', 'Instantly.'];
+    const words = ['Boldly.', 'Creatively.', 'At Scale.', 'Rapidly.', 'Bespoke.'];
     let currentIndex = 0;
     let cycling = false;
 
@@ -249,20 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (content) content.style.maxHeight = content.scrollHeight + "px";
   });
 
-
-  /* ═══════════════════════════════════════════
-     #10 — LEADCALL AI — LIVE CALL TIMER
-     ═══════════════════════════════════════════ */
-  const callTimer = document.getElementById('call-timer');
-  if (callTimer) {
-    let seconds = 0;
-    setInterval(() => {
-      seconds++;
-      const mm = String(Math.floor(seconds / 60)).padStart(2, '0');
-      const ss = String(seconds % 60).padStart(2, '0');
-      callTimer.textContent = mm + ':' + ss;
-    }, 1000);
-  }
 
 
   /* ═══════════════════════════════════════════

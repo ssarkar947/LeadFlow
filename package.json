@@ -1,7 +1,7 @@
 {
   "name": "leadflow",
   "version": "1.0.0",
-  "description": "LeadCall AI Landing Page and Simulator",
+  "description": "AdsVise.in - FMCG Creative & AI Agency website",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
