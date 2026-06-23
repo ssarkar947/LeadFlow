@@ -1099,7 +1099,7 @@ body:has(button:hover) #cursor-ring {
   
   /* Hero Section */
   .desktop-br { display: none; }
-  .adv-hero { padding: 120px 0 60px; min-height: 70vh; }
+  .adv-hero { padding: 100px 0 60px; min-height: 100vh; min-height: 100dvh; }
   .hero-content { max-width: 100%; margin-bottom: 2rem; }
   .adv-hero h1 { font-size: clamp(1.8rem, 8vw, 2.4rem); line-height: 1.1; letter-spacing: -0.02em; padding-right: 0.5rem; }
   .hero-tagline { font-size: 1rem; }
