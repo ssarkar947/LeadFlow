@@ -94,7 +94,11 @@ const MIME_TYPES = {
   '.json': 'application/json',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
   '.gif': 'image/gif',
+  '.woff2': 'font/woff2',
+  '.woff': 'font/woff',
+  '.webp': 'image/webp',
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon'
 };
@@ -366,8 +370,15 @@ const server = http.createServer((req, res) => {
     return;
   }
   
+  
+  // Clean URL routing for case study pages
+  let urlPath = req.url.split('?')[0]; // Remove query params
+  if (urlPath === '/work/gomata-ghee-branding' || urlPath === '/work/gomata-ghee-branding/') {
+    urlPath = '/work/gomata-ghee-branding.html';
+  }
+
   // Normalize path and set default index.html
-  let filePath = req.url === '/' ? '/index.html' : req.url;
+  let filePath = urlPath === '/' ? '/index.html' : urlPath;
   // Prevent directory traversal
   filePath = path.normalize(filePath).replace(/^(\.\.[\/\\])+/, '');
   const absPath = path.join(__dirname, filePath);
