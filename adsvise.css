@@ -27,7 +27,7 @@ html { scroll-behavior: smooth; font-family: var(--font-body); line-height: 1.6;
 body { overflow-x: hidden; background: var(--bg-dark); color: var(--text-main); cursor: none; }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
-h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; }
+h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
 
 .adv-container { width: 100%; max-width: 1536px; margin: 0 auto; padding: 0 clamp(2rem, 5vw, 4rem); }
 
@@ -168,7 +168,7 @@ body:has(button:hover) #cursor-ring {
 .mobile-overlay.is-active { opacity: 1; pointer-events: auto; }
 .mobile-overlay-nav { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
 .mobile-nav-link {
-  font-family: var(--font-heading); font-size: 2rem; font-weight: 800;
+  font-family: var(--font-heading); font-size: 2rem; font-weight: 600;
   color: var(--text-light); /* Light text for dark background */
 }
 .mobile-nav-link:hover { color: var(--lime-green); }
@@ -233,7 +233,7 @@ body:has(button:hover) #cursor-ring {
 .hero-layout { position: relative; z-index: 2; width: 100%; }
 .hero-content { margin-bottom: 4rem; max-width: 75%; }
 .adv-hero h1 {
-  font-size: clamp(3rem, 6.5vw, 5.5rem); margin-bottom: 0; color: var(--text-dark); letter-spacing: -0.03em; line-height: 1.05; font-weight: 800; text-align: left;
+  font-size: clamp(3rem, 6.5vw, 5.5rem); margin-bottom: 0; color: var(--text-dark); letter-spacing: -0.03em; line-height: 1.05; font-weight: 600; text-align: left;
 }
 .text-accent { color: var(--brand-blue); }
 
@@ -272,7 +272,7 @@ body:has(button:hover) #cursor-ring {
 .hero-service-item:nth-child(7):hover h2 { color: #f472b6; }
 .hero-service-item:nth-child(9):hover h2 { color: var(--neon-teal); }
 .hero-service-item h2 {
-  font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 800; color: var(--text-dark);
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 600; color: var(--text-dark);
   transition: color 0.3s ease;
 }
 .hero-service-plus {
@@ -337,7 +337,7 @@ body:has(button:hover) #cursor-ring {
 .brand-item {
   font-family: var(--font-heading);
   font-size: 2.2rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--text-muted-dark);
   opacity: 0.4;
   white-space: nowrap;
@@ -379,7 +379,7 @@ body:has(button:hover) #cursor-ring {
 .roll-line {
   white-space: nowrap; display: flex; gap: 1.5rem; align-items: baseline;
   font-family: var(--font-heading); font-size: clamp(3rem, 9vw, 7.5rem);
-  font-weight: 800; text-transform: uppercase;
+  font-weight: 600; text-transform: uppercase;
   will-change: transform; transition: none;
 }
 .roll-outline {
@@ -432,7 +432,7 @@ body:has(button:hover) #cursor-ring {
 .bento-number {
   font-family: var(--font-heading);
   font-size: clamp(2.4rem, 4vw, 3.2rem);
-  font-weight: 800;
+  font-weight: 600;
   color: var(--lime-green);
   line-height: 1;
   letter-spacing: -0.03em;
@@ -450,7 +450,7 @@ body:has(button:hover) #cursor-ring {
 /* ─── OUR VALUES ─── */
 .section-title-accent {
   font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 5rem);
-  font-weight: 800; color: var(--lime-green); margin-bottom: 1rem;
+  font-weight: 600; color: var(--lime-green); margin-bottom: 1rem;
 }
 .section-subtitle {
   font-size: 1.1rem; color: var(--text-main); margin-bottom: 5rem;
@@ -561,7 +561,7 @@ body:has(button:hover) #cursor-ring {
 .value-title {
   font-family: var(--font-heading);
   font-size: 1.4rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #fff;
   margin: 0 0 0.5rem 0;
   z-index: 2;
@@ -630,7 +630,7 @@ body:has(button:hover) #cursor-ring {
 .vidzy-service-title {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 3vw, 2.5rem);
-  font-weight: 800;
+  font-weight: 600;
   color: var(--brand-blue);
   margin-bottom: 2rem;
 }
@@ -960,7 +960,7 @@ body:has(button:hover) #cursor-ring {
   display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem;
 }
 .ph-status { color: var(--lime-green); font-size: 0.8rem; font-weight: 600; margin-bottom: 0.75rem; }
-.ph-name { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.25rem; }
+.ph-name { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.25rem; }
 .ph-subtitle { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 3rem; }
 
 /* ═══════════════════════════════════════════
@@ -996,7 +996,7 @@ body:has(button:hover) #cursor-ring {
 }
 
 .ph-timer {
-  font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800;
+  font-family: var(--font-heading); font-size: 1.8rem; font-weight: 600;
   color: var(--lime-green);
 }
 
@@ -1129,9 +1129,9 @@ body:has(button:hover) #cursor-ring {
     flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start;
     gap: 0.5rem 0.3rem; margin-top: 2.5rem; 
   }
-  .hero-service-plus { display: inline-block; color: #F97316; font-weight: 800; font-size: clamp(1rem, 3.8vw, 1.15rem); }
+  .hero-service-plus { display: inline-block; color: #F97316; font-weight: 600; font-size: clamp(1rem, 3.8vw, 1.15rem); }
   .hero-service-item { padding: 0; }
-  .hero-service-item h2 { font-size: clamp(1rem, 3.8vw, 1.15rem); font-weight: 800; color: var(--text-dark); margin: 0; }
+  .hero-service-item h2 { font-size: clamp(1rem, 3.8vw, 1.15rem); font-weight: 600; color: var(--text-dark); margin: 0; }
   
   /* Section Paddings */
   .adv-values { padding: 5rem 0; }
@@ -1287,7 +1287,7 @@ body:has(button:hover) #cursor-ring {
   gap: 0.5rem;
   color: var(--lime-green);
   font-family: var(--font-heading);
-  font-weight: 800;
+  font-weight: 600;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1321,7 +1321,7 @@ body:has(button:hover) #cursor-ring {
 .placeholder-logo-txt {
   font-family: var(--font-heading);
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--text-dark);
   opacity: 0.8;
 }
@@ -1344,7 +1344,7 @@ body:has(button:hover) #cursor-ring {
 .work-card-title {
   font-family: var(--font-heading);
   font-size: 1.3rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--text-dark);
   margin: 0;
 }
