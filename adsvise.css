@@ -486,94 +486,105 @@ body:has(button:hover) #cursor-ring {
 /* ═══════════════════════════════════════════
    #6 — VALUE CARD FLIP ON HOVER
    ═══════════════════════════════════════════ */
-.value-item-new {
-  display: flex; flex-direction: column; justify-content: flex-end;
-  min-height: 260px;
-  perspective: 800px;
-  cursor: default;
-}
-.value-card-inner {
+.value-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 260px;
-  transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
-}
-.value-item-new:hover .value-card-inner {
-  transform: rotateY(180deg);
-}
-.value-card-front,
-.value-card-back {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  height: 100%;
 }
-.value-card-back {
-  transform: rotateY(180deg);
-  background: linear-gradient(135deg, rgba(163,230,53,0.12), rgba(59,130,246,0.08));
-  border: 1px solid rgba(163,230,53,0.25);
+.value-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.04), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+.value-card:hover::before {
+  opacity: 1;
+}
+.value-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(163, 230, 53, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.035);
+}
+.value-card-border-glow {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 40%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--lime-green), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease, width 0.4s ease;
+  z-index: 2;
+}
+.value-card:hover .value-card-border-glow {
+  opacity: 1;
+  width: 75%;
+}
+.value-icon-wrap {
+  width: 60px; height: 60px;
   border-radius: 16px;
-  padding: 1.5rem;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.value-card-back p {
-  font-family: var(--font-heading);
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--lime-green);
-  line-height: 1.4;
-  font-style: italic;
-}
-.value-card-back .value-name-back {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--text-muted);
-  margin-top: 1rem;
-  font-style: normal;
-  font-family: var(--font-body);
-  font-weight: 600;
-}
-
-.value-icon {
-  flex-grow: 1; display: flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex; align-items: center; justify-content: center;
   margin-bottom: 2rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #fff;
+  position: relative;
+  z-index: 2;
 }
-.value-icon svg {
-  width: 100px; height: 100px;
-  transition: stroke 0.3s, opacity 0.3s, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s;
+.value-card:hover .value-icon-wrap {
+  background: rgba(163, 230, 53, 0.1);
+  border-color: rgba(163, 230, 53, 0.3);
+  color: var(--lime-green);
+  transform: scale(1.05) rotate(5deg);
+  box-shadow: 0 0 20px rgba(163, 230, 53, 0.15);
 }
-.value-icon svg:not(.expressive-icon) {
-  stroke: rgba(255, 255, 255, 0.15); stroke-width: 1.5px;
+.value-icon-wrap svg {
+  width: 26px; height: 26px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
-.value-card-front:hover .value-icon svg:not(.expressive-icon) { stroke: var(--lime-green); opacity: 1; }
-
-.value-icon svg.expressive-icon {
-  overflow: visible;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+.value-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.5rem 0;
+  z-index: 2;
+  position: relative;
 }
-.value-card-front:hover .value-icon svg.expressive-icon {
-  transform: scale(1.15) rotate(4deg);
-  filter: drop-shadow(0 8px 24px rgba(204,255,0,0.3));
+.value-motto {
+  font-size: 0.95rem;
+  color: var(--lime-green);
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  font-style: italic;
+  z-index: 2;
+  position: relative;
+  display: block;
 }
-
-.value-footer {
-  border-top: 2px solid var(--lime-green);
-  padding-top: 0.75rem; display: flex; justify-content: space-between; align-items: center;
-}
-.value-circle {
-  width: 16px; height: 16px; border: 2.5px solid #FFF;
-  border-radius: 50%; background: transparent;
-}
-.value-footer h3 {
-  font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; color: #FFF; margin: 0;
+.value-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-weight: 400;
+  margin: 0;
+  z-index: 2;
+  position: relative;
 }
 
 /* ─── VIDZY SERVICES SECTION ─── */
@@ -1121,11 +1132,7 @@ body:has(button:hover) #cursor-ring {
   .adv-how-we-roll { padding: 3rem 0; }
   
   /* Values Grid */
-  .values-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
-  .value-item-new { min-height: 200px; }
-  .value-card-inner { min-height: 200px; }
-  .value-icon svg { width: 70px; height: 70px; }
-  .value-footer h3 { font-size: 1rem; }
+  .values-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
   
   /* Accordion Layout */
   .accordion-header { display: flex; flex-direction: column; align-items: flex-start; position: relative; padding: 1.5rem 0; }
