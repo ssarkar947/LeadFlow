@@ -479,8 +479,8 @@ body:has(button:hover) #cursor-ring {
   color: rgba(255,255,255,0.9); font-size: 1.15rem; max-width: 600px;
 }
 .values-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 4rem 3rem; margin-top: 3rem;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 3rem; margin-top: 4rem;
 }
 
 /* ═══════════════════════════════════════════
@@ -1131,8 +1131,14 @@ body:has(button:hover) #cursor-ring {
   .adv-cta { padding: 5rem 0; }
   .adv-how-we-roll { padding: 3rem 0; }
   
-  /* Values Grid */
-  .values-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  /* Values Grid & Card Mobile Overrides */
+  .values-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .value-card { padding: 2rem 1.25rem; }
+  .value-icon-wrap { width: 48px; height: 48px; margin-bottom: 1.25rem; }
+  .value-icon-wrap svg { width: 22px; height: 22px; }
+  .value-title { font-size: 1.25rem; }
+  .value-motto { font-size: 0.88rem; margin-bottom: 0.75rem; }
+  .value-desc { font-size: 0.85rem; line-height: 1.5; }
   
   /* Accordion Layout */
   .accordion-header { display: flex; flex-direction: column; align-items: flex-start; position: relative; padding: 1.5rem 0; }
@@ -1389,12 +1395,7 @@ body:has(button:hover) #cursor-ring {
     height: 220px;
   }
 }
-@media (max-width: 576px) {
-  .values-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-}
+
 @media (max-width: 480px) {
   .adv-container {
     padding: 0 1.25rem;
