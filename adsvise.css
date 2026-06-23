@@ -593,6 +593,15 @@ body:has(button:hover) #cursor-ring {
   padding: 8rem 0;
   border-top: 1px solid var(--border-light);
 }
+.adv-vidzy-services .section-title-accent {
+  color: var(--text-dark);
+}
+.adv-vidzy-services .section-subtitle {
+  color: var(--text-muted-dark);
+}
+.adv-vidzy-services .service-tldr {
+  color: var(--text-muted-dark) !important;
+}
 
 .vidzy-row {
   display: grid;
