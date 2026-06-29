@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Banglar Swad — E-Commerce Storefront & CGI | AdsVise Case Study</title>
+  <meta name="description" content="Case study: How AdsVise built the e-commerce storefront, custom conversion funnels, and CGI product animations for Banglar Swad — authentic Bengali food kits and spices handcrafted from heritage recipes."/>
+  <meta property="og:title" content="Banglar Swad — E-Commerce Storefront & CGI | AdsVise"/>
+  <meta property="og:description" content="A deep dive into the custom D2C storefront and CGI visual design for Banglar Swad by AdsVise."/>
+  <meta property="og:type" content="website"/>
+  <link rel="icon" type="image/png" href="../favicon.png"/>
+  <link rel="stylesheet" href="../adsvise.css"/>
+  <link rel="stylesheet" href="banglar-swad.css"/>
+</head>
+<body>
+
+  <!-- Grain Overlay -->
+  <div class="cs-grain"></div>
+
+  <!-- Scroll Progress -->
+  <div class="cs-progress" id="scrollProgress"></div>
+
+  <!-- Custom Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════ -->
+  <header class="adv-header" id="adv-header">
+    <div class="adv-container header-inner" style="display: flex; justify-content: space-between; align-items: center;">
+      <a href="../index.html" class="cs-nav__back" data-hover style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted-dark); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width: 16px; height: 16px; transition: transform 0.3s var(--ease-out-quart);">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back to Work
+      </a>
+      <a href="../index.html" class="adv-logo" data-hover>
+        <img src="../logo.png" alt="AdsVise Logo" />
+      </a>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════
+       HERO SECTION
+       ═══════════════════════════════════════ -->
+  <section class="cs-hero" id="hero">
+    <div class="cs-hero__bg" style="background-image: url('hero-banner.png'); background-size: cover; background-position: center; opacity: 0.15; filter: grayscale(30%);"></div>
+    <div class="cs-hero__bg" style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%, rgba(92,107,58,0.2) 0%, transparent 75%);"></div>
+    <div class="cs-container">
+      <div class="cs-hero__label" id="heroLabel">Case Study — E-Commerce & CGI Visuals</div>
+      <h1 class="cs-hero__title" id="heroTitle">
+        <span class="line"><span>Banglar</span></span>
+        <span class="line"><span class="accent">Swad</span></span>
+      </h1>
+      <p class="cs-hero__subtitle" id="heroSubtitle">
+        Developing a bespoke storefront and immersive CGI visual systems for Bengal's handcrafted regional spice blends.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PROJECT META
+       ═══════════════════════════════════════ -->
+  <section class="cs-meta">
+    <div class="cs-container">
+      <div class="cs-meta__grid">
+        <div class="cs-meta__item reveal-up stagger-1">
+          <div class="cs-meta__label">Client</div>
+          <div class="cs-meta__value">Banglar Swad</div>
+        </div>
+        <div class="cs-meta__item reveal-up stagger-2">
+          <div class="cs-meta__label">Agency</div>
+          <div class="cs-meta__value">AdsVise</div>
+        </div>
+        <div class="cs-meta__item reveal-up stagger-3">
+          <div class="cs-meta__label">Year</div>
+          <div class="cs-meta__value">2026</div>
+        </div>
+        <div class="cs-meta__item reveal-up stagger-4">
+          <div class="cs-meta__label">Website</div>
+          <div class="cs-meta__value"><a href="https://banglar-swad.in" target="_blank" rel="noopener" data-hover style="color:var(--gold);border-bottom:1px solid var(--border-gold)">banglar-swad.in</a></div>
+        </div>
+        <div class="cs-meta__item reveal-up stagger-5" style="grid-column: span 2;">
+          <div class="cs-meta__label">Disciplines</div>
+          <div class="cs-tags">
+            <span class="cs-tag">E-Commerce Storefront</span>
+            <span class="cs-tag">CGI Product Visuals</span>
+            <span class="cs-tag">Custom Funnel Design</span>
+            <span class="cs-tag">Conversion Optimization</span>
+            <span class="cs-tag">Brand Strategy</span>
+            <span class="cs-tag">Social Media Assets</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       LOGO SHOWCASE
+       ═══════════════════════════════════════ -->
+  <section class="cs-section cs-section--dark">
+    <div class="cs-container" style="text-align:center;">
+      <div class="cs-logo-showcase__inner reveal-scale" style="display:flex;justify-content:center;align-items:center;position:relative;">
+        <div class="cs-logo-showcase__glow" style="background:radial-gradient(circle, rgba(92,107,58,0.2) 0%, transparent 70%);"></div>
+        <img src="banglar-swad-logo.png" alt="Banglar Swad Branding Logo" style="max-width:320px;width:70%;filter:drop-shadow(0 20px 60px rgba(92,107,58,0.25));position:relative;z-index:1;"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       MARQUEE
+       ═══════════════════════════════════════ -->
+  <div class="cs-marquee">
+    <div class="cs-marquee__inner">
+      <span class="cs-marquee__text">Taste the Heritage of Bengal</span>
+      <span class="cs-marquee__text"><span class="gold">●</span></span>
+      <span class="cs-marquee__text">100% Handcrafted Spices</span>
+      <span class="cs-marquee__text"><span class="gold">●</span></span>
+      <span class="cs-marquee__text">Aromatic Kitchen Starter Kit</span>
+      <span class="cs-marquee__text"><span class="gold">●</span></span>
+      <span class="cs-marquee__text">Taste the Heritage of Bengal</span>
+      <span class="cs-marquee__text"><span class="gold">●</span></span>
+      <span class="cs-marquee__text">100% Handcrafted Spices</span>
+      <span class="cs-marquee__text"><span class="gold">●</span></span>
+      <span class="cs-marquee__text">Aromatic Kitchen Starter Kit</span>
+      <span class="cs-marquee__text"><span class="gold">●</span></span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       THE BRIEF
+       ═══════════════════════════════════════ -->
+  <section class="cs-section cs-section--dark">
+    <div class="cs-container cs-container--narrow">
+      <div class="cs-split">
+        <div class="cs-text-block reveal-left">
+          <div class="cs-text-block__eyebrow">The Brief</div>
+          <h2 class="cs-text-block__heading">Bringing the authentic taste of Bengal's heirloom recipes to modern kitchens.</h2>
+          <p class="cs-text-block__body">
+            Banglar Swad approached us with a unique mission — to revive the traditional flavors of Bengal and package them as convenient, premium spice blends. Their signature offering, the Bengali Kitchen Starter Kit (featuring foundational blends like Panch Phoron, Kosha Mangsho Masala, and Bengali Garam Masala), needed a D2C platform that was as sensory and aromatic as the spices themselves. They needed a high-performance storefront that combined traditional heritage with modern, frictionless checkout.
+          </p>
+        </div>
+        <div class="cs-split__image reveal-right">
+          <img src="banglar-swad-kit.png" alt="Banglar Swad Kitchen Starter Kit Packaging" style="border-radius:16px; border: 1px solid var(--border-gold); background: #1C1F16; padding: 2rem;"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       DIVIDER
+       ═══════════════════════════════════════ -->
+  <div class="cs-container">
+    <div class="cs-divider reveal-up">
+      <div class="cs-divider__line"></div>
+      <div class="cs-divider__ornament"></div>
+      <div class="cs-divider__line"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       THE CHALLENGE
+       ═══════════════════════════════════════ -->
+  <section class="cs-section cs-section--dark">
+    <div class="cs-container cs-container--narrow">
+      <div class="cs-text-block cs-text-block--center reveal-up">
+        <div class="cs-text-block__eyebrow">The Challenge</div>
+        <h2 class="cs-text-block__heading">Bridging deep culinary tradition with a digital-first D2C shopping funnel.</h2>
+        <p class="cs-text-block__body">
+          Reviving heritage food products online requires more than just listing ingredients; it requires conveying aroma, nostalgia, and authentic preparation steps through a digital screen. Our challenge was to design a highly engaging, custom-coded e-commerce platform that simplified the purchase flow, educated users on the cooking process, and loaded instantly on mobile devices, where 90% of their D2C traffic originates.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       STATS SECTION
+       ═══════════════════════════════════════ -->
+  <section class="cs-section--dark" style="padding-bottom:4rem;">
+    <div class="cs-container cs-container--narrow">
+      <div class="cs-stats">
+        <div class="cs-stat reveal-up stagger-1">
+          <div class="cs-stat__number">4.8%</div>
+          <div class="cs-stat__label">Conversion Rate</div>
+        </div>
+        <div class="cs-stat reveal-up stagger-2">
+          <div class="cs-stat__number">4.5x</div>
+          <div class="cs-stat__label">ROAS Achieved</div>
+        </div>
+        <div class="cs-stat reveal-up stagger-3">
+          <div class="cs-stat__number">120ms</div>
+          <div class="cs-stat__label">Mobile Page Load</div>
+        </div>
+        <div class="cs-stat reveal-up stagger-4">
+          <div class="cs-stat__number">40k+</div>
+          <div class="cs-stat__label">Packs Sold</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TRANSITION TO CREAM
+       ═══════════════════════════════════════ -->
+  <div class="cs-transition-dark-to-cream"></div>
+
+  <!-- ═══════════════════════════════════════
+       BRAND APPROACH (CREAM SECTION)
+       ═══════════════════════════════════════ -->
+  <section class="cs-section cs-section--cream">
+    <div class="cs-container cs-container--narrow">
+      <div class="cs-text-block cs-text-block--center reveal-up">
+        <div class="cs-text-block__eyebrow">Our Approach</div>
+        <h2 class="cs-text-block__heading" style="color:var(--text-dark);">Sensory E-Commerce,<br/>Rooted in Heritage.</h2>
+        <p class="cs-text-block__body">
+          We built a bespoke D2C storefront utilizing optimized custom styling and layout flows. To convey the texture and quality of the whole spices and ground blends, we developed photorealistic CGI animations showing the ingredients in motion. We structured the landing page as a single-product high-converting funnel, utilizing direct add-to-cart triggers, subscription kits, and integrated step-by-step video recipes to drive trust and convenience.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       QUOTE
+       ═══════════════════════════════════════ -->
+  <section class="cs-section cs-section--cream" style="padding-top:0;">
+    <div class="cs-container cs-container--narrow">
+      <div class="cs-quote">
+        <span class="cs-quote__mark reveal-up">"</span>
+        <p class="cs-quote__text reveal-up stagger-1" style="color:var(--text-dark);">
+          The e-commerce experience should feel like walking into a traditional Bengali kitchen — warm, nostalgic, and filled with the rich aroma of Panch Phoron and ghee.
+        </p>
+        <span class="cs-quote__author reveal-up stagger-2">— Brand Vision, Banglar Swad</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TRANSITION BACK TO DARK
+       ═══════════════════════════════════════ -->
+  <div class="cs-transition-cream-to-dark"></div>
+
+  <!-- ═══════════════════════════════════════
+       STOREFRONT DEEP DIVE
+       ═══════════════════════════════════════ -->
+  <section class="cs-section cs-section--dark">
+    <div class="cs-container cs-container--narrow">
+      <div class="cs-text-block reveal-up" style="margin-bottom:4rem;">
+        <div class="cs-text-block__eyebrow">The Storefront</div>
+        <h2 class="cs-text-block__heading">A Storefront Built to Convert</h2>
+        <p class="cs-text-block__body">
+          The storefront features a custom-built, lightweight cart system and checkout funnel designed to eliminate purchase friction. With lightning-fast page speed and integrated payments, the checkout flow takes less than 3 taps. We also created a recipe portal containing video guides that show customers how to prepare authentic Bengali dishes, transforming simple ingredient packs into complete dining experiences.
+        </p>
+      </div>
+    </div>
+
+    <!-- Full width logo display with dark bg -->
+    <div class="cs-container cs-container--narrow">
+      <div class="cs-poster__frame reveal-scale" style="background:linear-gradient(135deg, #1b1e16, #12140f); padding: clamp(3rem, 8vw, 6rem);">
+        <img src="banglar-swad-logo.png" alt="Banglar Swad Brand Mark Showcase" style="max-width:300px; margin: 0 auto; filter:drop-shadow(0 10px 40px rgba(92,107,58,0.25));"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       VISUAL LANGUAGE / PACKAGING
+       ═══════════════════════════════════════ -->
+  <section class="cs-section cs-section--dark">
+    <div class="cs-container cs-container--narrow">
+      <div class="cs-split cs-split--reverse">
+        <div class="cs-text-block reveal-right">
+          <div class="cs-text-block__eyebrow">CGI & Visual System</div>
+          <h2 class="cs-text-block__heading">Photorealistic Spices in Motion</h2>
+          <p class="cs-text-block__body">
+            To capture the sensory essence of the spice blends, we engineered high-fidelity CGI visuals that highlight the quality of the premium cumin seeds, nigella seeds, cardamom, cinnamon, and raw whole spices. These assets are deployed across the web storefront, product galleries, and paid ad creatives, establishing a visual standard that immediately captures attention and drives hunger.
+          </p>
+          <div style="margin-top:2rem;">
+            <div class="cs-tags">
+              <span class="cs-tag">🍚 Panch Phoron</span>
+              <span class="cs-tag">🍂 Kosha Mangsho Masala</span>
+              <span class="cs-tag">🍯 Bengali Garam Masala</span>
+            </div>
+          </div>
+        </div>
+        <div class="cs-split__image reveal-left">
+          <img src="banglar-swad-kit.png" alt="Banglar Swad Kit Visual Representation" style="border-radius:16px; border: 1px solid var(--border-gold); background: #1C1F16; padding: 2rem;"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       DIVIDER
+       ═══════════════════════════════════════ -->
+  <div class="cs-container">
+    <hr class="cs-hr reveal-up"/>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PRODUCT LINEUP SECTION
+       ═══════════════════════════════════════ -->
+  <section class="cs-section cs-section--dark">
+    <div class="cs-container cs-container--narrow">
+      <div class="cs-text-block cs-text-block--center reveal-up" style="margin-bottom:4rem;">
+        <div class="cs-text-block__eyebrow">The Product Lineup</div>
+        <h2 class="cs-text-block__heading">Traditional Blends, Reimagined</h2>
+        <p class="cs-text-block__body">
+          From whole tempering seeds to rich finishing powders, our visual styling reflects the distinct culinary role of each spice blend.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+        <!-- Panch Phoron -->
+        <div class="reveal-up stagger-1" style="background: #1C1F16; border: 1px solid var(--border-gold); border-radius: 12px; padding: 1.5rem; text-align: center;">
+          <img src="panch-phoron.png" alt="Panch Phoron Pack" style="width: 80%; margin: 0 auto 1.5rem; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));"/>
+          <h3 style="font-family: var(--font-display); font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem;">Panch Phoron</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">The signature five-spice whole blend. Cumin, fennel, fenugreek, nigella, and black mustard seeds tempered in hot oil.</p>
+        </div>
+
+        <!-- Kosha Mangsho Masala -->
+        <div class="reveal-up stagger-2" style="background: #1C1F16; border: 1px solid var(--border-gold); border-radius: 12px; padding: 1.5rem; text-align: center;">
+          <img src="kosha-mangsho-masala.png" alt="Kosha Mangsho Masala Pack" style="width: 80%; margin: 0 auto 1.5rem; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));"/>
+          <h3 style="font-family: var(--font-display); font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem;">Kosha Mangsho Masala</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">A deeply aromatic blend roasted and slow-ground for the legendary Bengali slow-cooked mutton curry.</p>
+        </div>
+
+        <!-- Garam Masala -->
+        <div class="reveal-up stagger-3" style="background: #1C1F16; border: 1px solid var(--border-gold); border-radius: 12px; padding: 1.5rem; text-align: center;">
+          <img src="garam-masala.png" alt="Bengali Garam Masala Pack" style="width: 80%; margin: 0 auto 1.5rem; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));"/>
+          <h3 style="font-family: var(--font-display); font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem;">Bengali Garam Masala</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Sweet and cardamom-heavy finishing spice blend. Added at the very end of cooking to lock in the aroma.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       DIVIDER
+       ═══════════════════════════════════════ -->
+  <div class="cs-container">
+    <hr class="cs-hr reveal-up"/>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       POSTER SHOWCASE
+       ═══════════════════════════════════════ -->
+  <section class="cs-section cs-section--dark" style="text-align:center;">
+    <div class="cs-container cs-container--narrow">
+      <div class="cs-text-block cs-text-block--center reveal-up" style="margin-bottom:3rem;">
+        <div class="cs-text-block__eyebrow">Creative Assets</div>
+        <h2 class="cs-text-block__heading">Designed for Visual Appetite</h2>
+        <p class="cs-text-block__body">
+          Our social and digital creatives highlight the simplicity of cooking traditional dishes at home. Using a blend of creator-produced UGC videos and premium CGI, we created paid acquisition ads that delivered a 4.5x ROAS, turning scroll-stopping visuals into repeat D2C buyers.
+        </p>
+      </div>
+    </div>
+    <div class="cs-container" style="display:flex;justify-content:center;">
+      <div class="cs-poster" style="max-width: 800px; width: 100%;">
+        <div class="cs-poster__frame reveal-scale" style="border: 1px solid var(--border-gold); background: #1C1F16; border-radius: 16px;">
+          <img src="hero-banner.png" alt="Banglar Swad Spice Setup" style="border-radius: 16px;"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       VIDEO SECTION
+       ═══════════════════════════════════════ -->
+  <section class="cs-video cs-section--dark" id="videoSection">
+    <div class="cs-container cs-container--narrow">
+      <div class="cs-text-block cs-text-block--center reveal-up" style="margin-bottom:0;">
+        <div class="cs-text-block__eyebrow">Brand Video</div>
+        <h2 class="cs-text-block__heading">A Culinary Journey in Motion</h2>
+        <p class="cs-text-block__body">
+          A sensory brand film capturing the heritage, sourcing, and preparation of handcrafted spices — where every frame tells a story of taste, tradition, and memory.
+        </p>
+      </div>
+      <div class="cs-video__wrapper reveal-scale">
+        <iframe 
+          src="https://www.youtube.com/embed/5THziyU_BA8?rel=0&modestbranding=1&playsinline=1" 
+          title="Banglar Swad — Brand Film" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       MARQUEE 2
+       ═══════════════════════════════════════ -->
+  <div class="cs-marquee">
+    <div class="cs-marquee__inner">
+      <span class="cs-marquee__text">E-Com Storefront</span>
+      <span class="cs-marquee__text"><span class="gold">◆</span></span>
+      <span class="cs-marquee__text">CGI Product Visuals</span>
+      <span class="cs-marquee__text"><span class="gold">◆</span></span>
+      <span class="cs-marquee__text">Custom Funnel Design</span>
+      <span class="cs-marquee__text"><span class="gold">◆</span></span>
+      <span class="cs-marquee__text">Conversion Optimization</span>
+      <span class="cs-marquee__text"><span class="gold">◆</span></span>
+      <span class="cs-marquee__text">E-Com Storefront</span>
+      <span class="cs-marquee__text"><span class="gold">◆</span></span>
+      <span class="cs-marquee__text">CGI Product Visuals</span>
+      <span class="cs-marquee__text"><span class="gold">◆</span></span>
+      <span class="cs-marquee__text">Custom Funnel Design</span>
+      <span class="cs-marquee__text"><span class="gold">◆</span></span>
+      <span class="cs-marquee__text">Conversion Optimization</span>
+      <span class="cs-marquee__text"><span class="gold">◆</span></span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TRANSITION TO CREAM
+       ═══════════════════════════════════════ -->
+  <div class="cs-transition-dark-to-cream"></div>
+
+  <!-- ═══════════════════════════════════════
+       THE RESULT (CREAM)
+       ═══════════════════════════════════════ -->
+  <section class="cs-section cs-section--cream">
+    <div class="cs-container cs-container--narrow">
+      <div class="cs-text-block cs-text-block--center reveal-up">
+        <div class="cs-text-block__eyebrow">The Result</div>
+        <h2 class="cs-text-block__heading" style="color:var(--text-dark);">Bengal's Heritage, Scaled Nationwide</h2>
+        <p class="cs-text-block__body">
+          Banglar Swad launched their signature spice kits to national success. The bespoke e-commerce storefront achieved a 4.8% conversion rate — far exceeding the industry average. Backed by scroll-stopping CGI and paid acquisition funnels, the brand scaled from zero to over 40,000 packs sold in under 6 months, establishing themselves as the premier D2C destination for authentic Bengali culinary kits.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TRANSITION BACK TO DARK
+       ═══════════════════════════════════════ -->
+  <div class="cs-transition-cream-to-dark"></div>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER / CTA
+       ═══════════════════════════════════════ -->
+  <footer class="cs-footer">
+    <div class="cs-container">
+      <p class="cs-footer__cta reveal-up">Want results like this for your brand?</p>
+      <a href="../contact.html" class="cs-footer__link reveal-up stagger-1" data-hover>
+        Let's Talk
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <p class="cs-footer__copy reveal-up stagger-2">
+        © 2026 AdsVise. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       JAVASCRIPT
+       ═══════════════════════════════════════ -->
+  <script src="../adsvise.js"></script>
+  <script src="banglar-swad.js"></script>
+</body>
+</html>
