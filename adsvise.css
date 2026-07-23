@@ -795,6 +795,11 @@ body:has(button:hover) #cursor-ring {
   height: 100%;
 }
 
+.phone-screen iframe.zoom-out {
+  width: 180%;
+  height: 100%;
+}
+
 .mobile-thumbnail-only {
   display: none !important;
 }

@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ═══════════════════════════════════════════ */
   const cyclingWord = document.getElementById('cycling-word');
   if (cyclingWord) {
-    const words = ['Boldly.', 'Creatively.', 'At Scale.', 'Rapidly.', 'Bespoke.'];
+    const words = ['Precisely.', '10X ROI.', 'In Your Favor.', 'By Intelligence.', 'Decisively.'];
     let currentIndex = 0;
     let cycling = false;
 
