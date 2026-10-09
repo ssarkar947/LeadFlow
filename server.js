@@ -371,12 +371,14 @@ const server = http.createServer((req, res) => {
   }
   
   
-  // Clean URL routing for case study pages
+  // Clean URL routing for case study and legal pages
   let urlPath = req.url.split('?')[0]; // Remove query params
   if (urlPath === '/work/gomata-ghee-branding' || urlPath === '/work/gomata-ghee-branding/') {
     urlPath = '/work/gomata-ghee-branding.html';
   } else if (urlPath === '/work/banglar-swad' || urlPath === '/work/banglar-swad/') {
     urlPath = '/work/banglar-swad.html';
+  } else if (urlPath === '/privacy-policy' || urlPath === '/privacy-policy/' || urlPath === '/privacy' || urlPath === '/privacy/') {
+    urlPath = '/privacy-policy.html';
   }
 
   // Normalize path and set default index.html
