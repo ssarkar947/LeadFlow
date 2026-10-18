@@ -379,6 +379,10 @@ const server = http.createServer((req, res) => {
     urlPath = '/work/banglar-swad.html';
   } else if (urlPath === '/privacy-policy' || urlPath === '/privacy-policy/' || urlPath === '/privacy' || urlPath === '/privacy/') {
     urlPath = '/privacy-policy.html';
+  } else if (urlPath === '/water-can-manager' || urlPath === '/water-can-manager/' || 
+             urlPath === '/water-can-manager/privacy' || urlPath === '/water-can-manager/privacy/' ||
+             urlPath === '/water-can-manager/terms' || urlPath === '/water-can-manager/terms/') {
+    urlPath = '/water-can-manager.html';
   }
 
   // Normalize path and set default index.html
