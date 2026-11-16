@@ -1,6 +1,13 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
+let Razorpay = null;
+try {
+  Razorpay = require('razorpay');
+} catch (e) {
+  // razorpay loaded dynamically
+}
 
 // Load environment variables from local .env file if it exists
 try {
@@ -215,6 +222,289 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  
+  
+  // ─── RAZORPAY STANDARD WEB CHECKOUT ENDPOINTS ───
+  if (req.method === 'GET' && req.url === '/api/razorpay-key') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      key_id: process.env.RAZORPAY_KEY_ID || ''
+    }));
+    return;
+  }
+
+  // STEP 1: BACKEND - Create Order
+  if (req.method === 'POST' && req.url === '/api/create-order') {
+    let body = '';
+    req.on('data', chunk => { body += chunk.toString(); });
+    req.on('end', async () => {
+      try {
+        const data = body ? JSON.parse(body) : {};
+        const amount = parseInt(data.amount, 10);
+        const currency = data.currency || 'INR';
+        const receipt = data.receipt || ('rcpt_' + Date.now());
+
+        // Error Handling: Validate amount >= 100 paise (minimum ₹1.00)
+        if (!amount || isNaN(amount) || amount < 100) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({
+            success: false,
+            error: 'Invalid amount. Minimum amount is 100 paise (₹1.00).'
+          }));
+          return;
+        }
+
+        const keyId = process.env.RAZORPAY_KEY_ID;
+        const keySecret = process.env.RAZORPAY_KEY_SECRET;
+
+        // Error Handling: Handle auth / credential failures
+        if (!keyId || !keySecret) {
+          console.error('[Razorpay Error] Missing RAZORPAY_KEY_ID or RAZORPAY_KEY_SECRET in environment');
+          res.writeHead(401, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({
+            success: false,
+            error: 'Razorpay credentials not configured on server'
+          }));
+          return;
+        }
+
+        if (!Razorpay) {
+          try {
+            Razorpay = require('razorpay');
+          } catch (loadErr) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({
+              success: false,
+              error: 'Razorpay SDK is not installed on server'
+            }));
+            return;
+          }
+        }
+
+        const rzp = new Razorpay({
+          key_id: keyId,
+          key_secret: keySecret
+        });
+
+        const orderOptions = {
+          amount: amount, // amount in paise
+          currency: currency,
+          receipt: receipt,
+          notes: data.notes || {}
+        };
+
+        const order = await rzp.orders.create(orderOptions);
+        console.log(`[Razorpay] Order created: ${order.id} | Amount: ${order.amount} paise (${order.currency}) | Receipt: ${receipt}`);
+
+        // Return order_id, amount, currency, and key_id for frontend initialization
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+          success: true,
+          order_id: order.id,
+          amount: order.amount,
+          currency: order.currency,
+          key_id: keyId
+        }));
+      } catch (err) {
+        console.error('[Razorpay Create Order Error]:', err);
+        const statusCode = (err && (err.statusCode === 401 || (err.error && err.error.code === 'BAD_REQUEST_ERROR' && err.statusCode === 401))) ? 401 : 500;
+        res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+          success: false,
+          error: (err.error && err.error.description) ? err.error.description : (err.message || 'Razorpay order creation failed')
+        }));
+      }
+    });
+    return;
+  }
+
+  // STEP 3: BACKEND - Verify Signature
+  if (req.method === 'POST' && req.url === '/api/verify-payment') {
+    let body = '';
+    req.on('data', chunk => { body += chunk.toString(); });
+    req.on('end', () => {
+      try {
+        const data = body ? JSON.parse(body) : {};
+        const orderId = data.razorpay_order_id || data.order_id;
+        const paymentId = data.razorpay_payment_id || data.payment_id;
+        const signature = data.razorpay_signature || data.signature;
+
+        // Error Handling: Missing fields -> return 400
+        if (!orderId || !paymentId || !signature) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({
+            success: false,
+            error: 'Missing required payment verification fields (razorpay_order_id, razorpay_payment_id, razorpay_signature)'
+          }));
+          return;
+        }
+
+        const keySecret = process.env.RAZORPAY_KEY_SECRET;
+        if (!keySecret) {
+          res.writeHead(500, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({
+            success: false,
+            error: 'Razorpay secret key not configured on server'
+          }));
+          return;
+        }
+
+        // Algorithm: HMAC-SHA256(order_id + "|" + payment_id, KEY_SECRET)
+        const expectedSignature = crypto
+          .createHmac('sha256', keySecret)
+          .update(`${orderId}|${paymentId}`)
+          .digest('hex');
+
+        // Signature mismatch: return 400, do NOT mark as paid
+        if (expectedSignature !== signature) {
+          console.warn(`[Razorpay Security Alert] Signature mismatch for order ${orderId} with payment ${paymentId}`);
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({
+            success: false,
+            error: 'Invalid payment signature. Verification failed.'
+          }));
+          return;
+        }
+
+        console.log(`[Razorpay Verification] Signature verified successfully for payment ${paymentId} on order ${orderId}`);
+
+        // If bookingData or customer lead info is passed with the verification, record it
+        if (data.bookingData) {
+          const lead = {
+            ...data.bookingData,
+            payment_status: 'Paid (Razorpay Verified)',
+            razorpay_payment_id: paymentId,
+            razorpay_order_id: orderId
+          };
+          saveLeadLocally(lead);
+        }
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+          success: true,
+          message: 'Payment verified successfully',
+          order_id: orderId,
+          payment_id: paymentId
+        }));
+      } catch (err) {
+        console.error('[Razorpay Verify Payment Error]:', err);
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+          success: false,
+          error: 'Invalid JSON payload'
+        }));
+      }
+    });
+    return;
+  }
+
+  if (req.method === 'POST' && req.url === '/api/book-audit') {
+    let body = '';
+    req.on('data', chunk => { body += chunk.toString(); });
+    req.on('end', () => {
+      try {
+        const data = JSON.parse(body);
+        console.log('\n================ NEW AD AUDIT BOOKING (₹1,999) ================');
+        console.log(`Name:        ${data.name}`);
+        console.log(`Email:       ${data.email}`);
+        console.log(`Business:    ${data.business || data.company || 'Not provided'}`);
+        console.log(`Phone:       ${data.phone}`);
+        console.log(`Platform:    ${data.platform || 'Meta / Google'}`);
+        console.log(`Spend:       ${data.spend || 'Not provided'}`);
+        console.log(`Handle/URL:  ${data.websiteOrHandle || 'N/A'}`);
+        console.log(`Notes:       ${data.notes || 'None'}`);
+        console.log(`Payment:     ${data.paymentStatus || 'Initiated'}`);
+        console.log(`Txn ID:      ${data.transactionId || 'Pending'}`);
+        console.log('=================================================================\n');
+
+        // Save locally to JSON DB
+        const lead = {
+          name: data.name,
+          email: data.email,
+          business: data.business || data.company || '',
+          phone: data.phone,
+          platform: data.platform || '',
+          spend: data.spend || '',
+          website_or_handle: data.websiteOrHandle || '',
+          notes: data.notes || '',
+          source: 'Ad Audit + Growth Plan (₹1,999)',
+          payment_status: data.paymentStatus || 'Initiated',
+          transaction_id: data.transactionId || '',
+          amount: 1999,
+          currency: 'INR'
+        };
+        saveLeadLocally(lead);
+
+        // Sending Email to digitaladsexpresso@gmail.com
+        if (nodemailer && SMTP_CONFIG.host && SMTP_CONFIG.auth.user) {
+          const transporter = nodemailer.createTransport(SMTP_CONFIG);
+          const mailOptions = {
+            from: SMTP_CONFIG.auth.user,
+            to: EMAIL_TO,
+            subject: `🎯 New Ad Audit Booking: ₹1,999 from ${data.name} (${data.business || data.company || 'Business'})`,
+            text: `A new Ad Audit & Growth Plan booking (₹1,999) has been placed on AdsVise (https://adsvise.in/ad-audit).\n\n` +
+                  `Client Details:\n` +
+                  `-----------------------------------------\n` +
+                  `Name:            ${data.name}\n` +
+                  `Business Name:   ${data.business || data.company || 'N/A'}\n` +
+                  `Contact Phone:   ${data.phone}\n` +
+                  `Email:           ${data.email}\n` +
+                  `Website / IG:    ${data.websiteOrHandle || 'N/A'}\n` +
+                  `Ad Platform:     ${data.platform || 'N/A'}\n` +
+                  `Monthly Ad Spend:${data.spend || 'N/A'}\n` +
+                  `Key Challenge:   ${data.notes || 'N/A'}\n` +
+                  `Payment Status:  ${data.paymentStatus || 'Initiated'}\n` +
+                  `Transaction ID:  ${data.transactionId || 'Pending'}\n` +
+                  `Amount:          ₹1,999 (One-Time Payment)\n` +
+                  `-----------------------------------------\n\n` +
+                  `Next Step: Reach out to client on WhatsApp (${data.phone}) to confirm intake details and arrange view-only ad account access.`
+          };
+          transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+              console.error(`[Error] Failed to send email to ${EMAIL_TO}:`, error.message);
+            } else {
+              console.log(`[Email] Notification email successfully sent to ${EMAIL_TO}`);
+            }
+          });
+        } else {
+          console.log(`[Email Mock] Ad audit booking details would be sent to ${EMAIL_TO}`);
+        }
+
+        // Saving to Supabase if configured
+        if (createClient && SUPABASE_URL && SUPABASE_KEY) {
+          try {
+            const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+            supabase.from('leads').insert([
+              {
+                name: data.name,
+                email: data.email,
+                business: data.business || data.company,
+                phone: data.phone,
+                source: 'Ad Audit + Growth Plan (₹1,999)',
+                website: 'https://adsvise.in/ad-audit'
+              }
+            ]).then(({ error }) => {
+              if (error) {
+                console.error('[Supabase Error] Failed to insert audit booking:', error.message);
+              } else {
+                console.log('[Supabase] Successfully saved ad audit booking.');
+              }
+            });
+          } catch (supabaseErr) {
+            console.error('[Supabase Error]:', supabaseErr.message);
+          }
+        }
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, message: 'Ad audit booking received successfully' }));
+      } catch (err) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: 'Invalid JSON payload' }));
+      }
+    });
+    return;
+  }
+
   if (req.method === 'POST' && req.url === '/api/call-event') {
     let body = '';
     req.on('data', chunk => { body += chunk.toString(); });
@@ -383,6 +673,10 @@ const server = http.createServer((req, res) => {
              urlPath === '/water-can-manager/privacy' || urlPath === '/water-can-manager/privacy/' ||
              urlPath === '/water-can-manager/terms' || urlPath === '/water-can-manager/terms/') {
     urlPath = '/water-can-manager.html';
+  } else if (urlPath === '/ad-audit' || urlPath === '/ad-audit/' || urlPath === '/audit' || urlPath === '/audit/') {
+    urlPath = '/ad-audit.html';
+  } else if (urlPath === '/test-checkout' || urlPath === '/test-checkout/' || urlPath === '/checkout' || urlPath === '/checkout/') {
+    urlPath = '/test-checkout.html';
   }
 
   // Normalize path and set default index.html

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Razorpay Standard Checkout Test | AdsVise</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Razorpay Standard Web Checkout Script -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <style>
+    :root {
+      --bg-dark: #080614;
+      --card-dark: #0f172a;
+      --card-border: #1e293b;
+      --lime-green: #a3e635;
+      --brand-blue: #3b82f6;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .checkout-container {
+      width: 100%;
+      max-width: 650px;
+      background: var(--card-dark);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .header-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--lime-green);
+      background: rgba(163, 230, 53, 0.1);
+      border: 1px solid rgba(163, 230, 53, 0.3);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+    .order-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .order-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .order-row:last-child {
+      margin-bottom: 0;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
+    .price-val {
+      color: var(--lime-green);
+    }
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .btn-pay {
+      background: var(--lime-green);
+      color: #080614;
+      border: none;
+      padding: 1rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+    .btn-pay:hover:not(:disabled) {
+      background: #84cc16;
+      transform: translateY(-1px);
+    }
+    .btn-pay:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 0.85rem;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .log-terminal {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 1rem;
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: #94a3b8;
+      max-height: 220px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      line-height: 1.4;
+      margin-top: 1rem;
+    }
+    .log-line {
+      margin-bottom: 0.35rem;
+    }
+    .log-success { color: #4ade80; }
+    .log-info { color: #60a5fa; }
+    .log-warn { color: #fbbf24; }
+    .log-error { color: #f87171; }
+    .footer-links {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    .footer-links a {
+      color: var(--brand-blue);
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="checkout-container">
+    <div class="header-badge">Razorpay Standard Web Checkout</div>
+    <h1>Secure Payment Gateway Test</h1>
+    <p class="subtitle">Complete 3-step Standard Checkout: Backend Order Creation &rarr; Razorpay Modal &rarr; HMAC-SHA256 Signature Verification.</p>
+
+    <div class="order-box">
+      <div class="order-row">
+        <span>Item</span>
+        <span>Ad Audit + Growth Plan</span>
+      </div>
+      <div class="order-row">
+        <span>Gateway</span>
+        <span>Razorpay Standard Checkout (UPI, Cards, NetBanking)</span>
+      </div>
+      <div class="order-row">
+        <span>Total Payable</span>
+        <span class="price-val" id="display-amount">₹1,999.00</span>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn-pay" id="pay-audit-btn" onclick="startCheckout(199900, 'Ad Audit + Growth Plan')">
+        <span>Pay ₹1,999 with Razorpay</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+
+      <button class="btn-secondary" id="pay-test-btn" onclick="startCheckout(100, 'Test Order - Min Amount')">
+        Test Pay ₹1.00 (100 paise minimum amount)
+      </button>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
+      <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 700;">Live Execution Log:</span>
+      <button onclick="clearLogs()" style="background:none; border:none; color:var(--text-muted); font-size: 0.75rem; cursor:pointer;">Clear</button>
+    </div>
+    <div class="log-terminal" id="log-terminal">Ready for test checkout. Click one of the buttons above to begin.</div>
+
+    <div class="footer-links">
+      <a href="/ad-audit">&larr; Return to Ad Audit Landing Page</a>
+      &bull;
+      <a href="/">AdsVise Home</a>
+    </div>
+  </div>
+
+  <script>
+    function log(msg, type = 'info') {
+      const term = document.getElementById('log-terminal');
+      const time = new Date().toLocaleTimeString();
+      const line = document.createElement('div');
+      line.className = 'log-line log-' + type;
+      line.textContent = `[${time}] ${msg}`;
+      term.appendChild(line);
+      term.scrollTop = term.scrollHeight;
+      console.log(`[Checkout Test] [${type}]`, msg);
+    }
+
+    function clearLogs() {
+      document.getElementById('log-terminal').innerHTML = 'Console cleared. Ready.';
+    }
+
+    async function startCheckout(amountInPaise, description) {
+      const payAuditBtn = document.getElementById('pay-audit-btn');
+      const payTestBtn = document.getElementById('pay-test-btn');
+      payAuditBtn.disabled = true;
+      payTestBtn.disabled = true;
+
+      try {
+        log(`STEP 1: Requesting Order from Backend (POST /api/create-order) for ${amountInPaise} paise...`, 'info');
+
+        const orderResponse = await fetch('/api/create-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            amount: amountInPaise,
+            currency: 'INR',
+            receipt: 'test_rcpt_' + Date.now(),
+            notes: {
+              test: 'true',
+              item: description
+            }
+          })
+        });
+
+        const orderData = await orderResponse.json();
+
+        if (!orderResponse.ok || !orderData.success) {
+          log(`Order creation failed: ${orderData.error || 'Unknown error'}`, 'error');
+          alert('Order creation failed: ' + (orderData.error || 'Server error'));
+          return;
+        }
+
+        log(`STEP 1 SUCCESS: Order created! ID: ${orderData.order_id} | Amount: ${orderData.amount} paise`, 'success');
+        log(`STEP 2: Initializing Razorpay Standard Checkout Modal...`, 'info');
+
+        if (typeof window.Razorpay !== 'function') {
+          log('Razorpay checkout.js not loaded!', 'error');
+          alert('Razorpay SDK failed to load.');
+          return;
+        }
+
+        const options = {
+          key: orderData.key_id,
+          amount: orderData.amount,
+          currency: orderData.currency,
+          name: 'AdsVise',
+          description: description,
+          order_id: orderData.order_id,
+          image: 'logo.png',
+          prefill: {
+            name: 'Test Customer',
+            email: 'test@adsvise.in',
+            contact: '9999999999'
+          },
+          notes: {
+            source: 'Test Checkout Page'
+          },
+          theme: {
+            color: '#0f172a'
+          },
+          handler: async function (response) {
+            log(`STEP 2 SUCCESS: Payment authorized! Payment ID: ${response.razorpay_payment_id}`, 'success');
+            log(`STEP 3: Sending signature to backend (POST /api/verify-payment)...`, 'info');
+
+            try {
+              const verifyResponse = await fetch('/api/verify-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature
+                })
+              });
+
+              const verifyData = await verifyResponse.json();
+
+              if (verifyResponse.ok && verifyData.success) {
+                log(`STEP 3 SUCCESS: Signature Verified! Payment is Authentic & Paid!`, 'success');
+                log(`Order: ${verifyData.order_id} | Payment: ${verifyData.payment_id}`, 'success');
+                alert(`✅ Payment Verified Successfully!\n\nPayment ID: ${response.razorpay_payment_id}\nOrder ID: ${response.razorpay_order_id}`);
+              } else {
+                log(`STEP 3 FAILED: Signature verification rejected: ${verifyData.error}`, 'error');
+                alert('❌ Payment verification failed: ' + verifyData.error);
+              }
+            } catch (err) {
+              log(`Network error during verification: ${err.message}`, 'error');
+              alert('Network error during verification: ' + err.message);
+            }
+          },
+          modal: {
+            ondismiss: function () {
+              log('Modal dismissed: User closed payment window before completing payment.', 'warn');
+            }
+          }
+        };
+
+        const rzp = new window.Razorpay(options);
+
+        rzp.on('payment.failed', function (failRes) {
+          log(`Payment Failed Event: ${failRes.error.description || failRes.error.reason}`, 'error');
+          alert('Payment Failed: ' + (failRes.error.description || failRes.error.reason));
+        });
+
+        rzp.open();
+
+      } catch (err) {
+        log(`Unexpected Error: ${err.message}`, 'error');
+        alert('Checkout error: ' + err.message);
+      } finally {
+        payAuditBtn.disabled = false;
+        payTestBtn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
