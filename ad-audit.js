@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const text = encodeURIComponent(
         `Hi Sourav! I just booked and paid ₹1,999 for the Ad Audit for ${biz} (Payment ID: ${paymentId}, Order: ${orderId}). Please let me know how to share campaign access.`
       );
-      confirmWhatsappBtn.href = `https://wa.me/919830000000?text=${text}`;
+      confirmWhatsappBtn.href = `https://wa.me/918240089145?text=${text}`;
     }
 
     // Save lead to backend database
