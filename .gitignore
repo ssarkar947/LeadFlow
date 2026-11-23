@@ -3,3 +3,5 @@ leads.json
 .env
 .DS_Store
 *.log
+*.backup
+data/
