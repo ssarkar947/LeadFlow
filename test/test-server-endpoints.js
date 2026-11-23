@@ -6,15 +6,13 @@
 const http = require('http');
 const assert = require('assert');
 
-// Start server on an isolated port for testing
-process.env.PORT = '3001';
-const serverModule = require('../server.js');
+const PORT = process.env.PORT || 3000;
 
 function makeRequest(method, path, body = null, headers = {}) {
   return new Promise((resolve, reject) => {
     const options = {
       hostname: 'localhost',
-      port: 3000, // or whatever server is listening on
+      port: PORT,
       path,
       method,
       headers: {
@@ -109,10 +107,7 @@ async function runServerTests() {
     const payload = {
       name: 'Server Test User',
       email: 'server_test_' + Date.now() + '@saastest.io',
-      company: 'TestSaaS Inc',
       websiteUrl: 'https://adsvise.in',
-      productDescription: 'Enterprise growth intelligence',
-      idealCustomer: 'SaaS CEOs',
       businessModel: 'Freemium',
       pricingModel: 'Tiered plans',
       challenges: ['Getting visitors to sign up'],

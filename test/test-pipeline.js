@@ -3,6 +3,26 @@
  * Tests deterministic scoring, Gemini/consultative analysis, email generation, and API pipeline
  */
 
+const fs = require('fs');
+const path = require('path');
+
+// Load environment variables from local .env file
+try {
+  const envPath = path.join(__dirname, '..', '.env');
+  if (fs.existsSync(envPath)) {
+    const envData = fs.readFileSync(envPath, 'utf8');
+    envData.split(/\r?\n/).forEach(line => {
+      const match = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+      if (match) {
+        const key = match[1];
+        let value = match[2] || '';
+        if (value.startsWith('"') && value.endsWith('"')) value = value.slice(1, -1);
+        process.env[key] = value;
+      }
+    });
+  }
+} catch (e) {}
+
 const assert = require('assert');
 const { calculateFitScore } = require('../lib/saas-fitscore/scoring');
 const { analyzeWithGemini } = require('../lib/saas-fitscore/gemini');

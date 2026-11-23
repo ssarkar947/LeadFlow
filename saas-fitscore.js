@@ -67,31 +67,41 @@ document.addEventListener('DOMContentLoaded', () => {
     return url;
   }
 
+  // Helper to derive company name from website URL
+  function deriveCompanyName(url) {
+    if (!url) return 'Your SaaS';
+    try {
+      const parsed = new URL(url.startsWith('http') ? url : 'https://' + url);
+      const host = parsed.hostname.replace(/^www\./i, '');
+      const namePart = host.split('.')[0] || 'Your SaaS';
+      return namePart.charAt(0).toUpperCase() + namePart.slice(1);
+    } catch (e) {
+      return 'Your SaaS';
+    }
+  }
+
   // Step 1 Validation
   function validateStep1() {
     let isValid = true;
     const name = document.getElementById('founder-name');
     const email = document.getElementById('work-email');
-    const company = document.getElementById('company-name');
     const website = document.getElementById('saas-website');
-    const productDo = document.getElementById('product-description');
-    const idealCustomer = document.getElementById('ideal-customer');
     const businessModel = document.querySelector('input[name="businessModel"]:checked');
     const pricingModel = document.querySelector('input[name="pricingModel"]:checked');
 
     // Simple email regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    [name, email, company, website, productDo, idealCustomer].forEach(input => {
-      if (!input.value.trim()) {
-        input.style.borderColor = '#ef4444';
+    [name, email, website].forEach(input => {
+      if (!input || !input.value.trim()) {
+        if (input) input.style.borderColor = '#ef4444';
         isValid = false;
       } else {
         input.style.borderColor = '';
       }
     });
 
-    if (email.value.trim() && !emailRegex.test(email.value.trim())) {
+    if (email && email.value.trim() && !emailRegex.test(email.value.trim())) {
       email.style.borderColor = '#ef4444';
       isValid = false;
     }
@@ -183,23 +193,26 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isValid) return;
 
       // Collect payload
+      const websiteUrl = cleanUrl(document.getElementById('saas-website').value);
+      const derivedCompany = deriveCompanyName(websiteUrl);
+
       const payload = {
         name: document.getElementById('founder-name').value.trim(),
         email: document.getElementById('work-email').value.trim(),
-        company: document.getElementById('company-name').value.trim(),
-        websiteUrl: cleanUrl(document.getElementById('saas-website').value),
-        productDescription: document.getElementById('product-description').value.trim(),
-        idealCustomer: document.getElementById('ideal-customer').value.trim(),
+        company: derivedCompany,
+        websiteUrl: websiteUrl,
+        productDescription: '',
+        idealCustomer: '',
         businessModel: document.querySelector('input[name="businessModel"]:checked').value,
         pricingModel: document.querySelector('input[name="pricingModel"]:checked').value,
-        competitors: document.getElementById('competitors')?.value.trim() || '',
-        category: document.getElementById('category')?.value.trim() || '',
+        competitors: '',
+        category: '',
         challenges: challenges,
         dropOff: dropOff.value,
         monthlySignups: signups.value,
         freeToPaidConversion: conversion.value,
         approxMrr: mrr.value,
-        next90DaysGoal: document.getElementById('goal-90-days')?.value.trim() || '',
+        next90DaysGoal: document.getElementById('goal-90-days')?.value?.trim() || '',
         consentGranted: true,
         submittedAt: new Date().toISOString()
       };
