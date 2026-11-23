@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>SaaS FitScore — Your SaaS Growth Scorecard | AdsVise</title>
+  <meta name="description" content="Understand how well your SaaS is set up to turn the right users into paying, long-term customers. Get your free, personalised growth scorecard across 5 critical dimensions."/>
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="SaaS FitScore — Your SaaS Growth Scorecard | AdsVise"/>
+  <meta property="og:description" content="Evaluate your SaaS across Positioning, Acquisition, Activation, Monetisation, and Retention. Identify sticking points and get a prioritised growth roadmap."/>
+  <meta property="og:image" content="https://adsvise.in/logo.png"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://adsvise.in/saas-fitscore"/>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFBB9FSMCS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NFBB9FSMCS');
+  </script>
+
+  <!-- Google Fonts: Epilogue & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Core AdsVise Stylesheet & Scoped SaaS FitScore Stylesheet -->
+  <link rel="stylesheet" href="adsvise.css"/>
+  <link rel="stylesheet" href="saas-fitscore.css"/>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "SaaS FitScore",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "All",
+    "url": "https://adsvise.in/saas-fitscore",
+    "description": "Free strategic growth intelligence scorecard for B2B SaaS founders evaluating Positioning, Acquisition, Activation, Monetisation, and Retention.",
+    "creator": {
+      "@type": "Organization",
+      "name": "AdsVise",
+      "url": "https://adsvise.in"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Custom Animated Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ═══════════ ADSVISE HEADER ═══════════ -->
+  <header class="adv-header" id="adv-header">
+    <div class="adv-container header-inner">
+      <a href="index.html" class="adv-logo" title="AdsVise Home">
+        <img src="logo.png" alt="AdsVise Logo" />
+      </a>
+      <nav class="adv-nav" id="adv-nav">
+        <a href="saas-fitscore.html" class="nav-highlight" style="border-color: var(--brand-blue); background: rgba(59,130,246,0.1); color: var(--brand-blue) !important;">SaaS FitScore (Free)</a>
+        <a href="ad-audit.html">Ad Audit (₹1,999)</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#work">Work</a>
+        <a href="index.html#how-we-roll">Process</a>
+        <a href="index.html#values">Values</a>
+      </nav>
+      <a href="#assessment-section" class="adv-btn adv-btn-primary header-cta-btn">Get My SaaS FitScore</a>
+      <button class="adv-menu-toggle" id="adv-menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Overlay Menu -->
+  <div class="mobile-overlay" id="mobile-overlay">
+    <nav class="mobile-overlay-nav">
+      <a href="saas-fitscore.html" class="mobile-nav-link nav-highlight">SaaS FitScore (Free)</a>
+      <a href="ad-audit.html" class="mobile-nav-link">Ad Audit (₹1,999)</a>
+      <a href="index.html#services" class="mobile-nav-link">Services</a>
+      <a href="index.html#work" class="mobile-nav-link">Work</a>
+      <a href="index.html#how-we-roll" class="mobile-nav-link">Process</a>
+      <a href="#assessment-section" class="adv-btn adv-btn-primary" style="margin-top:2rem;">Get My SaaS FitScore</a>
+    </nav>
+  </div>
+
+  <!-- ═══════════ MAIN CONTENT (SCOPED UNDER .saas-fitscore) ═══════════ -->
+  <main class="saas-fitscore" id="saas-fitscore-root">
+
+    <!-- ─── 1. HERO SECTION ─── -->
+    <section class="fitscore-hero">
+      <div class="adv-container">
+        <div class="hero-grid">
+          
+          <!-- Hero Text Column -->
+          <div>
+            <div class="hero-badge">
+              <span class="hero-badge-dot"></span>
+              YOUR SAAS GROWTH SCORECARD
+            </div>
+
+            <h1>How well is your SaaS set up to turn the right users into paying customers?</h1>
+
+            <p class="hero-sub">
+              Your SaaS may be attracting visitors, generating signups and acquiring customers. But how well are all the parts of your growth system working together?
+            </p>
+
+            <p class="hero-sub-bold">
+              Get your free SaaS FitScore. Understand what's working, where growth is getting stuck, and what you should improve next.
+            </p>
+
+            <div class="hero-cta-group">
+              <a href="#assessment-section" class="adv-btn adv-btn-primary" style="padding: 0.9rem 2.2rem; font-size: 1rem;">
+                Get My SaaS FitScore
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 0.5rem;">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+              <span class="hero-trust-tag">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Free assessment. Personalised results. No lengthy forms.
+              </span>
+            </div>
+          </div>
+
+          <!-- Hero Scorecard Preview Column -->
+          <div>
+            <div class="preview-card">
+              <div class="preview-header">
+                <div>
+                  <span class="preview-tag">Growth Scorecard</span>
+                  <div style="font-weight: 600; font-size: 0.95rem; margin-top: 0.35rem; color: #fff;">AcmeFlow SaaS</div>
+                </div>
+                <div class="preview-disclaimer">Illustrative Preview</div>
+              </div>
+
+              <div class="preview-score-hero">
+                <div class="preview-score-num">74</div>
+                <div class="preview-score-denom">/100</div>
+                <div class="preview-score-status">Developing</div>
+              </div>
+
+              <div class="preview-dimensions">
+                <div class="preview-dim-row">
+                  <span class="preview-dim-label">1. Positioning</span>
+                  <div class="preview-bar-track">
+                    <div class="preview-bar-fill preview-bar-blue" style="width: 68%;"></div>
+                  </div>
+                  <span class="preview-dim-val">68</span>
+                </div>
+                <div class="preview-dim-row">
+                  <span class="preview-dim-label">2. Acquisition</span>
+                  <div class="preview-bar-track">
+                    <div class="preview-bar-fill preview-bar-lime" style="width: 82%;"></div>
+                  </div>
+                  <span class="preview-dim-val">82</span>
+                </div>
+                <div class="preview-dim-row">
+                  <span class="preview-dim-label">3. Activation</span>
+                  <div class="preview-bar-track">
+                    <div class="preview-bar-fill preview-bar-blue" style="width: 65%;"></div>
+                  </div>
+                  <span class="preview-dim-val">65</span>
+                </div>
+                <div class="preview-dim-row">
+                  <span class="preview-dim-label">4. Monetisation</span>
+                  <div class="preview-bar-track">
+                    <div class="preview-bar-fill preview-bar-lime" style="width: 78%;"></div>
+                  </div>
+                  <span class="preview-dim-val">78</span>
+                </div>
+                <div class="preview-dim-row">
+                  <span class="preview-dim-label">5. Retention</span>
+                  <div class="preview-bar-track">
+                    <div class="preview-bar-fill preview-bar-blue" style="width: 75%;"></div>
+                  </div>
+                  <span class="preview-dim-val">75</span>
+                </div>
+              </div>
+
+              <div class="preview-callout">
+                <strong>Primary Constraint Detected:</strong> Positioning is feature-heavy. Ideal buyer does not immediately grasp why to choose AcmeFlow over legacy options.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 2. FIVE DIMENSIONS SECTION ─── -->
+    <section class="dimensions-section">
+      <div class="adv-container">
+        <div class="section-header">
+          <span class="section-tag">Diagnostic Framework</span>
+          <h2 class="section-title">The Five Connected Dimensions of SaaS Growth</h2>
+          <p class="section-subtitle">
+            Most SaaS growth issues aren't just "traffic" or "conversion" problems. We evaluate how the 5 critical components of your commercial engine align to create sustainable compounding revenue.
+          </p>
+        </div>
+
+        <div class="dimensions-grid">
+          <!-- Dimension 1: Positioning -->
+          <div class="dimension-card">
+            <div class="dimension-card-num">DIMENSION 01</div>
+            <h3>Positioning</h3>
+            <p>How clearly you articulate who you serve, the acute problem you solve, and why qualified buyers should choose you over every alternative.</p>
+            <ul class="dimension-items">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Ideal customer clarity & buyer relevance</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Differentiated value proposition</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Outcome vs. feature messaging</li>
+            </ul>
+          </div>
+
+          <!-- Dimension 2: Acquisition -->
+          <div class="dimension-card">
+            <div class="dimension-card-num">DIMENSION 02</div>
+            <h3>Acquisition</h3>
+            <p>How effectively your website captures qualified intent, removes evaluation anxiety, and transitions high-fit visitors into active signups.</p>
+            <ul class="dimension-items">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Conversion structure & CTA visibility</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Trust signals & proof architecture</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Low-friction signup journeys</li>
+            </ul>
+          </div>
+
+          <!-- Dimension 3: Activation -->
+          <div class="dimension-card">
+            <div class="dimension-card-num">DIMENSION 03</div>
+            <h3>Activation</h3>
+            <p>How clearly the path to first meaningful product value is communicated and guided before the user loses interest or abandons.</p>
+            <ul class="dimension-items">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> First-run product experience clarity</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Time-to-value expectation setting</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> First milestone definition & guides</li>
+            </ul>
+          </div>
+
+          <!-- Dimension 4: Monetisation -->
+          <div class="dimension-card">
+            <div class="dimension-card-num">DIMENSION 04</div>
+            <h3>Monetisation</h3>
+            <p>How transparently your pricing, tiers, and value limits are structured so upgrading feels like an obvious business decision.</p>
+            <ul class="dimension-items">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Tier differentiation & upgrade catalysts</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Free vs. paid boundary clarity</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Value justification for mid-market plans</li>
+            </ul>
+          </div>
+
+          <!-- Dimension 5: Retention -->
+          <div class="dimension-card">
+            <div class="dimension-card-num">DIMENSION 05</div>
+            <h3>Retention</h3>
+            <p>Signals of ongoing utility, habit formation, expansion pathways, and ecosystem lock-in that safeguard lifetime value.</p>
+            <ul class="dimension-items">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Evidence of recurring workflow value</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Integrations & ecosystem reach</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Continuous education & support assets</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 3. HOW IT WORKS ─── -->
+    <section class="how-it-works-section">
+      <div class="adv-container">
+        <div class="section-header" style="margin-bottom: 2rem;">
+          <span class="section-tag">Process</span>
+          <h2 class="section-title">How SaaS FitScore Works</h2>
+          <p class="section-subtitle">A straightforward, 3-minute diagnostic that combines your public presence with business context.</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-badge">1</div>
+            <h3>Share Your Website & Context</h3>
+            <p>Provide your public domain and complete a quick 2-minute questionnaire about your ICP, pricing model, and biggest friction points.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-badge">2</div>
+            <h3>Multi-Point Evidence Review</h3>
+            <p>Our engine crawls key public pages (homepage, pricing, features, solutions) and cross-references them against your founder answers using structured evaluation criteria.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-badge">3</div>
+            <h3>Get Your Personalised Scorecard</h3>
+            <p>Receive your overall FitScore, 5 dimension ratings, identified growth constraints, and a practical 30-60-90 day improvement roadmap delivered on-screen and to your inbox.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 4. QUESTIONNAIRE SECTION ─── -->
+    <section class="assessment-section" id="assessment-section">
+      <div class="adv-container">
+        <div class="section-header" style="margin-bottom: 3rem;">
+          <span class="section-tag">Free Assessment</span>
+          <h2 class="section-title">Evaluate Your SaaS Growth System</h2>
+          <p class="section-subtitle">Takes ~2 to 3 minutes. No credit card, no password, and no private analytics access required.</p>
+        </div>
+
+        <div class="form-wrapper" id="questionnaire-wrapper">
+          
+          <!-- Progress Indicator -->
+          <div class="form-progress-bar">
+            <div class="progress-step-item is-active" id="step-1-indicator">
+              <div class="step-circle">1</div>
+              <div class="step-info">
+                <span class="step-label">Step 1</span>
+                <span class="step-title">About Your SaaS</span>
+              </div>
+            </div>
+            <div class="progress-connector"></div>
+            <div class="progress-step-item" id="step-2-indicator">
+              <div class="step-circle">2</div>
+              <div class="step-info">
+                <span class="step-label">Step 2</span>
+                <span class="step-title">Your Current Growth</span>
+              </div>
+            </div>
+          </div>
+
+          <form id="saas-fitscore-form" novalidate>
+
+            <!-- ═════════ STEP 1: ABOUT YOUR SAAS ═════════ -->
+            <div id="step-1-pane">
+              
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="founder-name">Your Name <span class="required">*</span></label>
+                  <input type="text" id="founder-name" class="form-input" placeholder="e.g. Sarah Jenkins" required />
+                </div>
+                <div class="form-group">
+                  <label for="work-email">Work Email <span class="required">*</span></label>
+                  <input type="email" id="work-email" class="form-input" placeholder="sarah@yourcompany.com" required />
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="company-name">Company Name <span class="required">*</span></label>
+                  <input type="text" id="company-name" class="form-input" placeholder="e.g. CloudScale AI" required />
+                </div>
+                <div class="form-group">
+                  <label for="saas-website">SaaS Website URL <span class="required">*</span></label>
+                  <input type="url" id="saas-website" class="form-input" placeholder="https://cloudscale.io" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="product-description">What does your SaaS product do? <span class="required">*</span></label>
+                <textarea id="product-description" class="form-textarea" placeholder="Briefly describe what your software does and the primary job it accomplishes for users." required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="ideal-customer">Who is your ideal customer? <span class="required">*</span></label>
+                <input type="text" id="ideal-customer" class="form-input" placeholder="e.g. B2B marketing leaders at mid-market fintech firms" required />
+              </div>
+
+              <!-- Business Model Selection -->
+              <div class="form-group">
+                <label>Primary Business Model <span class="required">*</span></label>
+                <div class="radio-tile-grid">
+                  <label class="radio-tile">
+                    <input type="radio" name="businessModel" value="Free trial" />
+                    <span>Free trial</span>
+                  </label>
+                  <label class="radio-tile">
+                    <input type="radio" name="businessModel" value="Freemium" />
+                    <span>Freemium</span>
+                  </label>
+                  <label class="radio-tile">
+                    <input type="radio" name="businessModel" value="Paid subscription" />
+                    <span>Paid subscription</span>
+                  </label>
+                  <label class="radio-tile">
+                    <input type="radio" name="businessModel" value="Demo-led" />
+                    <span>Demo-led</span>
+                  </label>
+                  <label class="radio-tile">
+                    <input type="radio" name="businessModel" value="Usage-based" />
+                    <span>Usage-based</span>
+                  </label>
+                  <label class="radio-tile">
+                    <input type="radio" name="businessModel" value="Hybrid" />
+                    <span>Hybrid</span>
+                  </label>
+                  <label class="radio-tile">
+                    <input type="radio" name="businessModel" value="Other" />
+                    <span>Other</span>
+                  </label>
+                </div>
+                <span id="business-model-error" style="color:#ef4444;font-size:0.8rem;display:none;margin-top:0.4rem;">Please select your business model.</span>
+              </div>
+
+              <!-- Pricing Model Selection -->
+              <div class="form-group">
+                <label>Pricing Model <span class="required">*</span></label>
+                <div class="radio-tile-grid">
+                  <label class="radio-tile">
+                    <input type="radio" name="pricingModel" value="Monthly subscription" />
+                    <span>Monthly sub</span>
+                  </label>
+                  <label class="radio-tile">
+                    <input type="radio" name="pricingModel" value="Annual subscription" />
+                    <span>Annual sub</span>
+                  </label>
+                  <label class="radio-tile">
+                    <input type="radio" name="pricingModel" value="Per user" />
+                    <span>Per user / seat</span>
+                  </label>
+                  <label class="radio-tile">
+                    <input type="radio" name="pricingModel" value="Usage-based" />
+                    <span>Usage-based</span>
+                  </label>
+                  <label class="radio-tile">
+                    <input type="radio" name="pricingModel" value="Tiered plans" />
+                    <span>Tiered plans</span>
+                  </label>
+                  <label class="radio-tile">
+                    <input type="radio" name="pricingModel" value="Custom enterprise" />
+                    <span>Custom enterprise</span>
+                  </label>
+                  <label class="radio-tile">
+                    <input type="radio" name="pricingModel" value="Other" />
+                    <span>Other</span>
+                  </label>
+                </div>
+                <span id="pricing-model-error" style="color:#ef4444;font-size:0.8rem;display:none;margin-top:0.4rem;">Please select your pricing model.</span>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="competitors">Main Competitors <span class="hint">(Optional, up to 3)</span></label>
+                  <input type="text" id="competitors" class="form-input" placeholder="e.g. CompetitorA, CompetitorB" />
+                </div>
+                <div class="form-group">
+                  <label for="category">Product Category <span class="hint">(Optional)</span></label>
+                  <input type="text" id="category" class="form-input" placeholder="e.g. Analytics, CRM, DevTools" />
+                </div>
+              </div>
+
+              <div class="form-nav-row" style="justify-content: flex-end;">
+                <button type="button" class="adv-btn adv-btn-primary" id="to-step-2-btn" style="padding: 0.85rem 2rem;">
+                  Continue to Step 2: Growth Metrics &rarr;
+                </button>
+              </div>
+
+            </div>
+
+            <!-- ═════════ STEP 2: YOUR CURRENT GROWTH ═════════ -->
+            <div id="step-2-pane" style="display: none;">
+              
+              <!-- Question 1: Biggest Growth Challenge -->
+              <div class="form-group">
+                <label>1. What is your biggest growth challenge? <span class="hint">(Select all that apply)</span></label>
+                <div class="chips-group">
+                  <label class="chip-label"><input type="checkbox" name="growthChallenge" value="Attracting qualified visitors" /><span>Attracting qualified visitors</span></label>
+                  <label class="chip-label"><input type="checkbox" name="growthChallenge" value="Getting visitors to sign up" /><span>Getting visitors to sign up</span></label>
+                  <label class="chip-label"><input type="checkbox" name="growthChallenge" value="Getting users to activate" /><span>Getting users to activate</span></label>
+                  <label class="chip-label"><input type="checkbox" name="growthChallenge" value="Converting free users into paying customers" /><span>Converting free users to paid</span></label>
+                  <label class="chip-label"><input type="checkbox" name="growthChallenge" value="Moving customers to higher plans" /><span>Moving customers to higher tiers</span></label>
+                  <label class="chip-label"><input type="checkbox" name="growthChallenge" value="Retaining customers" /><span>Retaining customers / reducing churn</span></label>
+                  <label class="chip-label"><input type="checkbox" name="growthChallenge" value="Differentiating from competitors" /><span>Differentiating from competitors</span></label>
+                  <label class="chip-label"><input type="checkbox" name="growthChallenge" value="Improving pricing and packaging" /><span>Improving pricing & packaging</span></label>
+                  <label class="chip-label"><input type="checkbox" name="growthChallenge" value="I am not sure yet" /><span>I am not sure yet</span></label>
+                </div>
+                <span id="growth-challenge-error" style="color:#ef4444;font-size:0.8rem;display:none;margin-top:0.4rem;">Please select at least one challenge.</span>
+              </div>
+
+              <!-- Question 2: Biggest drop-off -->
+              <div class="form-group">
+                <label>2. Where do you currently see the biggest drop-off?</label>
+                <div class="chips-group">
+                  <label class="chip-label"><input type="radio" name="dropOff" value="Visitors do not sign up" /><span>Visitors do not sign up</span></label>
+                  <label class="chip-label"><input type="radio" name="dropOff" value="Users sign up but do not use the product" /><span>Users sign up but do not use product</span></label>
+                  <label class="chip-label"><input type="radio" name="dropOff" value="Users activate but do not pay" /><span>Users activate but do not pay</span></label>
+                  <label class="chip-label"><input type="radio" name="dropOff" value="Customers pay but do not upgrade" /><span>Customers pay but do not upgrade</span></label>
+                  <label class="chip-label"><input type="radio" name="dropOff" value="Customers churn after a short period" /><span>Customers churn after a short period</span></label>
+                  <label class="chip-label"><input type="radio" name="dropOff" value="I do not track this yet" /><span>I do not track this yet</span></label>
+                </div>
+              </div>
+
+              <!-- Question 3: Monthly signups -->
+              <div class="form-group">
+                <label>3. Approximate monthly signups</label>
+                <div class="chips-group">
+                  <label class="chip-label"><input type="radio" name="monthlySignups" value="Below 100" /><span>Below 100</span></label>
+                  <label class="chip-label"><input type="radio" name="monthlySignups" value="100–500" /><span>100–500</span></label>
+                  <label class="chip-label"><input type="radio" name="monthlySignups" value="500–2,000" /><span>500–2,000</span></label>
+                  <label class="chip-label"><input type="radio" name="monthlySignups" value="2,000–10,000" /><span>2,000–10,000</span></label>
+                  <label class="chip-label"><input type="radio" name="monthlySignups" value="More than 10,000" /><span>More than 10,000</span></label>
+                  <label class="chip-label"><input type="radio" name="monthlySignups" value="Not tracking" /><span>Not tracking</span></label>
+                </div>
+              </div>
+
+              <!-- Question 4: Free-to-paid conversion -->
+              <div class="form-group">
+                <label>4. Approximate free-to-paid conversion</label>
+                <div class="chips-group">
+                  <label class="chip-label"><input type="radio" name="freeToPaidConversion" value="Below 1%" /><span>Below 1%</span></label>
+                  <label class="chip-label"><input type="radio" name="freeToPaidConversion" value="1–3%" /><span>1–3%</span></label>
+                  <label class="chip-label"><input type="radio" name="freeToPaidConversion" value="3–5%" /><span>3–5%</span></label>
+                  <label class="chip-label"><input type="radio" name="freeToPaidConversion" value="5–10%" /><span>5–10%</span></label>
+                  <label class="chip-label"><input type="radio" name="freeToPaidConversion" value="Above 10%" /><span>Above 10%</span></label>
+                  <label class="chip-label"><input type="radio" name="freeToPaidConversion" value="Not tracking" /><span>Not tracking</span></label>
+                  <label class="chip-label"><input type="radio" name="freeToPaidConversion" value="Not applicable" /><span>Not applicable</span></label>
+                </div>
+              </div>
+
+              <!-- Question 5: Monthly recurring revenue -->
+              <div class="form-group">
+                <label>5. Approximate monthly recurring revenue (MRR)</label>
+                <div class="chips-group">
+                  <label class="chip-label"><input type="radio" name="approxMrr" value="Pre-revenue" /><span>Pre-revenue</span></label>
+                  <label class="chip-label"><input type="radio" name="approxMrr" value="Below $1,000" /><span>Below $1,000</span></label>
+                  <label class="chip-label"><input type="radio" name="approxMrr" value="$1,000–$5,000" /><span>$1,000–$5,000</span></label>
+                  <label class="chip-label"><input type="radio" name="approxMrr" value="$5,000–$10,000" /><span>$5,000–$10,000</span></label>
+                  <label class="chip-label"><input type="radio" name="approxMrr" value="$10,000–$25,000" /><span>$10,000–$25,000</span></label>
+                  <label class="chip-label"><input type="radio" name="approxMrr" value="$25,000–$50,000" /><span>$25,000–$50,000</span></label>
+                  <label class="chip-label"><input type="radio" name="approxMrr" value="Above $50,000" /><span>Above $50,000</span></label>
+                  <label class="chip-label"><input type="radio" name="approxMrr" value="Prefer not to say" /><span>Prefer not to say</span></label>
+                </div>
+              </div>
+
+              <!-- Question 6: 90 days goal -->
+              <div class="form-group">
+                <label for="goal-90-days">6. What would you most like to improve in the next 90 days? <span class="hint">(Short text)</span></label>
+                <input type="text" id="goal-90-days" class="form-input" placeholder="e.g. Increase qualified demo bookings from cold inbound traffic" />
+              </div>
+
+              <!-- Consent & Privacy Reassurance -->
+              <div class="consent-box">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="consent-checkbox" required />
+                  <span>I agree that the submitted website and business information will be analysed to generate my personalised SaaS FitScore growth intelligence scorecard.</span>
+                </label>
+                <div style="font-size: 0.775rem; color: var(--text-muted, #a1a1aa); margin-top: 0.5rem; padding-left: 1.6rem;">
+                  Privacy guarantee: We do not collect passwords, private customer records, or access to private analytics tools.
+                </div>
+              </div>
+
+              <div class="form-nav-row">
+                <button type="button" class="adv-btn" id="back-to-step-1-btn" style="background: rgba(255,255,255,0.08); color: #fff;">
+                  &larr; Back to Step 1
+                </button>
+                <button type="submit" class="adv-btn adv-btn-lime" id="submit-assessment-btn" style="padding: 0.85rem 2.2rem; font-size: 1rem;">
+                  Generate My SaaS FitScore &rarr;
+                </button>
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+
+        <!-- ═════════ DIAGNOSTIC PROCESSING SCREEN ═════════ -->
+        <div class="form-wrapper processing-screen" id="processing-screen" style="display: none;">
+          <div class="spinner-ring"></div>
+          <h3 style="font-size: 1.75rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;">Analyzing Your SaaS Growth Engine...</h3>
+          <p style="color: var(--text-muted, #a1a1aa); max-width: 520px; margin: 0 auto;">Our growth intelligence engine is crawling key public pages and evaluating your positioning against the 5-dimension framework.</p>
+
+          <div class="stage-checklist">
+            <div class="stage-item done" id="stage-1-item">
+              <span style="color: var(--lime-green, #a3e635); font-weight: bold;">✓</span>
+              <span>Founder questionnaire context registered</span>
+            </div>
+            <div class="stage-item active" id="stage-2-item">
+              <span style="color: var(--brand-blue, #3b82f6);">●</span>
+              <span>Crawling public website pages (Homepage, Pricing, Features)</span>
+            </div>
+            <div class="stage-item" id="stage-3-item">
+              <span>○</span>
+              <span>Evaluating five-dimension deterministic scoring</span>
+            </div>
+            <div class="stage-item" id="stage-4-item">
+              <span>○</span>
+              <span>Generating evidence-backed findings & 90-day roadmap</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═════════ SCORECARD RESULTS VIEW ═════════ -->
+        <div class="report-view" id="report-container" style="display: none; margin-top: 2rem;">
+          
+          <div class="report-header-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid var(--border-subtle, rgba(255,255,255,0.06)); padding-bottom: 1rem;">
+              <div>
+                <span class="section-tag" style="margin-bottom: 0.25rem;">GROWTH SCORECARD</span>
+                <h2 style="font-size: 1.75rem; color: #fff; margin: 0;">SaaS FitScore Report: <span class="report-company-name">Your Company</span></h2>
+                <div style="font-size: 0.85rem; color: var(--text-muted, #a1a1aa); margin-top: 0.25rem;">Analyzed domain: <span class="report-website-url">yourdomain.com</span></div>
+              </div>
+              <button type="button" class="adv-btn" id="print-report-btn" style="background: rgba(255,255,255,0.08); color: #fff; font-size: 0.85rem; padding: 0.55rem 1.25rem;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.4rem;"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                Print / Save PDF
+              </button>
+            </div>
+
+            <div class="report-hero-grid">
+              
+              <!-- Dial / Overall Score Block -->
+              <div class="report-score-dial">
+                <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted, #a1a1aa); margin-bottom: 0.5rem;">Overall FitScore</div>
+                <div class="overall-number" id="report-overall-score">76</div>
+                <div style="font-size: 1.25rem; color: var(--text-muted, #a1a1aa);">out of 100</div>
+                <div class="overall-label" id="report-overall-label" style="color: var(--lime-green, #a3e635);">Strong Foundation</div>
+                <div class="overall-desc">Structured assessment across 5 commercial growth dimensions.</div>
+              </div>
+
+              <!-- 5 Dimension Breakdown Progress Bars -->
+              <div class="dimension-breakdown-list">
+                <div class="dim-bar-group">
+                  <div class="dim-bar-head">
+                    <span>1. Positioning</span>
+                    <strong id="score-positioning">70/100</strong>
+                  </div>
+                  <div class="dim-bar-track">
+                    <div class="dim-bar-progress preview-bar-blue" id="bar-positioning" data-target-width="70%" style="width: 0%;"></div>
+                  </div>
+                </div>
+
+                <div class="dim-bar-group">
+                  <div class="dim-bar-head">
+                    <span>2. Acquisition</span>
+                    <strong id="score-acquisition">82/100</strong>
+                  </div>
+                  <div class="dim-bar-track">
+                    <div class="dim-bar-progress preview-bar-lime" id="bar-acquisition" data-target-width="82%" style="width: 0%;"></div>
+                  </div>
+                </div>
+
+                <div class="dim-bar-group">
+                  <div class="dim-bar-head">
+                    <span>3. Activation</span>
+                    <strong id="score-activation">68/100</strong>
+                  </div>
+                  <div class="dim-bar-track">
+                    <div class="dim-bar-progress preview-bar-blue" id="bar-activation" data-target-width="68%" style="width: 0%;"></div>
+                  </div>
+                </div>
+
+                <div class="dim-bar-group">
+                  <div class="dim-bar-head">
+                    <span>4. Monetisation</span>
+                    <strong id="score-monetisation">80/100</strong>
+                  </div>
+                  <div class="dim-bar-track">
+                    <div class="dim-bar-progress preview-bar-lime" id="bar-monetisation" data-target-width="80%" style="width: 0%;"></div>
+                  </div>
+                </div>
+
+                <div class="dim-bar-group">
+                  <div class="dim-bar-head">
+                    <span>5. Retention</span>
+                    <strong id="score-retention">76/100</strong>
+                  </div>
+                  <div class="dim-bar-track">
+                    <div class="dim-bar-progress preview-bar-blue" id="bar-retention" data-target-width="76%" style="width: 0%;"></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Top Growth Constraints -->
+          <div class="constraints-block">
+            <h3 style="font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem;">Three Highest-Priority Growth Constraints</h3>
+            <p style="color: var(--text-muted, #a1a1aa); font-size: 0.95rem;">Key bottlenecks currently impeding customer velocity based on public evidence & context:</p>
+
+            <div class="constraint-card">
+              <div class="constraint-head">
+                <span class="constraint-tag">Critical Constraint</span>
+                <span class="constraint-title">1. Positioning is Feature-Centric Rather Than Buyer Decision-Centric</span>
+              </div>
+              <p>Your homepage and headline lead with features rather than an acute, urgent business outcome. Buyers understand what your software does mechanically, but cannot articulate why choosing it over competitor alternatives is a no-brainer decision.</p>
+            </div>
+
+            <div class="constraint-card">
+              <div class="constraint-head">
+                <span class="constraint-tag" style="background: rgba(59,130,246,0.2); color: var(--brand-blue, #3b82f6);">High Priority</span>
+                <span class="constraint-title">2. Activation Friction Between Initial Signup and "Aha" Moment</span>
+              </div>
+              <p>While acquisition flows capture email signups smoothly, onboarding copy sets generic expectations. First-time users are left to self-explore without guided milestone confirmation, leading to drop-off before product value crystallizes.</p>
+            </div>
+
+            <div class="constraint-card">
+              <div class="constraint-head">
+                <span class="constraint-tag" style="background: rgba(163,230,53,0.2); color: var(--lime-green, #a3e635);">Medium Priority</span>
+                <span class="constraint-title">3. Pricing Plan Differentiation Lacks Clear Value Ceilings</span>
+              </div>
+              <p>Free/starter and paid tier limits are primarily based on arbitrary feature access rather than tangible commercial scale triggers. Mid-market buyers lack a compelling economic rationale to upgrade to higher-value plans.</p>
+            </div>
+          </div>
+
+          <!-- 30-60-90 Day Action Roadmap -->
+          <div style="background: var(--bg-card, #18181b); border: 1px solid var(--border-subtle, rgba(255,255,255,0.06)); border-radius: 20px; padding: 2.25rem; margin-top: 2.5rem;">
+            <h3 style="font-size: 1.4rem; color: #fff; margin-bottom: 1.5rem;">Prioritised Strategic Roadmap</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+              <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle, rgba(255,255,255,0.06)); border-radius: 14px; padding: 1.5rem;">
+                <div style="font-weight: 700; color: var(--brand-blue, #3b82f6); font-size: 0.85rem; margin-bottom: 0.5rem;">NEXT 30 DAYS</div>
+                <h4 style="color: #fff; font-size: 1.05rem; margin-bottom: 0.5rem;">Nail Homepage Positioning</h4>
+                <p style="font-size: 0.875rem; color: var(--text-muted, #a1a1aa);">Rewrite above-the-fold messaging around the singular buying decision. Replace abstract capabilities with observable customer transformation.</p>
+              </div>
+
+              <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle, rgba(255,255,255,0.06)); border-radius: 14px; padding: 1.5rem;">
+                <div style="font-weight: 700; color: var(--lime-green, #a3e635); font-size: 0.85rem; margin-bottom: 0.5rem;">60-DAY PRIORITIES</div>
+                <h4 style="color: #fff; font-size: 1.05rem; margin-bottom: 0.5rem;">Streamline First-Mile Activation</h4>
+                <p style="font-size: 0.875rem; color: var(--text-muted, #a1a1aa);">Implement time-to-value milestone checklists directly into the post-signup journey. Ensure 80% of signups complete their primary setup action within 10 minutes.</p>
+              </div>
+
+              <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle, rgba(255,255,255,0.06)); border-radius: 14px; padding: 1.5rem;">
+                <div style="font-weight: 700; color: var(--accent, #F05417); font-size: 0.85rem; margin-bottom: 0.5rem;">90-DAY STRATEGY</div>
+                <h4 style="color: #fff; font-size: 1.05rem; margin-bottom: 0.5rem;">Restructure Pricing Expansion</h4>
+                <p style="font-size: 0.875rem; color: var(--text-muted, #a1a1aa);">Align tier boundaries with customer growth metrics (usage volume or team seats). Create a high-converting bridge from trial into the paid tier.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paid Product Funnel: System to Make the Right Buyers Choose You -->
+          <div class="paid-funnel-card">
+            <span class="paid-funnel-tag">NEXT LEVEL POSITIONING</span>
+            <h3>System to Make the Right Buyers Choose You</h3>
+            <p>
+              Your FitScore shows where your growth system needs attention. But one of the biggest reasons SaaS businesses struggle to convert the right customers is that their positioning does not make the buying decision clear enough.
+            </p>
+            <p>
+              Your ideal buyers may understand what your product does, but still not understand why they should choose it over the alternatives. <strong>System to Make the Right Buyers Choose You</strong> helps you work through that problem using positioning, customer psychology and buyer decision-making.
+            </p>
+
+            <div class="paid-cta-row">
+              <a href="https://adsvise.in/system-to-choose" target="_blank" class="adv-btn adv-btn-primary" style="padding: 0.85rem 2rem;">
+                Explore the System &rarr;
+              </a>
+              <a href="https://adsvise.in/#lead-modal" class="adv-btn" style="background: rgba(255,255,255,0.08); color: #fff;">
+                Discuss Your Growth Priorities
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── 5. FAQ SECTION ─── -->
+    <section class="adv-faq-section" style="padding: 6rem 2rem; background: var(--bg-dark, #09090b); border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.06));">
+      <div class="adv-container" style="max-width: 820px; margin: 0 auto;">
+        <div class="section-header" style="margin-bottom: 3rem;">
+          <span class="section-tag">FAQ</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-accordion">
+          
+          <div class="fitscore-faq-panel">
+            <h4 class="fitscore-faq-trigger">
+              What exactly is SaaS FitScore?
+              <span class="fitscore-faq-icon">+</span>
+            </h4>
+            <div class="fitscore-faq-content">
+              <p>SaaS FitScore is a structured growth intelligence scorecard designed for B2B SaaS founders. It evaluates the commercial readiness of your product across five interconnected dimensions: Positioning, Acquisition, Activation, Monetisation, and Retention, pinpointing where user conversion stalls.</p>
+            </div>
+          </div>
+
+          <div class="fitscore-faq-panel">
+            <h4 class="fitscore-faq-trigger">
+              How are the scores calculated?
+              <span class="fitscore-faq-icon">+</span>
+            </h4>
+            <div class="fitscore-faq-content">
+              <p>We use a deterministic, evidence-based scoring framework. We inspect public website messaging, pricing pages, and signup funnels alongside your founder-supplied business context. Scores are calculated objectively using weighted criteria—not arbitrary AI guesses.</p>
+            </div>
+          </div>
+
+          <div class="fitscore-faq-panel">
+            <h4 class="fitscore-faq-trigger">
+              Do you require access to my analytics or private code?
+              <span class="fitscore-faq-icon">+</span>
+            </h4>
+            <div class="fitscore-faq-content">
+              <p>No. We never ask for passwords, private customer records, or analytics access. The assessment relies exclusively on publicly discoverable website data and the high-level business context you provide in the questionnaire.</p>
+            </div>
+          </div>
+
+          <div class="fitscore-faq-panel">
+            <h4 class="fitscore-faq-trigger">
+              Is SaaS FitScore truly free?
+              <span class="fitscore-faq-icon">+</span>
+            </h4>
+            <div class="fitscore-faq-content">
+              <p>Yes. The diagnostic scorecard, evidence breakdown, and 30-60-90 day improvement priorities are 100% free with no obligation. If you later choose to implement deep positioning work, you can explore our paid product, "System to Make the Right Buyers Choose You," but the free scorecard delivers genuine standalone value.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 6. ADSVISE CTA BANNER ─── -->
+    <section class="adv-cta" id="cta-banner">
+      <div class="adv-container">
+        <div class="cta-inner reveal-fade">
+          <h2>Ready to unlock compounding SaaS growth?</h2>
+          <p>Find out where your growth system is getting stuck and what to improve next.</p>
+          <a href="#assessment-section" class="adv-btn adv-btn-primary" style="padding: 0.9rem 2.2rem; font-size: 1rem;">
+            Get My SaaS FitScore Now
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════ FOOTER (MATCHING ADSVISE) ═══════════ -->
+  <footer class="adv-footer">
+    <div class="adv-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="adv-logo">
+            <img src="footerlogo.png" alt="AdsVise Logo" />
+          </a>
+          <p>A marketing intelligence startup helping businesses shape customer perception in their favor by nailing brand positioning for 10X ROI.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Products & Services</h4>
+          <ul>
+            <li><a href="saas-fitscore.html" style="color: var(--brand-blue); font-weight: 600;">SaaS FitScore (Free Scorecard)</a></li>
+            <li><a href="ad-audit.html" style="color: var(--lime-green); font-weight: 600;">Ad Audit + Growth Plan (₹1,999)</a></li>
+            <li><a href="index.html#services">LinkedIn Personal Branding</a></li>
+            <li><a href="index.html#services">LinkedIn Ads</a></li>
+            <li><a href="index.html#services">Creative Strategy & Positioning</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="index.html#values">Our Values</a></li>
+            <li><a href="index.html#how-we-roll">Process</a></li>
+            <li><a href="water-can-manager.html">Water Can Manager (App)</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="mailto:digitaladsexpresso@gmail.com">digitaladsexpresso@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 AdsVise Marketing Intelligence. All Rights Reserved. | <a href="privacy-policy.html" style="color:var(--text-muted); text-decoration:underline;">Privacy Policy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="adsvise.js"></script>
+  <script src="saas-fitscore.js"></script>
+</body>
+</html>

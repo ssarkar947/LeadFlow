@@ -675,6 +675,8 @@ const server = http.createServer((req, res) => {
     urlPath = '/water-can-manager.html';
   } else if (urlPath === '/ad-audit' || urlPath === '/ad-audit/' || urlPath === '/audit' || urlPath === '/audit/') {
     urlPath = '/ad-audit.html';
+  } else if (urlPath === '/saas-fitscore' || urlPath === '/saas-fitscore/' || urlPath === '/fitscore' || urlPath === '/fitscore/') {
+    urlPath = '/saas-fitscore.html';
   } else if (urlPath === '/test-checkout' || urlPath === '/test-checkout/' || urlPath === '/checkout' || urlPath === '/checkout/') {
     urlPath = '/test-checkout.html';
   }

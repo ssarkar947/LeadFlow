@@ -1,0 +1,1008 @@
+/* ═════════════════════════════════════════════════════════════════
+   SaaS FitScore — AdsVise Growth Intelligence Design System
+   Scoped under .saas-fitscore to guarantee zero leakage
+   ═════════════════════════════════════════════════════════════════ */
+
+/* ─── Scope Wrapper ─── */
+.saas-fitscore {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  color: var(--text-main, #f4f4f5);
+  background-color: var(--bg-dark, #09090b);
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+}
+
+/* ─── Hero Section (AdsVise Warm Cream Signature) ─── */
+.saas-fitscore .fitscore-hero {
+  background: var(--bg-cream, #FAF9F6);
+  color: var(--text-dark, #18181b);
+  padding: 160px 0 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.saas-fitscore .hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.saas-fitscore .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--brand-blue, #3b82f6);
+  margin-bottom: 1.5rem;
+}
+
+.saas-fitscore .hero-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand-blue, #3b82f6);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.saas-fitscore .fitscore-hero h1 {
+  font-family: var(--font-heading, 'Epilogue', sans-serif);
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text-dark, #18181b);
+  margin-bottom: 1.5rem;
+}
+
+.saas-fitscore .fitscore-hero .hero-sub {
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  color: var(--text-muted-dark, #71717a);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  max-width: 640px;
+}
+
+.saas-fitscore .fitscore-hero .hero-sub-bold {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-dark, #18181b);
+  margin-bottom: 2rem;
+  max-width: 640px;
+}
+
+.saas-fitscore .hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.saas-fitscore .hero-trust-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted-dark, #71717a);
+}
+
+.saas-fitscore .hero-trust-tag svg {
+  color: #16a34a;
+}
+
+/* ─── Hero Scorecard Preview Widget ─── */
+.saas-fitscore .preview-card {
+  background: var(--bg-card, #18181b);
+  border: 1px solid var(--border-light, rgba(255,255,255,0.1));
+  border-radius: var(--radius, 20px);
+  padding: 1.75rem;
+  color: var(--text-main, #f4f4f5);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.saas-fitscore .preview-card::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(163,230,53,0.15), transparent 70%);
+  pointer-events: none;
+}
+
+.saas-fitscore .preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.saas-fitscore .preview-tag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--lime-green, #a3e635);
+  background: rgba(163, 230, 53, 0.1);
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(163, 230, 53, 0.25);
+}
+
+.saas-fitscore .preview-disclaimer {
+  font-size: 0.725rem;
+  color: var(--text-muted, #a1a1aa);
+}
+
+.saas-fitscore .preview-score-hero {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.saas-fitscore .preview-score-num {
+  font-family: var(--font-heading, 'Epilogue', sans-serif);
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #fff;
+}
+
+.saas-fitscore .preview-score-denom {
+  font-size: 1.25rem;
+  color: var(--text-muted, #a1a1aa);
+}
+
+.saas-fitscore .preview-score-status {
+  padding: 0.35rem 0.85rem;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--brand-blue, #3b82f6);
+  margin-left: auto;
+}
+
+.saas-fitscore .preview-dimensions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.saas-fitscore .preview-dim-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.saas-fitscore .preview-dim-label {
+  width: 110px;
+  color: var(--text-muted, #a1a1aa);
+  font-weight: 500;
+}
+
+.saas-fitscore .preview-bar-track {
+  flex: 1;
+  height: 7px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.saas-fitscore .preview-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 1s ease-in-out;
+}
+
+.saas-fitscore .preview-bar-blue { background: var(--brand-blue, #3b82f6); }
+.saas-fitscore .preview-bar-lime { background: var(--lime-green, #a3e635); }
+
+.saas-fitscore .preview-dim-val {
+  font-weight: 700;
+  font-family: var(--font-heading, 'Epilogue', sans-serif);
+  color: #fff;
+  width: 32px;
+  text-align: right;
+}
+
+.saas-fitscore .preview-callout {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+  border-radius: 12px;
+  padding: 0.85rem;
+  font-size: 0.8rem;
+  color: var(--text-muted, #a1a1aa);
+}
+
+.saas-fitscore .preview-callout strong {
+  color: var(--text-main, #f4f4f5);
+}
+
+/* ─── Dimensions Section (Dark) ─── */
+.saas-fitscore .dimensions-section {
+  padding: 7rem 0;
+  background: var(--bg-dark, #09090b);
+  border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+}
+
+.saas-fitscore .section-header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 4rem;
+}
+
+.saas-fitscore .section-tag {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--lime-green, #a3e635);
+  margin-bottom: 0.75rem;
+}
+
+.saas-fitscore .section-title {
+  font-family: var(--font-heading, 'Epilogue', sans-serif);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin-bottom: 1.25rem;
+}
+
+.saas-fitscore .section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted, #a1a1aa);
+  line-height: 1.6;
+}
+
+.saas-fitscore .dimensions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.saas-fitscore .dimension-card {
+  background: var(--bg-card, #18181b);
+  border: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+  border-radius: var(--radius, 20px);
+  padding: 2.25rem 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.saas-fitscore .dimension-card:hover {
+  transform: translateY(-5px);
+  background: var(--bg-card-hover, #27272a);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.saas-fitscore .dimension-card-num {
+  font-family: var(--font-heading, 'Epilogue', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--brand-blue, #3b82f6);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.saas-fitscore .dimension-card h3 {
+  font-family: var(--font-heading, 'Epilogue', sans-serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.saas-fitscore .dimension-card p {
+  font-size: 0.925rem;
+  color: var(--text-muted, #a1a1aa);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.saas-fitscore .dimension-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+  padding-top: 1.25rem;
+}
+
+.saas-fitscore .dimension-items li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-main, #f4f4f5);
+}
+
+.saas-fitscore .dimension-items li svg {
+  color: var(--lime-green, #a3e635);
+  flex-shrink: 0;
+}
+
+/* ─── How It Works (Steps) ─── */
+.saas-fitscore .how-it-works-section {
+  padding: 6rem 0;
+  background: #0f0f12;
+  border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+}
+
+.saas-fitscore .steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.saas-fitscore .step-card {
+  background: var(--bg-card, #18181b);
+  border: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+  border-radius: var(--radius, 20px);
+  padding: 2.5rem 2rem;
+  position: relative;
+}
+
+.saas-fitscore .step-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--brand-blue, #3b82f6);
+  font-family: var(--font-heading, 'Epilogue', sans-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.saas-fitscore .step-card h3 {
+  font-family: var(--font-heading, 'Epilogue', sans-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.saas-fitscore .step-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted, #a1a1aa);
+  line-height: 1.6;
+}
+
+/* ─── Questionnaire Section ─── */
+.saas-fitscore .assessment-section {
+  padding: 7rem 0 8rem;
+  background: var(--bg-dark, #09090b);
+  border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+}
+
+.saas-fitscore .form-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--bg-card, #18181b);
+  border: 1px solid var(--border-light, rgba(255,255,255,0.1));
+  border-radius: 24px;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+/* Step Progress Indicator */
+.saas-fitscore .form-progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+}
+
+.saas-fitscore .progress-step-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.saas-fitscore .step-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--border-light, rgba(255,255,255,0.15));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading, 'Epilogue', sans-serif);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-muted, #a1a1aa);
+  transition: all 0.3s;
+}
+
+.saas-fitscore .progress-step-item.is-active .step-circle {
+  background: var(--brand-blue, #3b82f6);
+  border-color: var(--brand-blue, #3b82f6);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.saas-fitscore .progress-step-item.is-completed .step-circle {
+  background: var(--lime-green, #a3e635);
+  border-color: var(--lime-green, #a3e635);
+  color: #000;
+}
+
+.saas-fitscore .step-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.saas-fitscore .step-label {
+  font-size: 0.725rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted, #a1a1aa);
+}
+
+.saas-fitscore .step-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.saas-fitscore .progress-connector {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0 1rem;
+}
+
+/* Form Groups & Inputs */
+.saas-fitscore .form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.saas-fitscore .form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.saas-fitscore .form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.saas-fitscore .form-group label .required {
+  color: #ef4444;
+  margin-left: 0.25rem;
+}
+
+.saas-fitscore .form-group label .hint {
+  font-size: 0.775rem;
+  font-weight: 400;
+  color: var(--text-muted, #a1a1aa);
+}
+
+.saas-fitscore .form-input,
+.saas-fitscore .form-select,
+.saas-fitscore .form-textarea {
+  width: 100%;
+  padding: 0.85rem 1.15rem;
+  background: #111113;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.saas-fitscore .form-input:focus,
+.saas-fitscore .form-select:focus,
+.saas-fitscore .form-textarea:focus {
+  border-color: var(--brand-blue, #3b82f6);
+  background: #141418;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.saas-fitscore .form-textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+/* Interactive Option Tiles & Chips */
+.saas-fitscore .chips-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.saas-fitscore .chip-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  background: #111113;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  color: var(--text-muted, #a1a1aa);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.saas-fitscore .chip-label:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+.saas-fitscore .chip-label input[type="checkbox"],
+.saas-fitscore .chip-label input[type="radio"] {
+  display: none;
+}
+
+.saas-fitscore .chip-label.is-selected {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: var(--brand-blue, #3b82f6);
+  color: #fff;
+  font-weight: 500;
+}
+
+.saas-fitscore .radio-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.saas-fitscore .radio-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.75rem 0.5rem;
+  background: #111113;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  color: var(--text-muted, #a1a1aa);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.saas-fitscore .radio-tile input[type="radio"] {
+  display: none;
+}
+
+.saas-fitscore .radio-tile:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+.saas-fitscore .radio-tile.is-selected {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: var(--brand-blue, #3b82f6);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Consent & Security */
+.saas-fitscore .consent-box {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+  border-radius: 14px;
+}
+
+.saas-fitscore .checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-muted, #a1a1aa);
+  cursor: pointer;
+}
+
+.saas-fitscore .checkbox-label input[type="checkbox"] {
+  margin-top: 0.2rem;
+  accent-color: var(--brand-blue, #3b82f6);
+  width: 16px;
+  height: 16px;
+}
+
+.saas-fitscore .form-nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+/* Diagnostic Progress View */
+.saas-fitscore .processing-screen {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.saas-fitscore .spinner-ring {
+  width: 64px;
+  height: 64px;
+  border: 4px solid rgba(59, 130, 246, 0.2);
+  border-top-color: var(--brand-blue, #3b82f6);
+  border-radius: 50%;
+  animation: spinRing 1s linear infinite;
+  margin: 0 auto 2rem;
+}
+
+@keyframes spinRing {
+  to { transform: rotate(360deg); }
+}
+
+.saas-fitscore .stage-checklist {
+  max-width: 420px;
+  margin: 2.5rem auto 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.saas-fitscore .stage-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.925rem;
+  color: var(--text-muted, #a1a1aa);
+  transition: all 0.3s;
+}
+
+.saas-fitscore .stage-item.done {
+  color: #fff;
+}
+
+.saas-fitscore .stage-item.done svg {
+  color: var(--lime-green, #a3e635);
+}
+
+.saas-fitscore .stage-item.active {
+  color: var(--brand-blue, #3b82f6);
+  font-weight: 600;
+}
+
+/* ─── Results & Scorecard Report ─── */
+.saas-fitscore .report-view {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.saas-fitscore .report-header-card {
+  background: var(--bg-card, #18181b);
+  border: 1px solid var(--border-light, rgba(255,255,255,0.1));
+  border-radius: 24px;
+  padding: 3rem clamp(1.5rem, 4vw, 3.5rem);
+  margin-bottom: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.saas-fitscore .report-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.saas-fitscore .report-score-dial {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+  border-radius: 20px;
+}
+
+.saas-fitscore .overall-number {
+  font-family: var(--font-heading, 'Epilogue', sans-serif);
+  font-size: 5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #fff;
+}
+
+.saas-fitscore .overall-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.saas-fitscore .overall-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted, #a1a1aa);
+  margin-top: 0.5rem;
+}
+
+.saas-fitscore .dimension-breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.saas-fitscore .dim-bar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.saas-fitscore .dim-bar-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.saas-fitscore .dim-bar-track {
+  height: 9px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.saas-fitscore .dim-bar-progress {
+  height: 100%;
+  border-radius: 9999px;
+}
+
+/* Constraint Callout Cards */
+.saas-fitscore .constraints-block {
+  margin-bottom: 3rem;
+}
+
+.saas-fitscore .constraint-card {
+  background: rgba(240, 84, 23, 0.05);
+  border: 1px solid rgba(240, 84, 23, 0.25);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.saas-fitscore .constraint-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.saas-fitscore .constraint-tag {
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(240, 84, 23, 0.2);
+  color: var(--accent, #F05417);
+}
+
+.saas-fitscore .constraint-title {
+  font-weight: 700;
+  color: #fff;
+}
+
+.saas-fitscore .constraint-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted, #a1a1aa);
+  line-height: 1.55;
+}
+
+/* Paid Product Pitch Section */
+.saas-fitscore .paid-funnel-card {
+  background: linear-gradient(145deg, #18181b 0%, #1e1e24 100%);
+  border: 1px solid var(--border-light, rgba(255,255,255,0.1));
+  border-radius: 24px;
+  padding: 3rem clamp(1.5rem, 4vw, 3.5rem);
+  margin-top: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.saas-fitscore .paid-funnel-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(59,130,246,0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.saas-fitscore .paid-funnel-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-blue, #3b82f6);
+  margin-bottom: 0.75rem;
+}
+
+.saas-fitscore .paid-funnel-card h3 {
+  font-family: var(--font-heading, 'Epilogue', sans-serif);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+
+.saas-fitscore .paid-funnel-card p {
+  font-size: 1.05rem;
+  color: var(--text-muted, #a1a1aa);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  max-width: 780px;
+}
+
+.saas-fitscore .paid-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* FAQ Accordion on SaaS FitScore */
+.saas-fitscore .fitscore-faq-panel {
+  border-bottom: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+  padding: 1.5rem 0;
+}
+
+.saas-fitscore .fitscore-faq-trigger {
+  font-family: var(--font-heading, 'Epilogue', sans-serif);
+  font-size: 1.2rem;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+}
+
+.saas-fitscore .fitscore-faq-icon {
+  color: var(--lime-green, #a3e635);
+  font-size: 1.5rem;
+  font-weight: 300;
+  transition: transform 0.25s ease;
+}
+
+.saas-fitscore .fitscore-faq-panel.is-active .fitscore-faq-icon {
+  transform: rotate(45deg);
+}
+
+.saas-fitscore .fitscore-faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.saas-fitscore .fitscore-faq-content p {
+  color: var(--text-muted, #a1a1aa);
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .saas-fitscore .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .saas-fitscore .steps-grid {
+    grid-template-columns: 1fr;
+  }
+  .saas-fitscore .report-hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .saas-fitscore .fitscore-hero {
+    padding: 130px 0 60px;
+  }
+  .saas-fitscore .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .saas-fitscore .form-nav-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .saas-fitscore .form-nav-row button {
+    width: 100%;
+  }
+  .saas-fitscore .paid-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .saas-fitscore .paid-cta-row a,
+  .saas-fitscore .paid-cta-row button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ─── Printable Styles ─── */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    cursor: auto !important;
+  }
+  #cursor-dot, #cursor-ring,
+  .adv-header, .adv-footer,
+  .hero-cta-group, .form-nav-row,
+  .paid-funnel-card, .fitscore-hero,
+  .dimensions-section, .how-it-works-section,
+  .assessment-section, .adv-cta {
+    display: none !important;
+  }
+  .saas-fitscore, .saas-fitscore .report-view {
+    background: #fff !important;
+    color: #000 !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .saas-fitscore .report-header-card,
+  .saas-fitscore .dimension-card,
+  .saas-fitscore .constraint-card {
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+  .saas-fitscore h1, .saas-fitscore h2, .saas-fitscore h3,
+  .saas-fitscore .overall-number {
+    color: #000 !important;
+  }
+}
