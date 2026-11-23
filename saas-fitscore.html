@@ -32,6 +32,9 @@
   <link rel="stylesheet" href="adsvise.css"/>
   <link rel="stylesheet" href="saas-fitscore.css"/>
 
+  <!-- Razorpay Standard Web Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
@@ -747,12 +750,19 @@
             </p>
 
             <div class="paid-cta-row">
-              <a href="https://adsvise.in/system-to-choose" target="_blank" class="adv-btn adv-btn-primary" style="padding: 0.85rem 2rem;">
+              <a href="https://adsvise.in/system-to-choose" id="explore-system-btn" target="_blank" class="adv-btn adv-btn-primary" style="padding: 0.85rem 2rem;">
                 Explore the System &rarr;
               </a>
-              <a href="https://adsvise.in/#lead-modal" class="adv-btn" style="background: rgba(255,255,255,0.08); color: #fff;">
+              <button type="button" id="instant-checkout-btn" class="adv-btn adv-btn-lime" style="padding: 0.85rem 1.8rem; font-size: 0.9rem;">
+                Order System Access (₹4,999)
+              </button>
+              <a href="https://adsvise.in/#lead-modal" id="consultation-btn" class="adv-btn" style="background: rgba(255,255,255,0.08); color: #fff;">
                 Discuss Your Growth Priorities
               </a>
+            </div>
+            <div id="payment-success-banner" style="display:none; margin-top:1.5rem; background:rgba(163,230,53,0.15); border:1px solid rgba(163,230,53,0.3); border-radius:12px; padding:1.25rem; color:#fff;">
+              <h4 style="margin:0 0 0.5rem; color:#a3e635;">Payment Successful & Verified!</h4>
+              <p style="margin:0; font-size:0.9rem; color:#d4d4d8;">Your order for <strong>System to Make the Right Buyers Choose You</strong> has been confirmed. Our team is preparing your onboarding materials and will reach out shortly.</p>
             </div>
           </div>
 

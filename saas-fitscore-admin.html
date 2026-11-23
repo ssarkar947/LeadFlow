@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>SaaS FitScore Admin — Growth Intelligence Dashboard | AdsVise</title>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="adsvise.css"/>
+  <style>
+    body {
+      background: #09090b;
+      color: #f4f4f5;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      cursor: auto !important;
+    }
+    #cursor-dot, #cursor-ring { display: none !important; }
+    .admin-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 2rem;
+    }
+    .admin-title-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .admin-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 99px;
+      background: rgba(59,130,246,0.15);
+      color: #3b82f6;
+      border: 1px solid rgba(59,130,246,0.3);
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    .kpi-card {
+      background: #18181b;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+    .kpi-val {
+      font-family: 'Epilogue', sans-serif;
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      margin: 0.5rem 0 0.25rem;
+    }
+    .kpi-lbl {
+      font-size: 0.825rem;
+      color: #a1a1aa;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .toolbar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .search-input {
+      background: #111113;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 0.65rem 1rem;
+      color: #fff;
+      font-size: 0.9rem;
+      width: 280px;
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: #3b82f6;
+    }
+    .filter-select {
+      background: #111113;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 0.65rem 1rem;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .admin-table-card {
+      background: #18181b;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+    th {
+      padding: 1rem 1.25rem;
+      color: #a1a1aa;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: #141416;
+    }
+    td {
+      padding: 1.1rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      vertical-align: middle;
+    }
+    tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .status-completed { background: rgba(163,230,53,0.15); color: #a3e635; }
+    .status-crawling, .status-analyzing { background: rgba(59,130,246,0.15); color: #3b82f6; }
+    .status-failed { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .status-submitted { background: rgba(255,255,255,0.1); color: #f4f4f5; }
+    .score-badge {
+      font-weight: 800;
+      font-family: 'Epilogue', sans-serif;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+    .login-container {
+      max-width: 420px;
+      margin: 8rem auto;
+      background: #18181b;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .btn-action {
+      padding: 0.45rem 0.85rem;
+      font-size: 0.8rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+    .btn-action:hover {
+      background: rgba(255,255,255,0.12);
+    }
+    .btn-retry {
+      border-color: rgba(239,68,68,0.3);
+      color: #f87171;
+    }
+    .btn-retry:hover {
+      background: rgba(239,68,68,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═════════ LOGIN SCREEN (IF UNAUTHENTICATED) ═════════ -->
+  <div id="login-screen" class="login-container" style="display: none;">
+    <div style="font-family:'Epilogue',sans-serif;font-size:1.75rem;font-weight:700;margin-bottom:0.5rem;color:#fff;">AdsVise Admin</div>
+    <p style="color:#a1a1aa;font-size:0.9rem;margin-bottom:2rem;">Sign in to access SaaS FitScore diagnostic intelligence.</p>
+    <form id="admin-login-form">
+      <div style="margin-bottom:1.25rem;text-align:left;">
+        <label style="font-size:0.85rem;color:#a1a1aa;display:block;margin-bottom:0.4rem;">Username</label>
+        <input type="text" id="admin-user" class="search-input" style="width:100%;box-sizing:border-box;" required />
+      </div>
+      <div style="margin-bottom:1.5rem;text-align:left;">
+        <label style="font-size:0.85rem;color:#a1a1aa;display:block;margin-bottom:0.4rem;">Password</label>
+        <input type="password" id="admin-pass" class="search-input" style="width:100%;box-sizing:border-box;" required />
+      </div>
+      <button type="submit" class="adv-btn adv-btn-primary" style="width:100%;padding:0.75rem;">Sign In to Dashboard</button>
+      <div id="login-error" style="color:#ef4444;font-size:0.85rem;margin-top:1rem;display:none;"></div>
+    </form>
+  </div>
+
+  <!-- ═════════ MAIN DASHBOARD SCREEN ═════════ -->
+  <div id="dashboard-screen" class="admin-wrapper" style="display: none;">
+    
+    <header class="admin-header">
+      <div class="admin-title-group">
+        <a href="index.html" title="AdsVise Home">
+          <img src="logo.png" alt="AdsVise" height="42" />
+        </a>
+        <span class="admin-tag">Growth Intelligence Admin</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <a href="/saas-fitscore" target="_blank" class="btn-action">View Live Page &rarr;</a>
+        <button id="logout-btn" class="btn-action" style="background:#27272a;">Sign Out</button>
+      </div>
+    </header>
+
+    <!-- KPI Row -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-lbl">Total Leads</div>
+        <div class="kpi-val" id="kpi-leads">0</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-lbl">Diagnostics Run</div>
+        <div class="kpi-val" id="kpi-diagnostics">0</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-lbl">Scorecards Generated</div>
+        <div class="kpi-val" id="kpi-reports">0</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-lbl">Paid Product Orders</div>
+        <div class="kpi-val" id="kpi-payments">0</div>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar-row">
+      <div style="display:flex;gap:0.75rem;align-items:center;">
+        <input type="text" id="lead-search" class="search-input" placeholder="Search by name, email, company..." />
+        <select id="status-filter" class="filter-select">
+          <option value="all">All Statuses</option>
+          <option value="completed">Completed</option>
+          <option value="submitted">Submitted</option>
+          <option value="crawling">Crawling / Analyzing</option>
+          <option value="failed">Failed</option>
+        </select>
+      </div>
+      <button id="export-csv-btn" class="adv-btn adv-btn-lime" style="font-size:0.85rem;padding:0.6rem 1.4rem;">
+        Export Leads to CSV
+      </button>
+    </div>
+
+    <!-- Diagnostics Table -->
+    <div class="admin-table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Lead & Company</th>
+            <th>Website</th>
+            <th>Overall Score</th>
+            <th>Dimensions (P / Acq / Act / Mon / Ret)</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="diagnostics-table-body">
+          <tr>
+            <td colspan="7" style="text-align:center;color:#71717a;padding:3rem;">Loading records...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script>
+    let globalOverview = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const token = localStorage.getItem('adsvise_admin_token');
+      if (token) {
+        loadDashboard(token);
+      } else {
+        document.getElementById('login-screen').style.display = 'block';
+      }
+
+      // Login form
+      const loginForm = document.getElementById('admin-login-form');
+      if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const username = document.getElementById('admin-user').value.trim();
+          const password = document.getElementById('admin-pass').value.trim();
+          const errDiv = document.getElementById('login-error');
+
+          try {
+            const res = await fetch('/api/auth', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ username, password })
+            });
+            const data = await res.json();
+            if (data.success && data.token) {
+              localStorage.setItem('adsvise_admin_token', data.token);
+              document.getElementById('login-screen').style.display = 'none';
+              loadDashboard(data.token);
+            } else {
+              errDiv.textContent = data.error || 'Invalid credentials';
+              errDiv.style.display = 'block';
+            }
+          } catch (err) {
+            errDiv.textContent = 'Server communication error: ' + err.message;
+            errDiv.style.display = 'block';
+          }
+        });
+      }
+
+      // Logout
+      const logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          localStorage.removeItem('adsvise_admin_token');
+          window.location.reload();
+        });
+      }
+
+      // Search & Filter
+      const searchInput = document.getElementById('lead-search');
+      const statusFilter = document.getElementById('status-filter');
+      if (searchInput) searchInput.addEventListener('input', filterTable);
+      if (statusFilter) statusFilter.addEventListener('change', filterTable);
+
+      // CSV Export
+      const exportBtn = document.getElementById('export-csv-btn');
+      if (exportBtn) {
+        exportBtn.addEventListener('click', exportToCsv);
+      }
+    });
+
+    async function loadDashboard(token) {
+      document.getElementById('dashboard-screen').style.display = 'block';
+
+      try {
+        const res = await fetch('/api/saas-fitscore/admin/overview', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (res.status === 401) {
+          localStorage.removeItem('adsvise_admin_token');
+          window.location.reload();
+          return;
+        }
+
+        const data = await res.json();
+        if (data.success) {
+          globalOverview = data;
+          renderOverview(data);
+        }
+      } catch (err) {
+        console.error('Failed loading admin data:', err);
+      }
+    }
+
+    function renderOverview(data) {
+      document.getElementById('kpi-leads').textContent = data.summary?.totalLeads || 0;
+      document.getElementById('kpi-diagnostics').textContent = data.summary?.totalDiagnostics || 0;
+      document.getElementById('kpi-reports').textContent = data.summary?.totalReports || 0;
+      document.getElementById('kpi-payments').textContent = data.summary?.totalPayments || 0;
+
+      renderTable(data.diagnostics || [], data.leads || [], data.reports || []);
+    }
+
+    function renderTable(diagnostics, leads, reports) {
+      const tbody = document.getElementById('diagnostics-table-body');
+      tbody.innerHTML = '';
+
+      if (diagnostics.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#71717a;padding:3rem;">No diagnostic assessments recorded yet.</td></tr>';
+        return;
+      }
+
+      diagnostics.forEach(diag => {
+        const lead = leads.find(l => l.id === diag.leadId) || {};
+        const report = reports.find(r => r.id === diag.reportId || r.diagnosticId === diag.id) || {};
+
+        const tr = document.createElement('tr');
+        tr.className = 'diag-row';
+        tr.setAttribute('data-search', `${lead.name || ''} ${lead.email || ''} ${lead.company || ''} ${diag.websiteUrl || ''}`.toLowerCase());
+        tr.setAttribute('data-status', diag.status || 'submitted');
+
+        const dateStr = diag.created_at ? new Date(diag.created_at).toLocaleDateString() : 'N/A';
+        const statusClass = `status-${diag.status || 'submitted'}`;
+        const scoreVal = report.overallScore !== undefined ? `<span class="score-badge">${report.overallScore}/100</span> <span style="font-size:0.75rem;color:#a3e635;">${report.overallRating || ''}</span>` : '<span style="color:#71717a;">—</span>';
+
+        // 5 dimensions summary
+        let dimStr = '—';
+        if (report.dimensions) {
+          const p = report.dimensions.positioning?.score || 0;
+          const acq = report.dimensions.acquisition?.score || 0;
+          const act = report.dimensions.activation?.score || 0;
+          const mon = report.dimensions.monetisation?.score || 0;
+          const ret = report.dimensions.retention?.score || 0;
+          dimStr = `${p} / ${acq} / ${act} / ${mon} / ${ret}`;
+        }
+
+        let actionBtns = '';
+        if (report.reportToken) {
+          actionBtns += `<a href="/saas-fitscore?token=${report.reportToken}" target="_blank" class="btn-action" style="margin-right:0.4rem;">View Scorecard</a>`;
+        }
+        if (diag.status === 'failed') {
+          actionBtns += `<button onclick="retryDiagnostic('${diag.id}')" class="btn-action btn-retry">Retry</button>`;
+        }
+
+        tr.innerHTML = `
+          <td style="color:#a1a1aa;font-size:0.8rem;">${dateStr}</td>
+          <td>
+            <div style="font-weight:600;color:#fff;">${lead.name || diag.questionnaireAnswers?.name || 'Anonymous'}</div>
+            <div style="font-size:0.8rem;color:#71717a;">${lead.email || diag.questionnaireAnswers?.email || ''}</div>
+            <div style="font-size:0.8rem;color:#3b82f6;">${lead.company || diag.questionnaireAnswers?.company || ''}</div>
+          </td>
+          <td><a href="${diag.websiteUrl}" target="_blank" style="color:#a1a1aa;text-decoration:underline;">${diag.websiteUrl}</a></td>
+          <td>${scoreVal}</td>
+          <td style="font-size:0.8rem;color:#a1a1aa;">${dimStr}</td>
+          <td><span class="status-badge ${statusClass}">${diag.status}</span></td>
+          <td>${actionBtns}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterTable() {
+      const q = document.getElementById('lead-search').value.toLowerCase().trim();
+      const status = document.getElementById('status-filter').value;
+      const rows = document.querySelectorAll('.diag-row');
+
+      rows.forEach(row => {
+        const rowSearch = row.getAttribute('data-search') || '';
+        const rowStatus = row.getAttribute('data-status') || '';
+        const matchesQ = !q || rowSearch.includes(q);
+        const matchesStatus = status === 'all' || rowStatus === status;
+        row.style.display = matchesQ && matchesStatus ? '' : 'none';
+      });
+    }
+
+    async function retryDiagnostic(diagId) {
+      const token = localStorage.getItem('adsvise_admin_token');
+      if (!confirm(`Retry diagnostic stage for ${diagId}?`)) return;
+
+      try {
+        const res = await fetch(`/api/saas-fitscore/admin/retry/${diagId}`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await res.json();
+        alert(data.message || 'Retry initiated');
+        loadDashboard(token);
+      } catch (err) {
+        alert('Retry failed: ' + err.message);
+      }
+    }
+
+    function exportToCsv() {
+      if (!globalOverview || !globalOverview.leads) {
+        alert('No data available to export');
+        return;
+      }
+      const headers = ['Lead ID', 'Name', 'Email', 'Company', 'Website', 'Created At'];
+      const rows = globalOverview.leads.map(l => [
+        `"${l.id || ''}"`,
+        `"${(l.name || '').replace(/"/g, '""')}"`,
+        `"${l.email || ''}"`,
+        `"${(l.company || '').replace(/"/g, '""')}"`,
+        `"${l.website || ''}"`,
+        `"${l.created_at || ''}"`
+      ]);
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `saas_fitscore_leads_${Date.now()}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>

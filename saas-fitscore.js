@@ -332,6 +332,13 @@ document.addEventListener('DOMContentLoaded', () => {
     reportContainer.style.display = 'block';
     reportContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
+    // Populate company and domain
+    const compEls = document.querySelectorAll('.report-company-name');
+    compEls.forEach(el => el.textContent = report.company || 'Your SaaS');
+
+    const websiteEls = document.querySelectorAll('.report-website-url');
+    websiteEls.forEach(el => el.textContent = report.websiteUrl || 'yourdomain.com');
+
     // Populate overall score
     const overallNum = document.getElementById('report-overall-score');
     if (overallNum && report.overallScore !== undefined) {
@@ -349,10 +356,114 @@ document.addEventListener('DOMContentLoaded', () => {
         const val = report.dimensions[dim].score;
         const valElem = document.getElementById(`score-${dim}`);
         const barElem = document.getElementById(`bar-${dim}`);
-        if (valElem) valElem.textContent = val;
+        if (valElem) valElem.textContent = `${val}/100`;
         if (barElem) barElem.style.width = `${val}%`;
       });
     }
+
+    // Dynamic Top Constraints if available from report
+    if (report.topConstraints && report.topConstraints.length > 0) {
+      const constraintsContainer = document.querySelector('.constraints-block');
+      if (constraintsContainer) {
+        let html = `
+          <h3 style="font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem;">Three Highest-Priority Growth Constraints</h3>
+          <p style="color: var(--text-muted, #a1a1aa); font-size: 0.95rem;">Key bottlenecks currently impeding customer velocity based on public evidence & context:</p>
+        `;
+        report.topConstraints.forEach((c, idx) => {
+          const tags = ['Critical Constraint', 'High Priority', 'Medium Priority'];
+          const colors = [
+            'rgba(240, 84, 23, 0.2); color: var(--accent, #F05417)',
+            'rgba(59, 130, 246, 0.2); color: var(--brand-blue, #3b82f6)',
+            'rgba(163, 230, 53, 0.2); color: var(--lime-green, #a3e635)'
+          ];
+          html += `
+            <div class="constraint-card">
+              <div class="constraint-head">
+                <span class="constraint-tag" style="background:${colors[idx] || colors[0]}">${tags[idx] || 'Growth Priority'}</span>
+                <span class="constraint-title">${idx + 1}. ${c.title}</span>
+              </div>
+              <p>${c.description}</p>
+            </div>
+          `;
+        });
+        constraintsContainer.innerHTML = html;
+      }
+    }
+  }
+
+  // ═══════════════════════════════════════════
+  // 3.5. RAZORPAY STANDARD WEB CHECKOUT
+  // ═══════════════════════════════════════════
+  const instantCheckoutBtn = document.getElementById('instant-checkout-btn');
+  if (instantCheckoutBtn) {
+    instantCheckoutBtn.addEventListener('click', async () => {
+      instantCheckoutBtn.disabled = true;
+      instantCheckoutBtn.textContent = 'Preparing Order...';
+
+      try {
+        const orderRes = await fetch('/api/saas-fitscore/create-paid-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ product: 'System to Make the Right Buyers Choose You' })
+        });
+        const orderData = await orderRes.json();
+
+        if (!orderRes.ok || !orderData.success) {
+          alert('Could not initiate order: ' + (orderData.error || 'Server error'));
+          instantCheckoutBtn.disabled = false;
+          instantCheckoutBtn.textContent = 'Order System Access (₹4,999)';
+          return;
+        }
+
+        const options = {
+          key: orderData.key_id,
+          amount: orderData.amount,
+          currency: orderData.currency,
+          name: 'AdsVise',
+          description: 'System to Make the Right Buyers Choose You',
+          image: '/logo.png',
+          order_id: orderData.order_id,
+          theme: { color: '#3b82f6' },
+          handler: async function (response) {
+            instantCheckoutBtn.textContent = 'Verifying Payment...';
+            try {
+              const verifyRes = await fetch('/api/saas-fitscore/verify-paid-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature
+                })
+              });
+              const verifyData = await verifyRes.json();
+              if (verifyData.success) {
+                instantCheckoutBtn.style.display = 'none';
+                const successBanner = document.getElementById('payment-success-banner');
+                if (successBanner) successBanner.style.display = 'block';
+              } else {
+                alert('Payment verification failed: ' + (verifyData.error || 'Contact support.'));
+              }
+            } catch (vErr) {
+              alert('Verification network error: ' + vErr.message);
+            }
+          },
+          modal: {
+            ondismiss: function () {
+              instantCheckoutBtn.disabled = false;
+              instantCheckoutBtn.textContent = 'Order System Access (₹4,999)';
+            }
+          }
+        };
+
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+      } catch (err) {
+        alert('Checkout error: ' + err.message);
+        instantCheckoutBtn.disabled = false;
+        instantCheckoutBtn.textContent = 'Order System Access (₹4,999)';
+      }
+    });
   }
 
   // Check URL token for direct report view

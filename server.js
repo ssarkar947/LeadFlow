@@ -31,6 +31,14 @@ try {
   // Ignore env loading errors
 }
 
+// ─── SaaS FitScore Modular Router ───
+let handleSaaSFitScoreApi = null;
+try {
+  handleSaaSFitScoreApi = require('./lib/saas-fitscore/router').handleSaaSFitScoreApi;
+} catch (e) {
+  console.warn('[Notice] SaaS FitScore router not loaded:', e.message);
+}
+
 // ─── SMTP Email Configuration ───
 const SMTP_CONFIG = {
   host: process.env.SMTP_HOST || '',
@@ -121,6 +129,18 @@ const server = http.createServer((req, res) => {
   if (req.method === 'OPTIONS') {
     res.writeHead(204);
     res.end();
+    return;
+  }
+
+  // Forward SaaS FitScore API routes
+  if (handleSaaSFitScoreApi && req.url.startsWith('/api/saas-fitscore')) {
+    handleSaaSFitScoreApi(req, res).catch(err => {
+      console.error('[SaaS FitScore API Unhandled Error]', err);
+      if (!res.writableEnded) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: 'Internal Server Error' }));
+      }
+    });
     return;
   }
 
@@ -677,6 +697,8 @@ const server = http.createServer((req, res) => {
     urlPath = '/ad-audit.html';
   } else if (urlPath === '/saas-fitscore' || urlPath === '/saas-fitscore/' || urlPath === '/fitscore' || urlPath === '/fitscore/') {
     urlPath = '/saas-fitscore.html';
+  } else if (urlPath === '/saas-fitscore/admin' || urlPath === '/saas-fitscore/admin/') {
+    urlPath = '/saas-fitscore-admin.html';
   } else if (urlPath === '/test-checkout' || urlPath === '/test-checkout/' || urlPath === '/checkout' || urlPath === '/checkout/') {
     urlPath = '/test-checkout.html';
   }
