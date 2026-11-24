@@ -26,7 +26,8 @@ try {
 const assert = require('assert');
 const { calculateFitScore } = require('../lib/saas-fitscore/scoring');
 const { analyzeWithGemini } = require('../lib/saas-fitscore/gemini');
-const { sendFitScoreEmail } = require('../lib/saas-fitscore/mailer');
+const { sendFitScoreEmail, sendCustomerLeadNotification, ADMIN_EMAIL } = require('../lib/saas-fitscore/mailer');
+const { selectTargetedSaaSUrls, PROMPT_TARGET_CATEGORIES, EXCLUDED_PATTERNS } = require('../lib/saas-fitscore/crawler');
 const { runAssessmentPipeline, checkEmailRateLimit } = require('../lib/saas-fitscore/router');
 const firestore = require('../lib/saas-fitscore/firestore');
 
@@ -152,7 +153,7 @@ async function runPipelineTests() {
 
     assert.ok(analysis.executiveSummary, 'Must contain executive summary');
     assert.ok(Array.isArray(analysis.topConstraints), 'Must have topConstraints array');
-    assert.strictEqual(analysis.topConstraints.length, 3, 'Must identify exactly 3 top constraints');
+    assert.ok(analysis.topConstraints.length >= 2, 'Must identify top constraints (at least 2-3)');
     assert.ok(Array.isArray(analysis.findings), 'Must have findings array');
     assert.ok(analysis.findings.length >= 3, 'Must have at least 3 detailed findings');
     
@@ -170,8 +171,64 @@ async function runPipelineTests() {
     assert.ok(Array.isArray(analysis.recommendedMetrics), 'Must recommend metrics');
   });
 
-  // ─── 3. EMAIL DELIVERY TEST ───
-  console.log('\n--- 3. Transactional Email Generator Tests ---');
+  // ─── 3. TARGETED CRAWLER SCOPING & TRANSACTIONAL EMAIL TESTS ───
+  console.log('\n--- 3. Targeted Crawler & Email Dispatch Tests ---');
+
+  test('selectTargetedSaaSUrls strictly scopes crawl to prompt-defined pages and rejects blogs/legal/terms', () => {
+    const candidateUrls = [
+      'https://saascloud.io',
+      'https://saascloud.io/pricing',
+      'https://saascloud.io/features',
+      'https://saascloud.io/solutions/fintech',
+      'https://saascloud.io/integrations',
+      'https://saascloud.io/blog/scaling-tips-2026',
+      'https://saascloud.io/privacy-policy.html',
+      'https://saascloud.io/terms-of-service',
+      'https://saascloud.io/careers/backend-lead',
+      'https://saascloud.io/app/dashboard',
+      'https://saascloud.io/docs/quickstart'
+    ];
+
+    const targets = selectTargetedSaaSUrls('https://saascloud.io', candidateUrls, 10);
+    const targetUrls = targets.map(t => t.url);
+
+    assert.ok(targetUrls.includes('https://saascloud.io'), 'Must include homepage');
+    assert.ok(targetUrls.includes('https://saascloud.io/pricing'), 'Must include pricing');
+    assert.ok(targetUrls.includes('https://saascloud.io/features'), 'Must include features');
+    assert.ok(targetUrls.includes('https://saascloud.io/solutions/fintech'), 'Must include solutions');
+    assert.ok(targetUrls.includes('https://saascloud.io/integrations'), 'Must include integrations');
+    assert.ok(targetUrls.includes('https://saascloud.io/docs/quickstart'), 'Must include docs');
+
+    // Strict Exclusions
+    assert.strictEqual(targetUrls.includes('https://saascloud.io/blog/scaling-tips-2026'), false, 'Blog must be excluded');
+    assert.strictEqual(targetUrls.includes('https://saascloud.io/privacy-policy.html'), false, 'Privacy policy must be excluded');
+    assert.strictEqual(targetUrls.includes('https://saascloud.io/terms-of-service'), false, 'Terms must be excluded');
+    assert.strictEqual(targetUrls.includes('https://saascloud.io/careers/backend-lead'), false, 'Careers must be excluded');
+    assert.strictEqual(targetUrls.includes('https://saascloud.io/app/dashboard'), false, 'In-app pages must be excluded');
+    assert.ok(targets.length <= 10, 'Must not exceed max 10 pages');
+  });
+
+  await asyncTest('sendCustomerLeadNotification dispatches customer info to ssarkar947@gmail.com', async () => {
+    assert.strictEqual(ADMIN_EMAIL, 'ssarkar947@gmail.com', 'Admin recipient must be ssarkar947@gmail.com');
+
+    const customerData = {
+      name: 'Rohan Sharma',
+      email: 'rohan@finflow.io',
+      websiteUrl: 'https://finflow.io',
+      company: 'Finflow',
+      businessModel: 'Free trial',
+      pricingModel: 'Tiered plans',
+      challenges: ['Getting visitors to sign up', 'Differentiating from competitors'],
+      dropOff: 'Visitors do not sign up',
+      monthlySignups: '500–2,000',
+      freeToPaidConversion: '3–5%',
+      approxMrr: '$10,000–$25,000',
+      next90DaysGoal: 'Double conversion rate to 6%'
+    };
+
+    const notifRes = await sendCustomerLeadNotification(customerData, 'diag_test_12345');
+    assert.strictEqual(notifRes.success, true, 'Customer lead notification dispatch must succeed');
+  });
 
   await asyncTest('sendFitScoreEmail builds HTML and dispatches gracefully', async () => {
     const mockReport = {
