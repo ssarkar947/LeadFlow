@@ -5,3 +5,4 @@ leads.json
 *.log
 *.backup
 data/
+firebase-service-account.json
