@@ -101,20 +101,25 @@ async function runServerTests() {
     assert.ok(res.data.includes('Growth Intelligence Admin'));
   });
 
-  // 3. SaaS FitScore API: Submit
+  // 3. SaaS FitScore API: Submit & Disposable Email Check
+  await test('POST /api/saas-fitscore/submit blocks disposable email addresses (400)', async () => {
+    const res = await makeRequest('POST', '/api/saas-fitscore/submit', {
+      name: 'Temp User',
+      email: 'temp123@mailinator.com',
+      websiteUrl: 'https://adsvise.in',
+      consentGranted: true
+    });
+    assert.strictEqual(res.statusCode, 400);
+    assert.strictEqual(res.json.success, false);
+    assert.ok(res.json.error.toLowerCase().includes('disposable'));
+  });
+
   let createdDiagId = null;
   await test('POST /api/saas-fitscore/submit processes assessment and returns diagnosticId', async () => {
     const payload = {
       name: 'Server Test User',
       email: 'server_test_' + Date.now() + '@saastest.io',
       websiteUrl: 'https://adsvise.in',
-      businessModel: 'Freemium',
-      pricingModel: 'Tiered plans',
-      challenges: ['Getting visitors to sign up'],
-      dropOff: 'Visitors do not sign up',
-      monthlySignups: '100–500',
-      freeToPaidConversion: '3–5%',
-      approxMrr: '$5,000–$10,000',
       consentGranted: true
     };
 
