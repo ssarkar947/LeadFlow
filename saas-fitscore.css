@@ -796,6 +796,7 @@
 
 /* Constraint Callout Cards */
 .saas-fitscore .constraints-block {
+  margin-top: 2.75rem;
   margin-bottom: 3rem;
 }
 
@@ -804,14 +805,15 @@
   border: 1px solid rgba(240, 84, 23, 0.25);
   border-radius: 16px;
   padding: 1.5rem;
-  margin-top: 1rem;
+  margin-top: 1.15rem;
 }
 
 .saas-fitscore .constraint-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.65rem;
 }
 
 .saas-fitscore .constraint-tag {
@@ -974,7 +976,7 @@
 @media print {
   body {
     background: #fff !important;
-    color: #000 !important;
+    color: #111827 !important;
     cursor: auto !important;
   }
   #cursor-dot, #cursor-ring,
@@ -982,27 +984,44 @@
   .hero-cta-group, .form-nav-row,
   .paid-funnel-card, .fitscore-hero,
   .dimensions-section, .how-it-works-section,
-  .assessment-section, .adv-cta {
+  .adv-faq-section, .adv-cta,
+  #questionnaire-wrapper, #processing-screen,
+  #print-report-btn, #locked-roadmap-section,
+  .assessment-section > .adv-container > .section-header {
     display: none !important;
   }
-  .saas-fitscore, .saas-fitscore .report-view {
+  .assessment-section {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
     background: #fff !important;
-    color: #000 !important;
+  }
+  .saas-fitscore, .saas-fitscore .report-view {
+    display: block !important;
+    background: #fff !important;
+    color: #111827 !important;
     max-width: 100% !important;
     padding: 0 !important;
     margin: 0 !important;
   }
   .saas-fitscore .report-header-card,
   .saas-fitscore .dimension-card,
-  .saas-fitscore .constraint-card {
+  .saas-fitscore .constraint-card,
+  #audit-kpi-strip > div,
+  #executive-summary-block,
+  #signals-audit-grid > div {
     background: #fff !important;
-    color: #000 !important;
-    border: 1px solid #ccc !important;
+    color: #111827 !important;
+    border: 1px solid #d1d5db !important;
     box-shadow: none !important;
     page-break-inside: avoid;
   }
-  .saas-fitscore h1, .saas-fitscore h2, .saas-fitscore h3,
-  .saas-fitscore .overall-number {
-    color: #000 !important;
+  .saas-fitscore h1, .saas-fitscore h2, .saas-fitscore h3, .saas-fitscore h4,
+  .saas-fitscore p, .saas-fitscore span, .saas-fitscore strong,
+  .saas-fitscore .overall-number, .saas-fitscore .constraint-title {
+    color: #111827 !important;
+  }
+  #fitscore-radar-svg text {
+    fill: #374151 !important;
   }
 }

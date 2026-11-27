@@ -250,23 +250,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. SCORECARD & REPORT RENDERER
   // ═══════════════════════════════════════════
   function renderScorecard(payload) {
-    reportContainer.style.display = 'block';
-    reportContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    // Populate client company name
-    const compEls = document.querySelectorAll('.report-company-name');
-    compEls.forEach(el => el.textContent = payload.company || 'Your SaaS');
-
-    const websiteEls = document.querySelectorAll('.report-website-url');
-    websiteEls.forEach(el => el.textContent = payload.websiteUrl || 'yourdomain.com');
-
-    // Animate progress bars
-    setTimeout(() => {
-      document.querySelectorAll('.dim-bar-progress').forEach(bar => {
-        const target = bar.getAttribute('data-target-width') || '75%';
-        bar.style.width = target;
-      });
-    }, 200);
+    renderScorecardWithReport({
+      company: payload.company || 'Your SaaS',
+      websiteUrl: payload.websiteUrl || 'yourdomain.com',
+      overallScore: 74,
+      overallRating: 'Developing',
+      dimensions: {
+        positioning: { score: 68 },
+        acquisition: { score: 82 },
+        activation: { score: 65 },
+        monetisation: { score: 78 },
+        retention: { score: 75 }
+      },
+      executiveSummary: `${payload.company || 'Your SaaS'} shows strong top-of-funnel acquisition potential, but positioning and first-mile activation clarity need tightening to convert more visitors into paying customers.`
+    });
   }
 
   function renderScorecardWithReport(report) {
