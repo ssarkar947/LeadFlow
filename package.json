@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
+    "disposable-email-domains": "^1.0.62",
     "nodemailer": "^6.9.7",
     "razorpay": "^2.9.8"
   }

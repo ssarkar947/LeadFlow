@@ -118,7 +118,7 @@ async function runServerTests() {
   await test('POST /api/saas-fitscore/submit processes assessment and returns diagnosticId', async () => {
     const payload = {
       name: 'Server Test User',
-      email: 'server_test_' + Date.now() + '@saastest.io',
+      email: 'server_test_' + Date.now() + '@adsvise.in',
       websiteUrl: 'https://adsvise.in',
       consentGranted: true
     };

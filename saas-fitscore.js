@@ -34,7 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function isDisposableEmail(email) {
     const parts = (email || '').trim().toLowerCase().split('@');
     if (parts.length !== 2) return false;
-    return DISPOSABLE_DOMAINS.has(parts[1]);
+    const domain = parts[1];
+    if (DISPOSABLE_DOMAINS.has(domain)) return true;
+    return /(tempmail|temp-mail|throwaway|guerrilla|10minutemail|mailinator|yopmail|trashmail|dispostable|fakeinbox|burnermail|minuteinbox|getnada|mail\.tm|internxt)/i.test(domain);
   }
 
   // URL normalizer helper
@@ -278,10 +280,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const websiteEls = document.querySelectorAll('.report-website-url');
     websiteEls.forEach(el => el.textContent = report.websiteUrl || 'yourdomain.com');
 
-    // Populate overall score
+    // Populate overall score + SVG Gauge
+    const overallScore = report.overallScore !== undefined ? report.overallScore : 70;
     const overallNum = document.getElementById('report-overall-score');
-    if (overallNum && report.overallScore !== undefined) {
-      overallNum.textContent = report.overallScore;
+    if (overallNum) overallNum.textContent = overallScore;
+
+    const gaugeArc = document.getElementById('score-gauge-arc');
+    if (gaugeArc) {
+      const circumference = 2 * Math.PI * 50; // 314.16
+      const offset = circumference * (1 - Math.max(0, Math.min(100, overallScore)) / 100);
+      gaugeArc.style.strokeDashoffset = offset.toFixed(2);
+      gaugeArc.style.stroke = overallScore >= 75 ? '#a3e635' : (overallScore >= 55 ? '#3b82f6' : '#F05417');
+    }
+
+    const gradeBadge = document.getElementById('report-grade-badge');
+    if (gradeBadge) {
+      const grade = overallScore >= 85 ? 'A' : overallScore >= 70 ? 'B' : overallScore >= 55 ? 'C' : 'D';
+      gradeBadge.textContent = `Grade: ${grade}`;
     }
 
     const overallLabel = document.getElementById('report-overall-label');
@@ -289,15 +304,95 @@ document.addEventListener('DOMContentLoaded', () => {
       overallLabel.textContent = report.overallRating;
     }
 
-    // Populate dimensions
+    // Populate dimensions + SVG 5-Axis Radar Chart
+    const dimsOrder = ['positioning', 'acquisition', 'activation', 'monetisation', 'retention'];
+    const dimLabels = ['Positioning', 'Acquisition', 'Activation', 'Monetisation', 'Retention'];
+    const dimScores = dimsOrder.map(d => (report.dimensions && report.dimensions[d]) ? report.dimensions[d].score : 60);
+
     if (report.dimensions) {
       Object.keys(report.dimensions).forEach(dim => {
         const val = report.dimensions[dim].score;
         const valElem = document.getElementById(`score-${dim}`);
         const barElem = document.getElementById(`bar-${dim}`);
         if (valElem) valElem.textContent = `${val}/100`;
-        if (barElem) barElem.style.width = `${val}%`;
+        if (barElem) {
+          barElem.style.width = `${val}%`;
+          barElem.style.background = val >= 75 ? '#a3e635' : (val >= 55 ? '#3b82f6' : '#F05417');
+        }
       });
+    }
+
+    // Render 5-Axis SVG Radar Chart
+    const radarSvg = document.getElementById('fitscore-radar-svg');
+    if (radarSvg) {
+      const cx = 130, cy = 120, maxR = 78;
+      const angleFor = (i) => (-Math.PI / 2) + (i * 2 * Math.PI / 5);
+      const pt = (r, i) => `${(cx + r * Math.cos(angleFor(i))).toFixed(1)},${(cy + r * Math.sin(angleFor(i))).toFixed(1)}`;
+
+      let svgHtml = '';
+      // Concentric pentagon grid rings (25%, 50%, 75%, 100%)
+      [0.25, 0.5, 0.75, 1].forEach(scale => {
+        const pts = [0,1,2,3,4].map(i => pt(maxR * scale, i)).join(' ');
+        svgHtml += `<polygon points="${pts}" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>`;
+      });
+      // Spokes + labels
+      [0,1,2,3,4].forEach(i => {
+        const outer = pt(maxR, i);
+        const [lx, ly] = [cx + (maxR + 22) * Math.cos(angleFor(i)), cy + (maxR + 18) * Math.sin(angleFor(i))];
+        svgHtml += `<line x1="${cx}" y1="${cy}" x2="${outer.split(',')[0]}" y2="${outer.split(',')[1]}" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>`;
+        svgHtml += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" fill="#a1a1aa" font-size="9.5" font-weight="600" text-anchor="middle" dominant-baseline="middle">${dimLabels[i]}</text>`;
+      });
+      // Data polygon
+      const dataPts = dimScores.map((s, i) => pt(maxR * (Math.max(15, s) / 100), i)).join(' ');
+      svgHtml += `<polygon points="${dataPts}" fill="rgba(59,130,246,0.28)" stroke="#3b82f6" stroke-width="2.2"/>`;
+      dimScores.forEach((s, i) => {
+        const [px, py] = pt(maxR * (Math.max(15, s) / 100), i).split(',');
+        svgHtml += `<circle cx="${px}" cy="${py}" r="3.5" fill="#a3e635" stroke="#09090b" stroke-width="1.2"/>`;
+      });
+      radarSvg.innerHTML = svgHtml;
+    }
+
+    // Populate Semrush-style Audit KPI Strip & Live Website Signals Matrix
+    const signals = report.signalsSummary || {};
+    const signalChecks = [
+      { label: 'Outcome-Led Hero Copy', pass: !!signals.mentionsOutcome },
+      { label: 'Public Pricing Page', pass: !!signals.hasPricingPage },
+      { label: 'Clear Tier Structure', pass: !!signals.mentionsTiers },
+      { label: 'Signup / Demo CTA', pass: !!signals.mentionsTrialOrDemo },
+      { label: 'Solutions / Use Cases', pass: !!signals.hasSolutionsPage },
+      { label: 'Social Proof / Case Studies', pass: !!(signals.mentionsProof || signals.hasCaseStudies) },
+      { label: 'Docs / Onboarding Help', pass: !!signals.hasDocsPage },
+      { label: 'Integrations & Security', pass: !!(signals.hasIntegrationsPage || signals.mentionsSecurityOrTrust) }
+    ];
+    const passedCount = signalChecks.filter(s => s.pass).length;
+    const failedCount = signalChecks.length - passedCount;
+
+    const kpiPages = document.getElementById('kpi-pages-audited');
+    if (kpiPages) kpiPages.textContent = `${signals.pageCount || (report.crawledPagesSummary ? report.crawledPagesSummary.length : 1)} pages`;
+    const kpiPassed = document.getElementById('kpi-checks-passed');
+    if (kpiPassed) kpiPassed.textContent = `${passedCount} / ${signalChecks.length}`;
+    const kpiIssues = document.getElementById('kpi-issues-found');
+    if (kpiIssues) kpiIssues.textContent = `${failedCount} gaps`;
+
+    // Find lowest scoring dimension as #1 Bottleneck
+    const minIdx = dimScores.indexOf(Math.min(...dimScores));
+    const kpiBottleneck = document.getElementById('kpi-top-bottleneck');
+    if (kpiBottleneck) kpiBottleneck.textContent = `${dimLabels[minIdx]} (${dimScores[minIdx]}/100)`;
+
+    const signalsGrid = document.getElementById('signals-audit-grid');
+    if (signalsGrid) {
+      signalsGrid.innerHTML = signalChecks.map(sc => `
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; border-radius:12px; background:${sc.pass ? 'rgba(163,230,53,0.06)' : 'rgba(240,84,23,0.07)'}; border:1px solid ${sc.pass ? 'rgba(163,230,53,0.22)' : 'rgba(240,84,23,0.25)'};">
+          <span style="font-size:0.85rem; color:#e4e4e7; font-weight:500;">${sc.label}</span>
+          <span style="font-size:0.75rem; font-weight:700; color:${sc.pass ? '#a3e635' : '#F05417'};">${sc.pass ? '✓ Detected' : '✗ Missing'}</span>
+        </div>
+      `).join('');
+    }
+
+    const urlsStrip = document.getElementById('audited-urls-strip');
+    if (urlsStrip && Array.isArray(report.crawledPagesSummary) && report.crawledPagesSummary.length > 0) {
+      urlsStrip.innerHTML = `<span style="font-size:0.75rem;color:#71717a;font-weight:600;margin-right:0.25rem;">AUDITED PAGES:</span>` +
+        report.crawledPagesSummary.map(p => `<a href="${p.url}" target="_blank" style="font-size:0.75rem; padding:0.2rem 0.6rem; border-radius:99px; background:rgba(255,255,255,0.06); color:#a1a1aa; text-decoration:none;">${p.pageCategory || 'page'}: ${p.url.replace(/^https?:\/\/[^/]+/, '') || '/'}</a>`).join('');
     }
 
     // Populate executive summary

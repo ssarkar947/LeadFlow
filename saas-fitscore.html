@@ -409,15 +409,29 @@
               </button>
             </div>
 
-            <div class="report-hero-grid">
+            <div class="report-hero-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; align-items: center;">
               
-              <!-- Dial / Overall Score Block -->
-              <div class="report-score-dial">
-                <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted, #a1a1aa); margin-bottom: 0.5rem;">Overall FitScore</div>
-                <div class="overall-number" id="report-overall-score">76</div>
-                <div style="font-size: 1.25rem; color: var(--text-muted, #a1a1aa);">out of 100</div>
-                <div class="overall-label" id="report-overall-label" style="color: var(--lime-green, #a3e635);">Strong Foundation</div>
-                <div class="overall-desc">Structured assessment across 5 commercial growth dimensions.</div>
+              <!-- Circular SVG Score Gauge -->
+              <div class="report-score-dial" style="text-align:center;">
+                <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted, #a1a1aa); margin-bottom: 0.75rem;">Overall FitScore</div>
+                <div style="position:relative; width:156px; height:156px; margin:0 auto 0.75rem;">
+                  <svg viewBox="0 0 120 120" width="156" height="156" style="transform: rotate(-90deg);">
+                    <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="10"/>
+                    <circle id="score-gauge-arc" cx="60" cy="60" r="50" fill="none" stroke="#a3e635" stroke-width="10" stroke-linecap="round" stroke-dasharray="314.16" stroke-dashoffset="75" style="transition: stroke-dashoffset 0.8s ease, stroke 0.4s ease;"/>
+                  </svg>
+                  <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                    <div class="overall-number" id="report-overall-score" style="font-size:2.6rem; line-height:1;">76</div>
+                    <div style="font-size:0.78rem; color:var(--text-muted, #a1a1aa); margin-top:2px;">/ 100</div>
+                  </div>
+                </div>
+                <div class="overall-label" id="report-overall-label" style="color: var(--lime-green, #a3e635); font-weight:700;">Strong Foundation</div>
+                <div id="report-grade-badge" style="display:inline-block; margin-top:0.4rem; padding:0.2rem 0.75rem; border-radius:99px; font-size:0.75rem; font-weight:700; background:rgba(59,130,246,0.16); color:#60a5fa;">Grade: B</div>
+              </div>
+
+              <!-- 5-Axis Radar Chart (SVG) -->
+              <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted, #a1a1aa); margin-bottom: 0.5rem;">Funnel Balance Radar</div>
+                <svg id="fitscore-radar-svg" viewBox="0 0 260 240" width="260" height="240" style="max-width:100%; overflow:visible;"></svg>
               </div>
 
               <!-- 5 Dimension Breakdown Progress Bars -->
@@ -476,11 +490,42 @@
             </div>
           </div>
 
-          <!-- Executive Summary & Current Website Diagnosis -->
-          <div id="executive-summary-block" style="background: var(--bg-card, #18181b); border: 1px solid var(--border-subtle, rgba(255,255,255,0.06)); border-radius: 20px; padding: 2rem; margin-top: 2rem;">
-            <span class="section-tag" style="margin-bottom: 0.5rem;">WHAT YOUR SAAS IS DOING RIGHT NOW</span>
-            <h3 style="font-size: 1.35rem; color: #fff; margin-bottom: 0.75rem;">Current Growth System Diagnosis</h3>
-            <p id="report-executive-summary" style="color: #d4d4d8; font-size: 0.95rem; line-height: 1.7; white-space: pre-line; margin: 0;">Analyzing your live website messaging, funnel clarity, and conversion architecture...</p>
+          <!-- Semrush-Style 4-Tile Audit KPI Strip -->
+          <div id="audit-kpi-strip" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+            <div style="background: var(--bg-card, #18181b); border: 1px solid var(--border-subtle, rgba(255,255,255,0.06)); border-radius: 16px; padding: 1.25rem;">
+              <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; color:#a1a1aa;">Pages Audited</div>
+              <div id="kpi-pages-audited" style="font-size:1.75rem; font-weight:800; color:#fff; margin-top:0.25rem;">—</div>
+            </div>
+            <div style="background: var(--bg-card, #18181b); border: 1px solid var(--border-subtle, rgba(255,255,255,0.06)); border-radius: 16px; padding: 1.25rem;">
+              <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; color:#a1a1aa;">Signals Passed</div>
+              <div id="kpi-checks-passed" style="font-size:1.75rem; font-weight:800; color:#a3e635; margin-top:0.25rem;">—</div>
+            </div>
+            <div style="background: var(--bg-card, #18181b); border: 1px solid var(--border-subtle, rgba(255,255,255,0.06)); border-radius: 16px; padding: 1.25rem;">
+              <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; color:#a1a1aa;">Gaps Detected</div>
+              <div id="kpi-issues-found" style="font-size:1.75rem; font-weight:800; color:#F05417; margin-top:0.25rem;">—</div>
+            </div>
+            <div style="background: var(--bg-card, #18181b); border: 1px solid var(--border-subtle, rgba(255,255,255,0.06)); border-radius: 16px; padding: 1.25rem;">
+              <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; color:#a1a1aa;">#1 Bottleneck</div>
+              <div id="kpi-top-bottleneck" style="font-size:1.25rem; font-weight:700; color:#60a5fa; margin-top:0.4rem;">—</div>
+            </div>
+          </div>
+
+          <!-- Public Website Signals Matrix (Pass / Fail Audit Checks) -->
+          <div style="background: var(--bg-card, #18181b); border: 1px solid var(--border-subtle, rgba(255,255,255,0.06)); border-radius: 20px; padding: 1.75rem; margin-top: 1.5rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
+              <div>
+                <h3 style="font-size: 1.25rem; color: #fff; margin: 0;">Live Website Signals Audit</h3>
+                <p style="font-size:0.85rem; color:#a1a1aa; margin:0.25rem 0 0;">Objective conversion signals detected across your crawled pages:</p>
+              </div>
+            </div>
+            <div id="signals-audit-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;"></div>
+            <div id="audited-urls-strip" style="margin-top:1rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.06); display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center;"></div>
+          </div>
+
+          <!-- Crisp Verdict Strip -->
+          <div id="executive-summary-block" style="background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.22); border-radius: 16px; padding: 1.5rem; margin-top: 1.5rem;">
+            <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#60a5fa; margin-bottom:0.4rem;">DIAGNOSTIC VERDICT</div>
+            <p id="report-executive-summary" style="color: #e4e4e7; font-size: 0.95rem; line-height: 1.6; margin: 0;">Analyzing your live website messaging, funnel clarity, and conversion architecture...</p>
           </div>
 
           <!-- Top Growth Constraints -->
